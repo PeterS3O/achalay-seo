@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Crawl · The Logistics World · Julio 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f1720; --charcoal:#242e39; --graphite:#4a5762; --muted:#6b7885;
+    --paper:#ffffff; --paper-soft:#faf7f1;
+    --bg:#efece3;
+    --line:#e6e2d8; --line-soft:#f0ece2;
+    --accent:#c1281e; --accent-soft:#f5e5e2; --accent-deep:#8f1c15;
+    --gold:#a7791a; --gold-soft:#f5ecd6;
+    --green:#1f6a4a; --green-soft:#dfefe6;
+    --blue:#1f4a7a; --blue-soft:#e0e9f2;
+    --purple:#5c3891; --purple-soft:#ece0f5;
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.5}
+  .card[id]{scroll-margin-top:20px}
+  .card[id]:target{box-shadow:0 0 0 3px var(--accent-soft), 0 6px 24px -12px rgba(15,23,32,.24);border-color:var(--accent);animation:pulse 1.5s ease-out}
+  @keyframes pulse{0%{box-shadow:0 0 0 8px var(--accent-soft)}100%{box-shadow:0 0 0 3px var(--accent-soft)}}
+
+  .wrap{max-width:1600px;margin:0 auto;padding:36px 28px 60px}
+
+  /* Header */
+  header{margin-bottom:32px}
+  header .kicker{font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+  header h1{font-family:'Fraunces',Georgia,serif;font-size:44px;font-weight:600;letter-spacing:-.02em;line-height:1.02;margin:0 0 6px}
+  header .sub{color:var(--muted);font-size:14px;font-family:'Fraunces',Georgia,serif;font-style:italic}
+  header .meta{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:32px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+  header .meta strong{display:block;color:var(--ink);font-family:'Fraunces',serif;font-size:15px;font-variant-numeric:tabular-nums;margin-top:2px}
+
+  /* Grid */
+  .grid{display:grid;gap:16px}
+  .g-kpi{grid-template-columns:repeat(6,1fr);margin-bottom:20px}
+  .g-main{grid-template-columns:repeat(12,1fr)}
+
+  /* Card */
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:18px 20px;position:relative;overflow:hidden}
+  .card h3{font-family:'Inter';font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 12px;font-weight:800}
+  .card h3 .sub{color:var(--graphite);text-transform:none;letter-spacing:0;font-size:10.5px;font-weight:600;margin-left:6px}
+  .card.dark{background:var(--ink);color:#e8e4d9}
+  .card.dark h3{color:#a8b0b8}
+
+  /* KPI cards */
+  .kpi{padding:18px 20px}
+  .kpi .val{font-family:'Fraunces',Georgia,serif;font-size:44px;line-height:1;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .kpi .val.red{color:var(--accent)}
+  .kpi .val.gold{color:var(--gold)}
+  .kpi .val.green{color:var(--green)}
+  .kpi .val.blue{color:var(--blue)}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800;margin-top:8px}
+  .kpi .cap{font-size:12px;color:var(--graphite);margin-top:4px;line-height:1.35}
+
+  /* Chart helpers */
+  .bar-row{display:grid;grid-template-columns:80px 1fr 60px;gap:8px;align-items:center;margin-bottom:6px;font-size:12px}
+  .bar-row .lbl{color:var(--charcoal);font-weight:600;font-size:11.5px}
+  .bar-row .track{background:var(--paper-soft);height:14px;border-radius:2px;overflow:hidden;position:relative}
+  .bar-row .fill{height:100%;border-radius:2px}
+  .bar-row .fill.red{background:var(--accent)}
+  .bar-row .fill.gold{background:var(--gold)}
+  .bar-row .fill.green{background:var(--green)}
+  .bar-row .fill.blue{background:var(--blue)}
+  .bar-row .fill.muted{background:var(--muted)}
+  .bar-row .fill.purple{background:var(--purple)}
+  .bar-row .val{text-align:right;color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;font-size:11.5px}
+  .bar-row .val .pct{color:var(--muted);font-weight:500;margin-left:4px;font-size:10.5px}
+
+  /* Vertical bar chart (for depth) */
+  .v-bars{display:flex;align-items:flex-end;gap:8px;height:120px;padding:8px 0 4px}
+  .v-bars .v-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+  .v-bars .v-bar{width:100%;background:var(--accent);border-radius:2px 2px 0 0;position:relative;transition:opacity .2s}
+  .v-bars .v-bar.dim{background:var(--line)}
+  .v-bars .v-num{font-family:'Fraunces',serif;font-size:14px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+  .v-bars .v-lbl{font-size:10.5px;color:var(--muted);font-weight:700}
+
+  /* Donut */
+  .donut-wrap{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center}
+  .donut{width:130px;height:130px}
+  .donut-legend{font-size:11.5px;color:var(--charcoal)}
+  .donut-legend .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 0;line-height:1.3}
+  .donut-legend .row .lg-lbl{display:flex;align-items:center;gap:8px;min-width:0}
+  .donut-legend .sw{width:9px;height:9px;border-radius:2px;flex:0 0 9px}
+  .donut-legend .n{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;font-size:11.5px}
+  .donut-legend .pct{color:var(--muted);font-size:10.5px;font-weight:600;margin-left:4px}
+  .donut-center{fill:var(--ink);font:800 22px 'Fraunces',serif}
+  .donut-sub{fill:var(--muted);font:11px 'Inter',sans-serif;font-weight:700}
+
+  /* Callout */
+  .callout{background:var(--paper-soft);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:11.5px;color:var(--charcoal);line-height:1.5;margin-top:12px}
+  .callout.warn{background:var(--accent-soft);border-color:#e8c1bd;color:#7a1610}
+  .callout.good{background:var(--green-soft);border-color:#b5d6c3;color:#164132}
+  .callout.gold{background:var(--gold-soft);border-color:#ecd9a3;color:#5a4110}
+  .callout b{font-weight:700}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th{color:var(--muted);text-align:left;padding:6px 8px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line)}
+  th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+  td{padding:6px 8px;border-bottom:1px solid var(--line-soft);color:var(--charcoal);line-height:1.35}
+  tr:last-child td{border-bottom:0}
+  td code{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--charcoal);background:var(--paper-soft);padding:1px 5px;border-radius:3px}
+
+  /* Utility */
+  .span-2{grid-column:span 2}
+  .span-3{grid-column:span 3}
+  .span-4{grid-column:span 4}
+  .span-5{grid-column:span 5}
+  .span-6{grid-column:span 6}
+  .span-8{grid-column:span 8}
+  .span-12{grid-column:span 12}
+
+  .mini-stat{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px dashed var(--line-soft);font-size:11.5px}
+  .mini-stat:last-child{border-bottom:0}
+  .mini-stat .k{color:var(--graphite)}
+  .mini-stat .v{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  .mini-stat .v.bad{color:var(--accent)}
+  .mini-stat .v.warn{color:var(--gold)}
+  .mini-stat .v.ok{color:var(--green)}
+
+  .badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .badge.red{background:var(--accent-soft);color:var(--accent)}
+  .badge.gold{background:var(--gold-soft);color:var(--gold)}
+  .badge.green{background:var(--green-soft);color:var(--green)}
+  .badge.blue{background:var(--blue-soft);color:var(--blue)}
+  .badge.muted{background:#eee;color:var(--muted)}
+
+  /* Priorization table */
+  .prio-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+  .prio-table thead th{background:transparent;color:var(--muted);text-align:left;padding:8px 10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;border-bottom:2px solid var(--line)}
+  .prio-table thead th.num{text-align:right}
+  .prio-table tbody td{padding:12px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top;font-size:12.5px;color:var(--charcoal);line-height:1.4}
+  .prio-table tbody tr:hover td{background:#faf7f1}
+  .prio-table tbody tr:last-child td{border-bottom:0}
+  .prio-table td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .prio-table td.rank{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--muted);letter-spacing:-.02em;padding-right:0;width:38px}
+  .prio-table td.issue b{color:var(--ink);font-weight:700;font-size:13px;display:block;margin-bottom:2px}
+  .prio-table td.issue .sub{color:var(--muted);font-size:11.5px;line-height:1.35;font-weight:400}
+  .prio-table td.fix{color:var(--charcoal);font-size:12px;line-height:1.4;max-width:32ch}
+  .prio-table td.fix b{color:var(--ink)}
+  .prio-table .p-link{display:inline-flex;align-items:center;gap:4px;color:var(--accent);text-decoration:none;font-weight:700;font-size:11.5px;padding:4px 10px;background:var(--accent-soft);border-radius:4px;border:1px solid transparent;transition:all .15s;white-space:nowrap}
+  .prio-table .p-link:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .prio-table .p-link::after{content:'→';font-size:12px}
+
+  /* Priority indicator row */
+  .prio-table td.pr{padding-left:0}
+  .prio-table td.pr .p-badge{display:inline-flex;align-items:center;justify-content:center;width:32px;height:22px;border-radius:4px;font-size:10.5px;font-weight:800;letter-spacing:.04em}
+  .prio-table td.pr .p-badge.p1{background:var(--accent);color:#fff}
+  .prio-table td.pr .p-badge.p2{background:var(--gold);color:#fff}
+  .prio-table td.pr .p-badge.p3{background:var(--muted);color:#fff}
+
+  .effort-cell{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .effort-cell.low{background:var(--green-soft);color:var(--green)}
+  .effort-cell.med{background:var(--gold-soft);color:var(--gold)}
+  .effort-cell.high{background:var(--accent-soft);color:var(--accent)}
+
+  /* Priority summary card highlight */
+  .card.prio-card{background:linear-gradient(180deg, #ffffff 0%, #fbf9f2 100%);border:1px solid var(--line);position:relative}
+  .card.prio-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg, var(--accent) 0%, var(--accent) 50%, var(--gold) 50%, var(--gold) 80%, var(--muted) 80%, var(--muted) 100%);border-radius:8px 8px 0 0}
+  .card.prio-card h2{font-family:'Fraunces',serif;font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em;color:var(--ink)}
+  .card.prio-card .prio-lede{color:var(--charcoal);font-size:13px;line-height:1.5;margin:0 0 16px;max-width:78ch}
+
+  .prio-summary{display:flex;gap:22px;margin:0 0 20px;flex-wrap:wrap}
+  .prio-summary .pill{display:flex;align-items:baseline;gap:8px}
+  .prio-summary .pill .n{font-family:'Fraunces',serif;font-size:32px;font-weight:600;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .prio-summary .pill.p1 .n{color:var(--accent)}
+  .prio-summary .pill.p2 .n{color:var(--gold)}
+  .prio-summary .pill.p3 .n{color:var(--muted)}
+  .prio-summary .pill .lb{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
+  /* Tab navigation */
+  .tabs{display:flex;gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px;margin-bottom:24px;box-shadow:0 1px 2px rgba(15,23,32,.04)}
+  .tab-btn{flex:1;background:transparent;border:0;padding:12px 18px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;border-radius:5px;text-align:center;letter-spacing:-.005em;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:10px}
+  .tab-btn:hover{color:var(--charcoal);background:var(--paper-soft)}
+  .tab-btn.active{background:var(--ink);color:#fff}
+  .tab-btn .counter{background:var(--accent);color:#fff;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.02em}
+  .tab-btn.active .counter{background:var(--accent-soft);color:var(--accent)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* Expandable URL details in prio table */
+  details.url-examples{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+  details.url-examples summary{cursor:pointer;font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;list-style:none;padding:2px 0;display:inline-flex;align-items:center;gap:6px}
+  details.url-examples summary::-webkit-details-marker{display:none}
+  details.url-examples summary::before{content:'▸';font-size:10px;transition:transform .15s;color:var(--accent)}
+  details.url-examples[open] summary::before{transform:rotate(90deg)}
+  details.url-examples summary:hover{color:var(--accent-deep)}
+  details.url-examples .url-list{margin-top:8px;padding:8px 10px;background:var(--paper-soft);border:1px solid var(--line-soft);border-radius:4px}
+  details.url-examples .url-list .url-item{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--charcoal);line-height:1.5;padding:2px 0;word-break:break-all}
+  details.url-examples .url-list .url-item .lbl{color:var(--muted);font-family:'Inter',sans-serif;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-right:6px}
+  details.url-examples .url-list .url-item .meta{color:var(--muted);font-size:10.5px;margin-left:4px}
+  details.url-examples .url-list .url-group{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+  details.url-examples .url-list .url-group:first-child{margin-top:0;padding-top:0;border-top:0}
+  details.url-examples .url-list .grp-title{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+  details.url-examples .foot{margin-top:6px;color:var(--muted);font-size:10.5px;font-style:italic}
+
+  /* Detail section in roadmap */
+  .prio-detail-heading{padding:0 4px}
+  .detail-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+
+  /* Anatomy tab */
+  .anatomy-hero{background:var(--ink);color:#e8e4d9;padding:32px 36px;border-radius:8px;margin-bottom:24px}
+  .anatomy-hero .kicker{font-size:11px;font-weight:800;letter-spacing:.22em;color:#f5eecf;text-transform:uppercase;margin-bottom:6px}
+  .anatomy-hero h2{font-family:'Fraunces',serif;font-size:32px;font-weight:600;color:#fff;letter-spacing:-.015em;margin:0 0 8px}
+  .anatomy-hero p{color:#c9cfd6;font-size:14.5px;line-height:1.55;margin:0 0 22px;max-width:82ch}
+  .anatomy-hero .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#2c3641;border:1px solid #2c3641;border-radius:6px;overflow:hidden}
+  .anatomy-hero .stats .cell{background:var(--ink);padding:18px 20px}
+  .anatomy-hero .stats .cell .num{font-family:'Fraunces',serif;font-size:36px;line-height:1;font-weight:600;color:#fff;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .anatomy-hero .stats .cell .lbl{color:#7c8791;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;margin-top:6px}
+  .anatomy-hero .stats .cell .cap{color:#c9cfd6;font-size:12px;line-height:1.4;margin-top:6px}
+
+  .anat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .anat-grid.narrow{grid-template-columns:repeat(4,1fr)}
+  .anat-grid.wide{grid-template-columns:repeat(2,1fr)}
+
+  .anat-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 16px;position:relative}
+  .anat-card.status-good{border-left:3px solid var(--green)}
+  .anat-card.status-warn{border-left:3px solid var(--gold)}
+  .anat-card.status-bad{border-left:3px solid var(--accent)}
+  .anat-card.status-neutral{border-left:3px solid var(--muted)}
+  .anat-card .head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+  .anat-card .path{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink);font-weight:700;letter-spacing:-.01em;word-break:break-all;line-height:1.3}
+  .anat-card .badge-status{flex:0 0 auto;font-size:9.5px;padding:2px 6px;border-radius:3px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+  .anat-card .badge-status.good{background:var(--green-soft);color:var(--green)}
+  .anat-card .badge-status.warn{background:var(--gold-soft);color:var(--gold)}
+  .anat-card .badge-status.bad{background:var(--accent-soft);color:var(--accent)}
+  .anat-card .badge-status.neutral{background:#eee;color:var(--muted)}
+  .anat-card .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;padding:8px 0;border-top:1px dashed var(--line-soft);border-bottom:1px dashed var(--line-soft)}
+  .anat-card .metrics .m{text-align:center}
+  .anat-card .metrics .m .n{font-family:'Fraunces',serif;font-size:20px;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+  .anat-card .metrics .m .n.dim{color:var(--muted)}
+  .anat-card .metrics .m .l{font-size:9.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+  .anat-card .note{font-size:11.5px;color:var(--charcoal);line-height:1.45;margin-top:8px}
+  .anat-card .note b{color:var(--ink)}
+
+  /* Subdomain block */
+  .subdomain-block{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin-bottom:24px;box-shadow:0 1px 2px rgba(15,23,32,.04)}
+  .subdomain-block .sd-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .subdomain-block .sd-head .dot{width:10px;height:10px;border-radius:50%;flex:0 0 10px}
+  .subdomain-block .sd-head .dot.main{background:var(--accent)}
+  .subdomain-block .sd-head .dot.expo{background:var(--gold)}
+  .subdomain-block .sd-head .dot.registro{background:var(--blue)}
+  .subdomain-block .sd-head .dot.core{background:var(--muted)}
+  .subdomain-block .sd-head h2{font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--ink);letter-spacing:-.015em;margin:0}
+  .subdomain-block .sd-head .role{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.12em;margin-left:auto;font-family:'Inter';text-transform:uppercase}
+  .subdomain-block .sd-lede{color:var(--charcoal);font-size:13px;line-height:1.55;margin:0 0 16px;max-width:78ch}
+
+  /* Subsection within subdomain */
+  .subsec-head{font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin:18px 0 10px}
+
+  /* Compact expo landings table */
+  .anat-mini-table{width:100%;font-size:11.5px;border-collapse:collapse;background:var(--paper-soft);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .anat-mini-table th{background:#f0ece2;color:var(--muted);text-align:left;padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--line)}
+  .anat-mini-table td{padding:5px 10px;border-bottom:1px solid var(--line-soft);color:var(--charcoal);line-height:1.35}
+  .anat-mini-table td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .anat-mini-table code{font-family:'JetBrains Mono',monospace;font-size:11px;background:transparent;padding:0;border:0;color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===================== HEADER ===================== -->
+<header>
+  <div class="kicker">Auditoría técnica SEO · The Logistics World</div>
+  <h1>Dashboard del crawl</h1>
+  <div class="sub">Resultados de Screaming Frog sobre <code style="font-family:JetBrains Mono,monospace;font-size:13px">thelogisticsworld.com</code> y subdominios · sin data de GSC · 21 jul 2026</div>
+  <div class="meta">
+    <div>Herramienta<strong>Screaming Frog v20</strong></div>
+    <div>Fecha del crawl<strong>21 jul 2026</strong></div>
+    <div>Modo<strong>Estándar · sin JS rendering</strong></div>
+    <div>Alcance<strong>thelogisticsworld.com + subdominios</strong></div>
+    <div>URLs totales rastreadas<strong>29.436</strong></div>
+    <div>HTML detectadas<strong>10.447 · 2.014 indexables finales</strong></div>
+  </div>
+</header>
+
+<!-- ===================== TAB NAV ===================== -->
+<nav class="tabs" role="tablist">
+  <button class="tab-btn active" role="tab" data-tab="dashboard">Dashboard del crawl</button>
+  <button class="tab-btn" role="tab" data-tab="anatomy">Análisis Crawl / GSC</button>
+  <button class="tab-btn" role="tab" data-tab="roadmap">Roadmap · Accionables <span class="counter">12</span></button>
+</nav>
+
+<!-- ===================== TAB 1: DASHBOARD ===================== -->
+<section class="tab-panel active" id="tab-dashboard">
+
+<!-- ===================== KPI ROW ===================== -->
+<div class="grid g-kpi">
+  <div class="card kpi">
+    <div class="val">29.436</div>
+    <div class="lbl">URLs totales rastreadas</div>
+    <div class="cap">crawl completo · 7 subdominios</div>
+  </div>
+  <div class="card kpi">
+    <div class="val">10.447</div>
+    <div class="lbl">HTML detectadas</div>
+    <div class="cap">documentos HTML válidos</div>
+  </div>
+  <div class="card kpi">
+    <div class="val green">2.014</div>
+    <div class="lbl">HTML 200 indexables</div>
+    <div class="cap">base SEO accionable</div>
+  </div>
+  <div class="card kpi">
+    <div class="val gold">8.433</div>
+    <div class="lbl">Recursos no-HTML</div>
+    <div class="cap">JS, imágenes, CSS, PDFs</div>
+  </div>
+  <div class="card kpi">
+    <div class="val red">7.726</div>
+    <div class="lbl">HTML bloqueados 403</div>
+    <div class="cap">Cloudflare bloqueó al crawler</div>
+  </div>
+  <div class="card kpi">
+    <div class="val red">5,22s</div>
+    <div class="lbl">Response time promedio</div>
+    <div class="cap">crítico · Google recomienda &lt;1s</div>
+  </div>
+</div>
+
+<!-- ===================== MAIN GRID ===================== -->
+<div class="grid g-main">
+
+  <!-- Content Types -->
+  <div class="card span-4">
+    <h3>Tipos de contenido <span class="sub">· 29.436 URLs</span></h3>
+    <div class="donut-wrap">
+      <svg class="donut" viewBox="0 0 130 130">
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#f0ece2" stroke-width="20"/>
+        <!-- HTML 10447 = 35.5% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#1f6a4a" stroke-width="20" stroke-dasharray="116 211" stroke-dashoffset="0" transform="rotate(-90 65 65)"/>
+        <!-- JS 8071 = 27.4% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#a7791a" stroke-width="20" stroke-dasharray="90 237" stroke-dashoffset="-116" transform="rotate(-90 65 65)"/>
+        <!-- Imagen 7826 = 26.6% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#c1281e" stroke-width="20" stroke-dasharray="87 240" stroke-dashoffset="-206" transform="rotate(-90 65 65)"/>
+        <!-- CSS 948 = 3.2% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#1f4a7a" stroke-width="20" stroke-dasharray="10 317" stroke-dashoffset="-293" transform="rotate(-90 65 65)"/>
+        <!-- Sin tipo 2093 = 7.1% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#6b7885" stroke-width="20" stroke-dasharray="23 304" stroke-dashoffset="-303" transform="rotate(-90 65 65)"/>
+        <text x="65" y="66" text-anchor="middle" class="donut-center">29.4K</text>
+        <text x="65" y="82" text-anchor="middle" class="donut-sub">URLs</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#1f6a4a"></span>HTML</span><span><span class="n">10.447</span><span class="pct">35,5%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#a7791a"></span>JavaScript</span><span><span class="n">8.071</span><span class="pct">27,4%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#c1281e"></span>Imágenes</span><span><span class="n">7.826</span><span class="pct">26,6%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#6b7885"></span>Sin tipo (403)</span><span><span class="n">2.093</span><span class="pct">7,1%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#1f4a7a"></span>CSS + otros</span><span><span class="n">999</span><span class="pct">3,4%</span></span></div>
+      </div>
+    </div>
+    <div class="callout">Sitio mucho más grande que un blog editorial estándar. El peso de JS (27%) es alto — es un WordPress con múltiples plugins que cargan scripts pesados.</div>
+  </div>
+
+  <!-- Status Codes -->
+  <div class="card span-4">
+    <h3>Status Codes <span class="sub">· 29.436 URLs</span></h3>
+    <div class="donut-wrap">
+      <svg class="donut" viewBox="0 0 130 130">
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#f0ece2" stroke-width="20"/>
+        <!-- 2xx 19453 = 66.1% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#1f6a4a" stroke-width="20" stroke-dasharray="216 111" stroke-dashoffset="0" transform="rotate(-90 65 65)"/>
+        <!-- 403 7726 = 26.2% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#c1281e" stroke-width="20" stroke-dasharray="86 241" stroke-dashoffset="-216" transform="rotate(-90 65 65)"/>
+        <!-- Otros (0) 2093 = 7.1% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#6b7885" stroke-width="20" stroke-dasharray="23 304" stroke-dashoffset="-302" transform="rotate(-90 65 65)"/>
+        <!-- 301 144 = 0.5% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#a7791a" stroke-width="20" stroke-dasharray="1.6 325" stroke-dashoffset="-325" transform="rotate(-90 65 65)"/>
+        <text x="65" y="66" text-anchor="middle" class="donut-center">66%</text>
+        <text x="65" y="82" text-anchor="middle" class="donut-sub">2xx OK</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#1f6a4a"></span>2xx (OK)</span><span><span class="n">19.453</span><span class="pct">66,1%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#c1281e"></span>403 (bloqueado)</span><span><span class="n">7.726</span><span class="pct">26,2%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#6b7885"></span>Sin código (timeout)</span><span><span class="n">2.093</span><span class="pct">7,1%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#a7791a"></span>301 (redirects)</span><span><span class="n">144</span><span class="pct">0,5%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#c1281e"></span>404 + 410 (errores)</span><span><span class="n">20</span><span class="pct">0,1%</span></span></div>
+      </div>
+    </div>
+    <div class="callout warn"><b>26% de URLs bloqueadas con 403.</b> Es Cloudflare tratando al crawler como bot. Google Search Console debería detectarlo — verificar si Googlebot pasa la protección. Los 144 redirects son todos 301 (buena práctica).</div>
+  </div>
+
+  <!-- Indexability -->
+  <div class="card span-4">
+    <h3>Indexabilidad HTML <span class="sub">· 2.564 HTML 200</span></h3>
+    <div class="donut-wrap">
+      <svg class="donut" viewBox="0 0 130 130">
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#f0ece2" stroke-width="20"/>
+        <!-- Indexable 2014/2564 = 78.6% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#1f6a4a" stroke-width="20" stroke-dasharray="257 70" stroke-dashoffset="0" transform="rotate(-90 65 65)"/>
+        <!-- Canonicalizada 269 = 10.5% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#a7791a" stroke-width="20" stroke-dasharray="34 293" stroke-dashoffset="-257" transform="rotate(-90 65 65)"/>
+        <!-- Canonicalizada+noindex 260 = 10.1% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#c46a20" stroke-width="20" stroke-dasharray="33 294" stroke-dashoffset="-291" transform="rotate(-90 65 65)"/>
+        <!-- noindex 21 = 0.8% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#c1281e" stroke-width="20" stroke-dasharray="3 324" stroke-dashoffset="-324" transform="rotate(-90 65 65)"/>
+        <text x="65" y="66" text-anchor="middle" class="donut-center">2.014</text>
+        <text x="65" y="82" text-anchor="middle" class="donut-sub">indexables</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#1f6a4a"></span>Indexable final</span><span><span class="n">2.014</span><span class="pct">78,6%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#a7791a"></span>Canonicalizada</span><span><span class="n">269</span><span class="pct">10,5%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#c46a20"></span>Canonicalizada + noindex</span><span><span class="n">260</span><span class="pct">10,1%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#c1281e"></span>noindex directo</span><span><span class="n">21</span><span class="pct">0,8%</span></span></div>
+      </div>
+    </div>
+    <div class="callout warn"><b>529 URLs canonicalizadas a otras páginas.</b> Sano si es intencional (paginación WordPress), pero <b>72 son páginas paginadas /page/N/ canonicalizadas a página 1</b> — bug clásico que confunde a Google. Ver Roadmap #02.</div>
+  </div>
+
+  <!-- Depth -->
+  <div class="card span-6" id="depth">
+    <h3>Profundidad de clicks desde la home <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div class="v-bars" style="height:180px">
+      <div class="v-col"><div class="v-num">1</div><div class="v-bar" style="height:1%"></div><div class="v-lbl">0</div></div>
+      <div class="v-col"><div class="v-num">49</div><div class="v-bar" style="height:3%"></div><div class="v-lbl">1</div></div>
+      <div class="v-col"><div class="v-num">354</div><div class="v-bar" style="height:23%"></div><div class="v-lbl">2</div></div>
+      <div class="v-col"><div class="v-num">1.563</div><div class="v-bar" style="height:100%"></div><div class="v-lbl">3</div></div>
+      <div class="v-col"><div class="v-num">47</div><div class="v-bar dim" style="height:3%"></div><div class="v-lbl">4</div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:var(--muted);font-weight:700">
+      <span>← Superficial</span>
+      <span>Profundidad de clicks</span>
+      <span>Profundo →</span>
+    </div>
+    <div class="callout warn"><b>78% del catálogo indexable está a depth 3.</b> Estructura muy plana pero concentrada en un nivel medio — sugiere que los artículos individuales cuelgan de categorías (depth 2) pero no hay hubs temáticos intermedios. Sin capa de depth 4+ apreciable, lo que es sano.</div>
+  </div>
+
+  <!-- Inlinks -->
+  <div class="card span-6" id="inlinks">
+    <h3>Inlinks internos únicos recibidos <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">0–4 inlinks</div><div class="track"><div class="fill red" style="width:100%"></div></div><div class="val">1.114<span class="pct">55%</span></div></div>
+      <div class="bar-row"><div class="lbl">5–9</div><div class="track"><div class="fill gold" style="width:46%"></div></div><div class="val">507<span class="pct">25%</span></div></div>
+      <div class="bar-row"><div class="lbl">10–24</div><div class="track"><div class="fill gold" style="width:16%"></div></div><div class="val">183<span class="pct">9%</span></div></div>
+      <div class="bar-row"><div class="lbl">25–49</div><div class="track"><div class="fill gold" style="width:5%"></div></div><div class="val">55<span class="pct">3%</span></div></div>
+      <div class="bar-row"><div class="lbl">50+</div><div class="track"><div class="fill green" style="width:14%"></div></div><div class="val">155<span class="pct">8%</span></div></div>
+    </div>
+    <div class="callout good"><b>Distribución mucho más sana que un WP típico:</b> hay 393 URLs con 5-49 inlinks (19,5%) formando una capa intermedia. Aún 55% con 0-4 inlinks pero con distribución progresiva, no bimodal. Muestra que el enlazado interno WordPress funciona parcialmente.</div>
+  </div>
+
+  <!-- Titles -->
+  <div class="card span-4" id="titles">
+    <h3>Titles <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">Ausentes</div><div class="track"><div class="fill green" style="width:0%"></div></div><div class="val">0</div></div>
+      <div class="bar-row"><div class="lbl">Cortos &lt;30</div><div class="track"><div class="fill gold" style="width:1%"></div></div><div class="val">2</div></div>
+      <div class="bar-row"><div class="lbl">OK 30-60</div><div class="track"><div class="fill green" style="width:22%"></div></div><div class="val">358</div></div>
+      <div class="bar-row"><div class="lbl">Largos &gt;60</div><div class="track"><div class="fill red" style="width:100%"></div></div><div class="val">1.654</div></div>
+      <div class="bar-row"><div class="lbl">Duplicados</div><div class="track"><div class="fill red" style="width:11%"></div></div><div class="val">190</div></div>
+    </div>
+    <div class="callout warn"><b>82% de titles pasan 60 caracteres.</b> Es el volumen más alto de todo el reporte. Bug de plantilla — el generador de titles no aplica límite. Google trunca en la SERP → afecta CTR de miles de páginas.</div>
+  </div>
+
+  <!-- Meta descriptions -->
+  <div class="card span-4" id="metas">
+    <h3>Meta descriptions <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">Ausentes</div><div class="track"><div class="fill red" style="width:100%"></div></div><div class="val">659</div></div>
+      <div class="bar-row"><div class="lbl">Cortas &lt;70</div><div class="track"><div class="fill gold" style="width:1%"></div></div><div class="val">3</div></div>
+      <div class="bar-row"><div class="lbl">OK 70-160</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="val">925</div></div>
+      <div class="bar-row"><div class="lbl">Largas &gt;160</div><div class="track"><div class="fill gold" style="width:46%"></div></div><div class="val">427</div></div>
+      <div class="bar-row"><div class="lbl">Duplicadas</div><div class="track"><div class="fill red" style="width:4%"></div></div><div class="val">37</div></div>
+    </div>
+    <div class="callout warn"><b>33% de URLs sin meta description.</b> Google la reescribe con extracto random del body — impacta CTR. Combinado con 21% largas → 54% del catálogo con meta subóptima.</div>
+  </div>
+
+  <!-- H1 -->
+  <div class="card span-4" id="h1-presence">
+    <h3>Headers · H1 <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">Ausentes</div><div class="track"><div class="fill red" style="width:31%"></div></div><div class="val">222<span class="pct">11%</span></div></div>
+      <div class="bar-row"><div class="lbl">OK ≤70</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="val">1.086</div></div>
+      <div class="bar-row"><div class="lbl">Largos &gt;70</div><div class="track"><div class="fill gold" style="width:65%"></div></div><div class="val">706</div></div>
+      <div class="bar-row"><div class="lbl">Múltiples H1</div><div class="track"><div class="fill red" style="width:3%"></div></div><div class="val">18</div></div>
+      <div class="bar-row"><div class="lbl">Duplicados</div><div class="track"><div class="fill red" style="width:25%"></div></div><div class="val">181</div></div>
+    </div>
+    <div class="callout warn"><b>11% del catálogo sin H1</b> y 35% con H1 largo. Combinado con 181 H1 duplicados entre URLs — señal de que el template no personaliza el H1 en varias plantillas (tags, /historico/, /author/).</div>
+  </div>
+
+  <!-- H2 -->
+  <div class="card span-6" id="h2">
+    <h3>H2 · Estructura semántica <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div class="donut-wrap" style="margin-top:8px">
+      <svg class="donut" viewBox="0 0 130 130">
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#f0ece2" stroke-width="20"/>
+        <!-- Con H2 1847/2014 = 91.7% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#1f6a4a" stroke-width="20" stroke-dasharray="300 27" stroke-dashoffset="0" transform="rotate(-90 65 65)"/>
+        <!-- Sin H2 167 = 8.3% -->
+        <circle cx="65" cy="65" r="52" fill="none" stroke="#c1281e" stroke-width="20" stroke-dasharray="27 300" stroke-dashoffset="-300" transform="rotate(-90 65 65)"/>
+        <text x="65" y="66" text-anchor="middle" class="donut-center">92%</text>
+        <text x="65" y="82" text-anchor="middle" class="donut-sub">con H2</text>
+      </svg>
+      <div class="donut-legend">
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#1f6a4a"></span>URLs con H2</span><span><span class="n">1.847</span><span class="pct">91,7%</span></span></div>
+        <div class="row"><span class="lg-lbl"><span class="sw" style="background:#c1281e"></span>URLs sin H2</span><span><span class="n">167</span><span class="pct">8,3%</span></span></div>
+      </div>
+    </div>
+    <div class="callout good"><b>Excelente estructura semántica.</b> El 92% de páginas usan H2 para dividir contenido — muy superior a un WP estándar. Las 167 sin H2 son en su mayoría páginas de listado/archivo (/tag/, /author/), no artículos editoriales.</div>
+  </div>
+
+  <!-- Response Time (CRÍTICO) -->
+  <div class="card span-6" id="response-time" style="border:2px solid var(--accent)">
+    <h3 style="color:var(--accent)">⚠ Tiempo de respuesta HTTP <span class="sub" style="color:var(--accent)">· 2.014 HTML · CRÍTICO</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">&lt;0,5s</div><div class="track"><div class="fill green" style="width:10%"></div></div><div class="val">93<span class="pct">5%</span></div></div>
+      <div class="bar-row"><div class="lbl">0,5-1s</div><div class="track"><div class="fill gold" style="width:100%"></div></div><div class="val">943<span class="pct">47%</span></div></div>
+      <div class="bar-row"><div class="lbl">1-3s</div><div class="track"><div class="fill gold" style="width:45%"></div></div><div class="val">421<span class="pct">21%</span></div></div>
+      <div class="bar-row"><div class="lbl">3-6s</div><div class="track"><div class="fill red" style="width:4%"></div></div><div class="val">40<span class="pct">2%</span></div></div>
+      <div class="bar-row"><div class="lbl">6-10s</div><div class="track"><div class="fill red" style="width:3%"></div></div><div class="val">26<span class="pct">1%</span></div></div>
+      <div class="bar-row"><div class="lbl">&gt;10s</div><div class="track"><div class="fill red" style="width:52%"></div></div><div class="val">491<span class="pct">24%</span></div></div>
+    </div>
+    <div class="mini-stat"><span class="k">Media</span><span class="v bad">5,22s</span></div>
+    <div class="mini-stat"><span class="k">Máximo</span><span class="v bad">29,85s</span></div>
+    <div class="callout warn"><b>Hallazgo crítico:</b> 24% de las URLs indexables tardan &gt;10 segundos en responder. Google usa Core Web Vitals como señal de ranking desde 2021 — cualquier URL con LCP &gt;2,5s tiene penalidad en resultados. Con media de 5,22s, la mayoría del catálogo está fuera del rango "bueno". <b>Es P1 del roadmap</b>.</div>
+  </div>
+
+  <!-- Word count -->
+  <div class="card span-4" id="word-count">
+    <h3>Recuento de palabras <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">&lt;100 palabras</div><div class="track"><div class="fill red" style="width:25%"></div></div><div class="val">204<span class="pct">10%</span></div></div>
+      <div class="bar-row"><div class="lbl">100-300</div><div class="track"><div class="fill gold" style="width:18%"></div></div><div class="val">146<span class="pct">7%</span></div></div>
+      <div class="bar-row"><div class="lbl">300-600</div><div class="track"><div class="fill green" style="width:54%"></div></div><div class="val">445<span class="pct">22%</span></div></div>
+      <div class="bar-row"><div class="lbl">600-1200</div><div class="track"><div class="fill green" style="width:48%"></div></div><div class="val">395<span class="pct">20%</span></div></div>
+      <div class="bar-row"><div class="lbl">1200+</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="val">824<span class="pct">41%</span></div></div>
+    </div>
+    <div class="callout good"><b>Excelente longitud editorial:</b> 61% de URLs tienen 600+ palabras, 41% tienen 1200+. Contenido substancial. Solo 17% podría considerarse thin content — probablemente páginas de listado/tag donde es esperable.</div>
+  </div>
+
+  <!-- URL Length -->
+  <div class="card span-4" id="url-length">
+    <h3>Longitud de URLs <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">&lt;50 chars</div><div class="track"><div class="fill green" style="width:29%"></div></div><div class="val">214<span class="pct">11%</span></div></div>
+      <div class="bar-row"><div class="lbl">50-80</div><div class="track"><div class="fill green" style="width:69%"></div></div><div class="val">515<span class="pct">26%</span></div></div>
+      <div class="bar-row"><div class="lbl">80-115</div><div class="track"><div class="fill gold" style="width:71%"></div></div><div class="val">535<span class="pct">27%</span></div></div>
+      <div class="bar-row"><div class="lbl">&gt;115 (bloat)</div><div class="track"><div class="fill red" style="width:100%"></div></div><div class="val">750<span class="pct">37%</span></div></div>
+    </div>
+    <div class="callout gold"><b>37% URLs superan 115 caracteres.</b> Son en su mayoría slugs largos de artículos editoriales — no crítico, pero URLs cortas rankean marginalmente mejor y se comparten más fácil.</div>
+  </div>
+
+  <!-- Canonicals -->
+  <div class="card span-4" id="canonicals">
+    <h3>Canonicals <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">Self-referencing</div><div class="track"><div class="fill green" style="width:100%"></div></div><div class="val">1.805<span class="pct">90%</span></div></div>
+      <div class="bar-row"><div class="lbl">Sin canonical</div><div class="track"><div class="fill red" style="width:12%"></div></div><div class="val">209<span class="pct">10%</span></div></div>
+      <div class="bar-row"><div class="lbl">A URL diferente</div><div class="track"><div class="fill muted" style="width:0%"></div></div><div class="val">0</div></div>
+    </div>
+    <div class="callout good"><b>Configuración canonical mayormente sana</b> (90% self-ref). Las 209 sin canonical son mayormente de subdominios (play, expo) — verificar que el template las declare. Cero canonicals apuntando a URLs distintas es buena señal (sin bugs de WordPress típicos).</div>
+  </div>
+
+  <!-- Page Size -->
+  <div class="card span-4">
+    <h3>Peso del HTML <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="margin-top:12px">
+      <div class="bar-row"><div class="lbl">&lt;50 KB</div><div class="track"><div class="fill green" style="width:6%"></div></div><div class="val">51<span class="pct">3%</span></div></div>
+      <div class="bar-row"><div class="lbl">50-150 KB</div><div class="track"><div class="fill gold" style="width:7%"></div></div><div class="val">60<span class="pct">3%</span></div></div>
+      <div class="bar-row"><div class="lbl">150-300 KB</div><div class="track"><div class="fill gold" style="width:22%"></div></div><div class="val">167<span class="pct">8%</span></div></div>
+      <div class="bar-row"><div class="lbl">&gt;300 KB</div><div class="track"><div class="fill red" style="width:100%"></div></div><div class="val">1.736<span class="pct">86%</span></div></div>
+    </div>
+    <div class="callout warn"><b>86% del HTML supera 300 KB.</b> Peso alto para páginas WordPress — sugiere HTML muy inflado por scripts inline, plugins y widgets. Contribuye al response time crítico (5,22s promedio).</div>
+  </div>
+
+  <!-- Meta robots + Language -->
+  <div class="card span-6" id="lang-attr">
+    <h3>Directivas del bot · Meta Robots + Language <span class="sub">· 2.014 HTML indexables</span></h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px">
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Meta robots</div>
+        <div class="mini-stat"><span class="k">index, follow (WP default)</span><span class="v ok">1.734</span></div>
+        <div class="mini-stat"><span class="k">max-image-preview:large</span><span class="v ok">168</span></div>
+        <div class="mini-stat"><span class="k">index, follow (limpio)</span><span class="v ok">112</span></div>
+        <div class="mini-stat"><span class="k">noindex</span><span class="v ok">0</span></div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">HTML lang attribute</div>
+        <div class="mini-stat"><span class="k"><code>lang="es"</code></span><span class="v ok">1.902</span></div>
+        <div class="mini-stat"><span class="k"><code>lang="en"</code></span><span class="v warn">112</span></div>
+        <div class="mini-stat"><span class="k">Contenido esperado</span><span class="v">Español (MX/LATAM)</span></div>
+      </div>
+    </div>
+    <div class="callout good"><b>Configuración de bots correcta.</b> 100% del catálogo indexable tiene <code>index,follow</code>. 94% declara <code>lang="es"</code>. Los 112 con <code>lang="en"</code> son URLs de <code>expo.thelogisticsworld.com</code> — verificar si el contenido es realmente en inglés o hay bug de template.</div>
+  </div>
+
+  <!-- Redirects table -->
+  <div class="card span-6" id="redirects">
+    <h3>Redirects · Tipo y protocolo <span class="sub">· 144 redirects</span></h3>
+    <table style="margin-top:8px">
+      <thead><tr><th>Código</th><th>Descripción</th><th class="num">Cantidad</th><th>Notas SEO</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge green">301</span></td><td>Moved Permanently ✓</td><td class="num"><b>144</b></td><td>Estándar SEO — transfiere autoridad</td></tr>
+        <tr><td><span class="badge muted">302</span></td><td>Temporal</td><td class="num">0</td><td>Ninguno detectado</td></tr>
+        <tr><td><span class="badge muted">307</span></td><td>Temporary</td><td class="num">0</td><td>Ninguno detectado</td></tr>
+        <tr><td><span class="badge muted">308</span></td><td>Permanent (nuevo)</td><td class="num">0</td><td>Ninguno detectado</td></tr>
+      </tbody>
+    </table>
+    <div class="callout good"><b>Los 144 redirects son 301</b> — configuración correcta. Transfiere autoridad, es el estándar. Sin redirect chains detectadas (0 hops múltiples), lo cual es sano.</div>
+  </div>
+
+  <!-- Overall summary -->
+  <div class="card span-12 dark">
+    <h3 style="color:#a8b0b8">Resumen ejecutivo del crawl · Solo issues técnicos derivables sin GSC</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:14px">
+      <div>
+        <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:#c1281e;line-height:1">5,22s</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#a8b0b8;text-transform:uppercase;margin-top:6px">Response time promedio</div>
+        <div style="font-size:12.5px;color:#c9cfd6;margin-top:6px;line-height:1.4">Crítico. 491 URLs (24%) tardan &gt;10 segundos. Core Web Vitals impacta ranking directo.</div>
+      </div>
+      <div>
+        <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:#c1281e;line-height:1">1.654</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#a8b0b8;text-transform:uppercase;margin-top:6px">Titles &gt;60 caracteres</div>
+        <div style="font-size:12.5px;color:#c9cfd6;margin-top:6px;line-height:1.4">82% del catálogo. Google trunca en SERP — impacto masivo en CTR.</div>
+      </div>
+      <div>
+        <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:#c1281e;line-height:1">659</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#a8b0b8;text-transform:uppercase;margin-top:6px">URLs sin meta description</div>
+        <div style="font-size:12.5px;color:#c9cfd6;margin-top:6px;line-height:1.4">33% del catálogo. Google reescribe con extracto random del body.</div>
+      </div>
+      <div>
+        <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:#f5eecf;line-height:1">72</div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#a8b0b8;text-transform:uppercase;margin-top:6px">Paginadas canonicalizadas a P1</div>
+        <div style="font-size:12.5px;color:#c9cfd6;margin-top:6px;line-height:1.4">Bug clásico WordPress. Google no consolida — todas compiten por la misma señal.</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #2c3641;margin-top:20px;padding-top:16px;font-size:12px;color:#a8b0b8">
+      Este dashboard usa <b>únicamente data del crawl de Screaming Frog</b> (29.436 URLs rastreadas · 21 jul 2026). El tab "Análisis Crawl / GSC" cruza esta data con Google Search Console para revelar la brecha entre lo que el sitio conecta y lo que Google conoce.
+    </div>
+  </div>
+
+</div>
+
+</section><!-- /tab-dashboard -->
+
+<!-- ===================== TAB 2: CRAWL / GSC ANALYSIS ===================== -->
+<section class="tab-panel" id="tab-anatomy">
+
+<!-- HERO -->
+<div class="anatomy-hero">
+  <div class="kicker">Análisis Crawl / GSC · The Logistics World</div>
+  <h2>Lo que Google conoce vs lo que el sitio conecta internamente.</h2>
+  <p>Comparamos dos universos: 18.996 URLs con impresiones en Google Search Console (últimos 90 días) contra 2.014 URLs alcanzables por un crawler siguiendo enlaces internos. La brecha es menor que en un WP típico — TLW tiene paginación WordPress funcional — pero <b>72,5% de los clics vienen de URLs que el crawler no alcanza</b>. La causa principal es una combinación de páginas paginadas mal canonicalizadas, archivos legacy huérfanos, y response time crítico.</p>
+  <div class="stats">
+    <div class="cell">
+      <div class="num">18.996</div>
+      <div class="lbl">URLs con impresiones GSC</div>
+      <div class="cap">90 días · main + expo subdomain</div>
+    </div>
+    <div class="cell">
+      <div class="num">2.014</div>
+      <div class="lbl">URLs alcanzables · crawl</div>
+      <div class="cap">Screaming Frog · sin JS rendering</div>
+    </div>
+    <div class="cell">
+      <div class="num" style="color:#c1281e">72,5%</div>
+      <div class="lbl">Clics fuera del crawl</div>
+      <div class="cap">31.029 de 42.804 clics/trimestre</div>
+    </div>
+    <div class="cell">
+      <div class="num">1:9,4</div>
+      <div class="lbl">Ratio crawl vs GSC</div>
+      <div class="cap">por cada URL enlazada, Google conoce 9,4</div>
+    </div>
+  </div>
+</div>
+
+<!-- FUNNEL CHART -->
+<div class="card" style="padding:22px 26px;margin-bottom:20px">
+  <h3 style="font-family:'Inter';font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:800;margin:0 0 6px">Cómo se compara lo que Google conoce vs lo que el sitio conecta</h3>
+  <p style="font-size:13px;color:var(--charcoal);line-height:1.5;margin:0 0 14px">La distancia entre el rojo y el verde es el gap estructural. A diferencia de sitios con paginación por API, en TLW la brecha existe pero es menor — hay paginación WordPress funcional que compensa parcialmente.</p>
+
+  <svg viewBox="0 0 900 200" role="img" style="width:100%;height:auto">
+    <rect x="0" y="10" width="880" height="46" fill="#c1281e" fill-opacity="0.85" rx="2"/>
+    <text x="16" y="38" font-family="Inter,sans-serif" fill="#fff" font-weight="800" font-size="14">GSC · CON IMPRESIONES REALES (90d)</text>
+    <text x="870" y="40" text-anchor="end" font-family="Fraunces,serif" fill="#fff" font-weight="700" font-size="24">18.996</text>
+
+    <rect x="0" y="72" width="200" height="46" fill="#a7791a" fill-opacity="0.90" rx="2"/>
+    <text x="16" y="100" font-family="Inter,sans-serif" fill="#fff" font-weight="800" font-size="14">GSC ENCONTRADAS EN CRAWL</text>
+    <text x="192" y="102" text-anchor="end" font-family="Fraunces,serif" fill="#fff" font-weight="700" font-size="24">1.567</text>
+    <text x="220" y="102" font-family="Inter,sans-serif" fill="var(--muted)" font-size="12" font-weight="600">8,2% de GSC</text>
+
+    <rect x="0" y="134" width="93" height="46" fill="#1f6a4a" rx="2"/>
+    <text x="16" y="162" font-family="Inter,sans-serif" fill="#fff" font-weight="800" font-size="14">CRAWL · INDEXABLES TOTAL</text>
+    <text x="240" y="162" font-family="Fraunces,serif" fill="var(--ink)" font-weight="700" font-size="24">2.014</text>
+    <text x="290" y="162" font-family="Inter,sans-serif" fill="var(--accent)" font-size="12" font-weight="700">10,6% de GSC</text>
+  </svg>
+
+  <p class="callout warn" style="margin-top:12px;font-size:12.5px"><b>Lectura:</b> Google conoce 9,4× más URLs de las que el sitio conecta internamente. Mucho mejor que un blog editorial roto (donde el ratio típico es 1:100), pero peor que un ecommerce sano (donde el ratio debería ser 1:1). El gap se explica por 3 causas concretas: <b>(1)</b> páginas paginadas <code>/page/N/</code> canonicalizadas a página 1 · <b>(2)</b> archivos legacy <code>/historico/</code> sin link interno · <b>(3)</b> tags huérfanos.</p>
+</div>
+
+<!-- SECTION: Coverage by section chart -->
+<div class="card" style="padding:24px 28px;margin-bottom:20px">
+  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px">
+    <div style="font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">La brecha por sección</div>
+    <div style="height:1px;background:var(--line);flex:1"></div>
+  </div>
+  <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:-.01em">Dónde el crawler alcanza menos de lo que Google conoce.</h3>
+  <p style="font-size:13.5px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">Comparación de cobertura por sección editorial. En rojo, URLs GSC · en verde, alcanzables por el crawler. Los ratios más críticos se concentran en <code>/historico/</code> (1:84), <code>/actualidad-logistica/</code> (1:24) y <code>/logistica-y-distribucion/</code> (1:10).</p>
+
+  <table style="margin-top:8px">
+    <thead>
+      <tr>
+        <th>Sección</th>
+        <th class="num">Crawl</th>
+        <th class="num">GSC pages</th>
+        <th class="num">Ratio</th>
+        <th class="num">Clics 90d</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>/actualidad-logistica/</code></td><td class="num">234</td><td class="num">5.611</td><td class="num">1:24</td><td class="num"><b>6.734</b></td><td><span class="badge gold">Parcial</span></td></tr>
+      <tr><td><code>/logistica-y-distribucion/</code></td><td class="num">131</td><td class="num">1.308</td><td class="num">1:10</td><td class="num"><b>6.783</b></td><td><span class="badge gold">Parcial</span></td></tr>
+      <tr><td><code>expo.thelogisticsworld.com</code></td><td class="num">112</td><td class="num">718</td><td class="num">1:6</td><td class="num"><b>3.908</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/logistica-comercio-electronico/</code></td><td class="num">74</td><td class="num">479</td><td class="num">1:6</td><td class="num"><b>3.869</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/planeacion-estrategica/</code></td><td class="num">129</td><td class="num">842</td><td class="num">1:7</td><td class="num"><b>3.197</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/comercio-internacional/</code></td><td class="num">88</td><td class="num">695</td><td class="num">1:8</td><td class="num"><b>2.901</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/tag/</code> (archive)</td><td class="num">449</td><td class="num">1.636</td><td class="num">1:3,6</td><td class="num"><b>2.712</b></td><td><span class="badge gold">Parcial</span></td></tr>
+      <tr><td><code>/transporte/</code></td><td class="num">104</td><td class="num">676</td><td class="num">1:6,5</td><td class="num"><b>2.406</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/historico/</code></td><td class="num">50</td><td class="num"><b>4.193</b></td><td class="num"><b>1:84</b></td><td class="num"><b>1.861</b></td><td><span class="badge red">Cementerio</span></td></tr>
+      <tr><td><code>/eventos-de-la-industria/</code></td><td class="num">61</td><td class="num">367</td><td class="num">1:6</td><td class="num"><b>1.372</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/tecnologia/</code></td><td class="num">88</td><td class="num">676</td><td class="num">1:7,7</td><td class="num"><b>1.236</b></td><td><span class="badge green">Sana</span></td></tr>
+      <tr><td><code>/wp-content/uploads/</code> (PDFs)</td><td class="num">0</td><td class="num">44</td><td class="num">—</td><td class="num">389</td><td><span class="badge red">Huérfanos</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn" style="margin-top:14px;font-size:13px"><b>Dos hallazgos clave:</b> (1) <b>/historico/ es un cementerio</b> — Google conoce 4.193 URLs con 1.861 clics/trimestre pero el crawler solo alcanza 50 (ratio 1:84). Google encuentra este contenido por sitemap o memoria histórica. (2) <b>Categorías activas tienen ratio 1:6 a 1:24</b> — mucho mejor que sitios con paginación fake pero aún indica que hay contenido histórico que solo Google conoce.</div>
+</div>
+
+<!-- SECTION: Paginación canonicalizada a página 1 (bug crítico) -->
+<div class="card" style="padding:24px 28px;margin-bottom:20px;border-left:4px solid var(--accent)">
+  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px">
+    <div style="font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Bug técnico verificable</div>
+    <div style="height:1px;background:var(--line);flex:1"></div>
+  </div>
+  <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:-.01em">72 URLs paginadas canonicalizadas a página 1.</h3>
+  <p style="font-size:13.5px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">TLW usa paginación WordPress correcta (<code>/tecnologia/page/2/</code>, etc.) pero muchas de estas páginas paginadas <b>declaran canonical hacia página 1</b>. Google desde 2011 recomienda explícitamente NO hacer esto — cada página paginada debe ser auto-referencial. El bug hace que Google deduplique todo el listado en una sola URL, perdiendo autoridad y crawl budget.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div>
+      <div style="font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Estado actual</div>
+      <div style="background:var(--paper-soft);border:1px solid var(--line);border-radius:5px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.7;color:var(--charcoal)">
+        <div style="color:var(--muted)">Ejemplo URL paginada:</div>
+        <div><b>/tecnologia/page/60/</b></div>
+        <div style="color:var(--muted);margin-top:6px">Response:</div>
+        <div>200 OK · HTML válido con 7 artículos</div>
+        <div style="color:var(--muted);margin-top:6px">Canonical actual:</div>
+        <div style="color:var(--accent)">&lt;link rel="canonical" href="/tecnologia/"&gt;</div>
+        <div style="color:var(--muted);margin-top:6px">Resultado:</div>
+        <div>Google descarta esta URL, no consolida los artículos de página 60</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Corrección recomendada</div>
+      <div style="background:var(--paper-soft);border:1px solid var(--line);border-radius:5px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.7;color:var(--charcoal)">
+        <div style="color:var(--muted)">Cambiar canonical a self-referencial:</div>
+        <div style="color:var(--green)">&lt;link rel="canonical"</div>
+        <div style="color:var(--green)">  href="/tecnologia/page/60/"&gt;</div>
+        <div style="color:var(--muted);margin-top:6px">Meta title distinto:</div>
+        <div>&lt;title&gt;Tecnología · Página 60&lt;/title&gt;</div>
+        <div style="color:var(--muted);margin-top:6px">Robots meta:</div>
+        <div>&lt;meta name="robots" content="index,follow"&gt;</div>
+        <div style="color:var(--muted);margin-top:6px">Resultado:</div>
+        <div>Google indexa cada página, distribuye autoridad, crawl budget se usa eficientemente</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:16px;font-size:13px">
+    <b>Impacto medido:</b> 72 páginas paginadas están descartadas por Google por este bug. Categorías afectadas incluyen <code>/tecnologia/</code> (páginas 2-60), <code>/innovacion/</code>, y varias más. Cada una lista 7 artículos que Google no puede descubrir eficientemente. <b>Es P2 del roadmap</b> — es un fix de una línea en <code>functions.php</code> o en el plugin de SEO (Yoast/RankMath/AIOSEO).
+  </div>
+</div>
+
+<!-- SECTION: /historico/ orphan -->
+<div class="card" style="padding:24px 28px;margin-bottom:20px;border-left:4px solid var(--accent)">
+  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px">
+    <div style="font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">El cementerio</div>
+    <div style="height:1px;background:var(--line);flex:1"></div>
+  </div>
+  <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:-.01em"><code style="background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:3px;font-family:JetBrains Mono,monospace;font-size:18px">/historico/</code> · 4.193 URLs que Google indexa sin un solo link interno.</h3>
+  <p style="font-size:13.5px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">Es el mayor gap de la web. Contenido histórico de años anteriores movido a <code>/historico/</code> — Google sigue indexándolo, sigue enviando <b>1.861 clics/trimestre</b>. Pero el crawler no encuentra ni un enlace hacia esta carpeta desde la nav ni desde artículos. Tráfico gratis por accidente.</p>
+
+  <table style="margin-top:6px">
+    <thead>
+      <tr>
+        <th>URL /historico/</th>
+        <th class="num">Clics</th>
+        <th class="num">Impresiones</th>
+        <th class="num">CTR aprox.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="url">/historico/conoce-el-centro-de-distribucion-de-amazon-en-tepotzotlan/</td><td class="num">185</td><td class="num">12.247</td><td class="num">1,5%</td></tr>
+      <tr><td class="url">/historico/alpura-del-rancho-a-la-mesa/</td><td class="num">88</td><td class="num">3.977</td><td class="num">2,2%</td></tr>
+      <tr><td class="url">/historico/cubicaje-una-guia-rapida-en-5-pasos-2/</td><td class="num">37</td><td class="num">2.354</td><td class="num">1,6%</td></tr>
+      <tr><td class="url">/historico/trp-capacitara-a-quienes-circulen-por-su-terminal/</td><td class="num">37</td><td class="num">340</td><td class="num">10,9%</td></tr>
+      <tr><td class="url">/historico/regimen-especial-jubilatorio-para-transportistas-de-cargas/</td><td class="num">30</td><td class="num">1.482</td><td class="num">2,0%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn" style="margin-top:14px;font-size:13px">
+    <b>Fix recomendado:</b> auditar por lote. Los que aún son relevantes se reintegran al blog activo con URL nueva y redirect 301. Los duplicados o obsoletos se dejan como están (mantienen el tráfico residual). Con solo agregar un módulo "Contenido histórico relacionado" al pie de artículos activos apuntando a los top 20 URLs de <code>/historico/</code>, se recupera parte de la autoridad interna.
+  </div>
+</div>
+
+<!-- SECTION: Response time (critical) -->
+<div class="card" style="padding:24px 28px;margin-bottom:20px;border-left:4px solid var(--accent);background:linear-gradient(180deg,#ffffff 0%,#fbf2f0 100%)">
+  <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:8px">
+    <div style="font-family:'Inter';font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Impacto en Core Web Vitals</div>
+    <div style="height:1px;background:var(--line);flex:1"></div>
+  </div>
+  <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:-.01em">Response time promedio: 5,22 segundos. Google penaliza esto directamente.</h3>
+  <p style="font-size:13.5px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">A diferencia del blog editorial promedio, TLW tiene un problema serio de performance del servidor. El TTFB (Time To First Byte) medido por Screaming Frog es 5,22s promedio, con 491 URLs (24%) que tardan más de 10 segundos en responder. Core Web Vitals (LCP en particular) es factor de ranking desde 2021 y penaliza directamente.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:14px">
+    <div class="callout warn" style="text-align:center;font-size:12px">
+      <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--accent);line-height:1">5,22s</div>
+      <div style="font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:6px">Media TTFB</div>
+    </div>
+    <div class="callout warn" style="text-align:center;font-size:12px">
+      <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--accent);line-height:1">29,85s</div>
+      <div style="font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:6px">Peor URL</div>
+    </div>
+    <div class="callout warn" style="text-align:center;font-size:12px">
+      <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--accent);line-height:1">491</div>
+      <div style="font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:6px">URLs con TTFB &gt;10s</div>
+    </div>
+    <div class="callout warn" style="text-align:center;font-size:12px">
+      <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--accent);line-height:1">86%</div>
+      <div style="font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:6px">HTML &gt;300 KB</div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:14px;font-size:13px">
+    <b>Diagnóstico:</b> combinación de servidor sub-dimensionado + HTML inflado (86% de páginas exceden 300 KB) + plugins WordPress que corren PHP en cada request sin cachear. Solución típica: cache de página completa (WP Rocket, LiteSpeed Cache), CDN (Cloudflare full page cache), optimización de queries DB, y reducción de scripts inline. <b>Es P1 del roadmap</b> — sin resolver esto, todos los demás fixes tienen ROI limitado porque Google penaliza el ranking.
+  </div>
+</div>
+
+<!-- BOTTOM: LINK TO ROADMAP -->
+<div class="card" style="padding:20px 24px;text-align:center;background:var(--ink);color:#e8e4d9">
+  <p style="margin:0 0 10px;font-size:14px;color:#c9cfd6">Los 3 hallazgos críticos anteriores (response time, paginación canonicalizada, /historico/ huérfano) están consolidados como <b style="color:#f5eecf">accionables P1</b> del Roadmap con URLs de ejemplo y fix técnico ejecutable.</p>
+  <a href="#roadmap-top" class="p-link" style="display:inline-block;background:var(--accent);color:#fff;padding:8px 20px;border-radius:4px;text-decoration:none;font-weight:700;font-size:13px">Ver Roadmap completo →</a>
+</div>
+
+</section><!-- /tab-anatomy -->
+
+<!-- ===================== TAB 3: ROADMAP ===================== -->
+<section class="tab-panel" id="tab-roadmap">
+<div id="roadmap-top"></div>
+
+<div class="card prio-card" style="padding:28px 32px">
+  <div class="kicker" style="font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:6px">Roadmap del crawl · Priorización</div>
+  <h2>12 issues técnicos ordenados por impacto ÷ esfuerzo.</h2>
+  <p class="prio-lede">El accionable <b>#01 es Core Web Vitals</b> — response time crítico impacta ranking directo desde 2021. Los otros P1 son fixes de plantilla/CMS con ROI en 30 días. Los P2 requieren revisión por lote. Los P3 son mejoras editoriales sin bloqueo. Hacé click en <b>"Ver URLs afectadas"</b> para ejemplos concretos.</p>
+
+  <div class="prio-summary">
+    <div class="pill p1"><span class="n">5</span><span class="lb">P1 · Alto impacto</span></div>
+    <div class="pill p2"><span class="n">4</span><span class="lb">P2 · Impacto medio</span></div>
+    <div class="pill p3"><span class="n">3</span><span class="lb">P3 · Mejora incremental</span></div>
+    <div class="pill" style="margin-left:auto"><span class="n" style="color:var(--ink)">~12</span><span class="lb">sem-persona (P1+P2)</span></div>
+  </div>
+
+  <table class="prio-table">
+    <thead>
+      <tr>
+        <th style="width:38px">#</th>
+        <th style="width:44px">P</th>
+        <th style="width:22%">Issue</th>
+        <th class="num" style="width:70px">URLs</th>
+        <th style="width:32%">Cómo se resuelve · URLs afectadas</th>
+        <th style="width:80px">Esfuerzo</th>
+        <th style="width:120px">Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 01 · Response time / Core Web Vitals -->
+      <tr style="background:linear-gradient(90deg, #fbf9f2 0%, #ffffff 100%)">
+        <td class="rank" style="color:var(--accent);font-size:22px">01</td>
+        <td class="pr"><span class="p-badge p1">P1</span></td>
+        <td class="issue">
+          <b style="font-size:14px;color:var(--accent)">Response time crítico · Core Web Vitals</b>
+          <span class="sub"><b>El hallazgo estructural de todo el reporte.</b> 5,22s de TTFB promedio · 491 URLs (24%) tardan &gt;10s · 86% del HTML supera 300 KB. Google penaliza ranking directo desde 2021.</span>
+        </td>
+        <td class="num"><b>2.014</b><br><span style="color:var(--muted);font-size:11px">todo el catálogo indexable</span></td>
+        <td class="fix">
+          <b>Fix en 3 capas:</b><br>
+          <b>1.</b> <b>Cache de página completa</b>: instalar WP Rocket / LiteSpeed Cache / Cloudflare Cache Full Page. TTFB debería bajar de 5s a &lt;500ms para páginas cacheadas.<br>
+          <b>2.</b> <b>Optimizar HTML inflado</b>: 86% pesan &gt;300 KB. Minificar HTML, lazy-load imágenes, defer scripts no críticos.<br>
+          <b>3.</b> <b>Servidor</b>: verificar si es shared hosting → considerar upgrade a VPS/dedicated.
+          <details class="url-examples">
+            <summary>Ver distribución del problema</summary>
+            <div class="url-list">
+              <div class="url-item">TTFB &lt;500ms: <b>93 URLs</b> (5%)</div>
+              <div class="url-item">TTFB 500ms - 1s: <b>943 URLs</b> (47%)</div>
+              <div class="url-item">TTFB 1-3s: <b>421 URLs</b> (21%)</div>
+              <div class="url-item">TTFB 3-6s: <b>40 URLs</b> (2%)</div>
+              <div class="url-item">TTFB 6-10s: <b>26 URLs</b> (1%)</div>
+              <div class="url-item"><b>TTFB &gt;10s: 491 URLs (24%)</b> · peor: 29,85s</div>
+              <div class="foot">Google recomienda TTFB &lt;200ms para "bueno". La escala actual está en la categoría "necesita mejorar" y "malo".</div>
+            </div>
+          </details>
+        </td>
+        <td><span class="effort-cell high">Alto</span><br><span style="color:var(--muted);font-size:11px">4 sem-persona</span></td>
+        <td><a class="p-link" href="#response-time">Ver detalle</a></td>
+      </tr>
+
+      <!-- 02 · Titles largos -->
+      <tr>
+        <td class="rank">02</td>
+        <td class="pr"><span class="p-badge p1">P1</span></td>
+        <td class="issue"><b>Titles &gt;60 caracteres · systematic</b><span class="sub">1.654 URLs (82%) superan 60 chars. Google trunca en SERP → CTR bajo. Bug de plantilla — el generador no aplica límite.</span></td>
+        <td class="num"><b>1.654</b><br><span style="color:var(--muted);font-size:11px">82% del catálogo</span></td>
+        <td class="fix">
+          <b>Fix en 2 partes:</b><br>
+          <b>1.</b> Actualizar el template del CMS con límite de 60 chars en el generador automático (típicamente en Yoast/RankMath: "Personalizar título en SERP").<br>
+          <b>2.</b> Auditoría manual de las 100 URLs con más impresiones GSC + reescribir manualmente esos titles con match exacto a la query principal.
+          <details class="url-examples">
+            <summary>Ver muestra de titles largos</summary>
+            <div class="url-list">
+              <div class="url-item"><span class="lbl">190 chars</span>Ejemplos típicos: "Cómo optimizar la cadena de suministro en 2026: estrategias probadas para reducir costos y mejorar tiempos de entrega en logística B2B en México | The Logistics World"</div>
+              <div class="foot">El patrón típico es: título completo del artículo + separador + nombre de la marca + descripción secundaria. Debería ser: título core + " | The Logistics World" y quedar en 55-60 chars.</div>
+            </div>
+          </details>
+        </td>
+        <td><span class="effort-cell med">Medio</span><br><span style="color:var(--muted);font-size:11px">2 sem-persona</span></td>
+        <td><a class="p-link" href="#titles">Ver detalle</a></td>
+      </tr>
+
+      <!-- 03 · Meta descriptions ausentes -->
+      <tr>
+        <td class="rank">03</td>
+        <td class="pr"><span class="p-badge p1">P1</span></td>
+        <td class="issue"><b>Meta descriptions ausentes</b><span class="sub">659 URLs (33%) sin meta description. Google reescribe con extracto random del body → impacto directo en CTR.</span></td>
+        <td class="num"><b>659</b><br><span style="color:var(--muted);font-size:11px">33% del catálogo</span></td>
+        <td class="fix">
+          Configurar el CMS para que auto-genere meta description dinámica desde el <b>primer párrafo del post</b> (o el excerpt manual si existe). Yoast/RankMath tiene esta configuración disponible. Para las 50 URLs top por impresiones, escribir meta manualmente.
+          <details class="url-examples">
+            <summary>Ver desglose</summary>
+            <div class="url-list">
+              <div class="url-item">Sin meta description: <b>659 URLs</b> (33%)</div>
+              <div class="url-item">Meta &gt;160 chars (larga): <b>427 URLs</b> (21%)</div>
+              <div class="url-item">Meta OK (70-160): <b>925 URLs</b> (46%)</div>
+              <div class="url-item">Meta duplicada entre URLs: <b>37 URLs</b> (1,8%)</div>
+              <div class="foot">Concentrado en subdominios (play.thelogisticsworld.com), páginas de /tag/ y /author/. Un fix de template cubre &gt;60% del volumen.</div>
+            </div>
+          </details>
+        </td>
+        <td><span class="effort-cell low">Bajo</span><br><span style="color:var(--muted);font-size:11px">0,5 sem-persona</span></td>
+        <td><a class="p-link" href="#metas">Ver detalle</a></td>
+      </tr>
+
+      <!-- 04 · Paginación canonicalizada -->
+      <tr>
+        <td class="rank">04</td>
+        <td class="pr"><span class="p-badge p1">P1</span></td>
+        <td class="issue"><b>Paginación WP canonicalizada a página 1</b><span class="sub">72 URLs <code>/categoria/page/N/</code> declaran canonical hacia página 1. Google descarta las paginadas, no consolida artículos. Bug clásico.</span></td>
+        <td class="num"><b>72</b><br><span style="color:var(--muted);font-size:11px">de 138 paginadas indexables</span></td>
+        <td class="fix">
+          Cambiar la lógica del plugin SEO (Yoast/RankMath/AIOSEO) para que las páginas paginadas sean <b>self-canonical</b>, no canonicalizadas a la primera. En Yoast: <code>Configuración avanzada → Canónicos → No usar canónico para paginación</code>.
+          <details class="url-examples">
+            <summary>Ver paginadas afectadas</summary>
+            <div class="url-list">
+              <div class="url-item">/tecnologia/page/2/ ... /tecnologia/page/60/</div>
+              <div class="url-item">/innovacion/page/2/ ... /innovacion/page/N/</div>
+              <div class="url-item">Y otras categorías con paginación WordPress</div>
+              <div class="foot">Cada página paginada debería ser: canonical=self, title="{Categoría} · Página N", robots=index,follow. Google desde 2011 recomienda explícitamente este patrón.</div>
+            </div>
+          </details>
+        </td>
+        <td><span class="effort-cell low">Bajo</span><br><span style="color:var(--muted);font-size:11px">0,25 sem-persona</span></td>
+        <td><a class="p-link" href="#canonicals">Ver detalle</a></td>
+      </tr>
+
+      <!-- 05 · /historico/ orphan -->
+      <tr>
+        <td class="rank">05</td>
+        <td class="pr"><span class="p-badge p1">P1</span></td>
+        <td class="issue"><b>Cementerio /historico/ · 4.193 URLs huérfanas</b><span class="sub">Google indexa 4.193 URLs de /historico/ que generan 1.861 clics/trimestre. El crawler solo alcanza 50. Sin ningún link interno desde el blog activo.</span></td>
+        <td class="num"><b>4.193</b><br><span style="color:var(--muted);font-size:11px">GSC · ratio 1:84 con crawl</span></td>
+        <td class="fix">
+          <b>Auditoría por lote en 3 fases:</b><br>
+          <b>1.</b> Identificar top 100 URLs de /historico/ por clics (Ver detalle abajo).<br>
+          <b>2.</b> Las que son relevantes hoy → reintegrar al blog activo con 301 a URL nueva.<br>
+          <b>3.</b> Agregar módulo "Contenido histórico relacionado" al pie de artículos activos apuntando a top 20 URLs de /historico/.
+          <details class="url-examples">
+            <summary>Ver top URLs con más clics</summary>
+            <div class="url-list">
+              <div class="url-item">/historico/conoce-el-centro-de-distribucion-de-amazon-en-tepotzotlan/ <span class="meta">→ 185 clics · 12.247 impr</span></div>
+              <div class="url-item">/historico/alpura-del-rancho-a-la-mesa/ <span class="meta">→ 88 clics · 3.977 impr</span></div>
+              <div class="url-item">/historico/cubicaje-una-guia-rapida-en-5-pasos-2/ <span class="meta">→ 37 clics · 2.354 impr</span></div>
+              <div class="url-item">/historico/trp-capacitara-a-quienes-circulen-por-su-terminal/ <span class="meta">→ 37 clics · 340 impr · CTR 10,9%</span></div>
+              <div class="url-item">/historico/regimen-especial-jubilatorio-para-transportistas-de-cargas/ <span class="meta">→ 30 clics · 1.482 impr</span></div>
+              <div class="foot">Es tráfico "gratis por accidente" — Google seguirá enviando clicks mientras el contenido siga indexado.</div>
+            </div>
+          </details>
+        </td>
+        <td><span class="effort-cell med">Medio</span><br><span style="color:var(--muted);font-size:11px">3 sem-persona</span></td>
+        <td><a class="p-link" href="#historico-detail">Ver detalle</a></td>
+      </tr>
+
+      <!-- 06 · H1 ausente -->
+      <tr>
+        <td class="rank">06</td>
+        <td class="pr"><span class="p-badge p2">P2</span></td>
+        <td class="issue"><b>H1 ausente en 222 URLs</b><span class="sub">11% del catálogo sin H1. Concentrado en templates de /tag/, /author/ y /historico/. Bug de plantilla.</span></td>
+        <td class="num"><b>222</b><br><span style="color:var(--muted);font-size:11px">11% del catálogo</span></td>
+        <td class="fix">
+          Modificar los templates afectados para envolver el título de la página en <code>&lt;h1&gt;</code>. También hay <b>18 URLs con múltiples H1</b> (debe ser 1) y <b>181 H1 duplicados entre URLs</b> — problema separado, requiere personalizar H1 por template de listado.
+          <details class="url-examples">
+            <summary>Ver templates afectados</summary>
+            <div class="url-list">
+              <div class="url-item">Templates de <code>/tag/{slug}/</code>: probablemente H1 fijo con "Tag: {slug}"</div>
+              <div class="url-item">Templates de <code>/author/{slug}/</code>: sin H1 o H1 genérico</div>
+              <div class="url-item">Templates de <code>/historico/</code>: legacy sin H1 definido</div>
+              <div class="foot">Un fix por template afectado (típicamente 3-5 templates) resuelve la mayoría.</div>
+            </div>
+          </details>
+        </td>
+        <td><span class="effort-cell med">Medio</span><br><span style="color:var(--muted);font-size:11px">1 sem-persona</span></td>
+        <td><a class="p-link" href="#h1-presence">Ver detalle</a></td>
+      </tr>
+
+      <!-- 07 · H1 largos -->
+      <tr>
+        <td class="rank">07</td>
+        <td class="pr"><span class="p-badge p2">P2</span></td>
+        <td class="issue"><b>H1 &gt;70 caracteres · 706 URLs</b><span class="sub">35% con H1 fuera del rango recomendado. Diluye keyword principal.</span></td>
+        <td class="num"><b>706</b><br><span style="color:var(--muted);font-size:11px">35% del catálogo</span></td>
+        <td class="fix">
+          Agregar validación de longitud en el editor del CMS. Para los 50 más críticos (por clics), editar manualmente.
+        </td>
+        <td><span class="effort-cell med">Medio</span><br><span style="color:var(--muted);font-size:11px">1 sem-persona</span></td>
+        <td><a class="p-link" href="#h1-presence">Ver detalle</a></td>
+      </tr>
+
+      <!-- 08 · Canonicals ausentes -->
+      <tr>
+        <td class="rank">08</td>
+        <td class="pr"><span class="p-badge p2">P2</span></td>
+        <td class="issue"><b>Canonicals ausentes · 209 URLs</b><span class="sub">10% del catálogo sin declarar canonical. Buena práctica declararlo self-referential explícitamente.</span></td>
+        <td class="num"><b>209</b><br><span style="color:var(--muted);font-size:11px">10% del catálogo</span></td>
+        <td class="fix">
+          Agregar <code>&lt;link rel="canonical" href="{URL}"&gt;</code> al <code>&lt;head&gt;</code> del layout base. Concentrado en subdominios <code>play.thelogisticsworld.com</code>.
+        </td>
+        <td><span class="effort-cell low">Bajo</span><br><span style="color:var(--muted);font-size:11px">0,25 sem-persona</span></td>
+        <td><a class="p-link" href="#canonicals">Ver detalle</a></td>
+      </tr>
+
+      <!-- 09 · Metas duplicadas -->
+      <tr>
+        <td class="rank">09</td>
+        <td class="pr"><span class="p-badge p2">P2</span></td>
+        <td class="issue"><b>Meta descriptions duplicadas · 37 URLs</b><span class="sub">2 metas fantasma: una de expo (13 URLs) y una del blog institucional (8 URLs). Bug de plantilla.</span></td>
+        <td class="num"><b>37</b><br><span style="color:var(--muted);font-size:11px">1,8% del catálogo</span></td>
+        <td class="fix">
+          Editar 2 templates del CMS (uno para páginas de expo, otro para páginas institucionales/autor) para que la meta se genere con contenido dinámico. Volumen bajo pero impacto en CTR de páginas visibles.
+        </td>
+        <td><span class="effort-cell low">Bajo</span><br><span style="color:var(--muted);font-size:11px">0,5 sem-persona</span></td>
+        <td><a class="p-link" href="#metas">Ver detalle</a></td>
+      </tr>
+
+      <!-- 10 · URLs largas -->
+      <tr>
+        <td class="rank">10</td>
+        <td class="pr"><span class="p-badge p3">P3</span></td>
+        <td class="issue"><b>URLs largas &gt;115 caracteres · 750 URLs</b><span class="sub">37% con slugs bloat. No crítico pero URLs cortas rankean marginalmente mejor.</span></td>
+        <td class="num"><b>750</b><br><span style="color:var(--muted);font-size:11px">37% del catálogo</span></td>
+        <td class="fix">
+          No cambiar URLs existentes (rompe backlinks). Definir límite de 100 chars en el CMS para posts nuevos, con validación en el editor del slug.
+        </td>
+        <td><span class="effort-cell low">Bajo</span><br><span style="color:var(--muted);font-size:11px">0,25 sem-persona</span></td>
+        <td><a class="p-link" href="#url-length">Ver detalle</a></td>
+      </tr>
+
+      <!-- 11 · Canibalización -->
+      <tr>
+        <td class="rank">11</td>
+        <td class="pr"><span class="p-badge p3">P3</span></td>
+        <td class="issue"><b>Canibalización de queries · 20.110</b><span class="sub">Queries donde ≥2 URLs compiten. "walmart" (26 URLs), "mercado libre" (56 URLs), "rappi" (8 URLs), etc.</span></td>
+        <td class="num"><b>20.110</b><br><span style="color:var(--muted);font-size:11px">queries multi-URL</span></td>
+        <td class="fix">
+          Auditoría en 2 fases: <b>(1)</b> Identificar top 30 queries con más impresiones fragmentadas. <b>(2)</b> Para cada query, elegir URL canónica y redireccionar 301 las duplicadas. Impacto especialmente en queries brand-adjacent ("walmart", "rappi", "aduanas").
+        </td>
+        <td><span class="effort-cell high">Alto</span><br><span style="color:var(--muted);font-size:11px">3 sem-persona</span></td>
+        <td><a class="p-link" href="#canib-detail">Ver detalle</a></td>
+      </tr>
+
+      <!-- 12 · /tag/ archive -->
+      <tr>
+        <td class="rank">12</td>
+        <td class="pr"><span class="p-badge p3">P3</span></td>
+        <td class="issue"><b>Archive /tag/ · 1.187 URLs semi-huérfanas</b><span class="sub">Google indexa 1.636 tags · el crawler alcanza 449. Ratio 1:3,6 · genera 2.712 clics/trimestre.</span></td>
+        <td class="num"><b>1.187</b><br><span style="color:var(--muted);font-size:11px">tags no alcanzables</span></td>
+        <td class="fix">
+          Agregar página <code>/tags/</code> hub con listado de los tags más populares como enlaces HTML. También agregar módulo "Etiquetas relacionadas" al pie de artículos.
+        </td>
+        <td><span class="effort-cell med">Medio</span><br><span style="color:var(--muted);font-size:11px">1 sem-persona</span></td>
+        <td><a class="p-link" href="#tags-detail">Ver detalle</a></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="callout good" style="margin-top:16px">
+    <b>Recomendación estratégica:</b> ejecutar los 5 items P1 en el primer trimestre (12 sem-persona total). El #01 (response time) es proyecto grande — arrancar en paralelo con el resto que son quick wins de plantilla. Los P2 son consolidación editorial (3 sem-persona). Los P3 son mejoras que no bloquean nada.
+  </div>
+</div>
+
+<!-- DETALLE DE ACCIONABLES -->
+<div class="prio-detail-heading">
+  <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600;color:var(--ink);letter-spacing:-.015em;margin:36px 0 4px">Detalle de cada accionable</div>
+  <p style="color:var(--muted);font-size:13.5px;line-height:1.5;margin:0 0 20px;max-width:80ch">Cada bloque expande el diagnóstico con URLs concretas y el fix técnico paso a paso.</p>
+</div>
+
+<div class="detail-grid">
+
+<!-- Detail: Historico -->
+<div class="card span-12" id="historico-detail" style="border-left:4px solid var(--accent);padding:24px 28px">
+  <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px">
+    <span class="p-badge p1" style="background:var(--accent);color:#fff">P1 · #05</span>
+    <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0;letter-spacing:-.015em;text-transform:none">Cementerio <code style="font-family:JetBrains Mono,monospace;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:3px;font-size:16px">/historico/</code> · 4.193 URLs indexadas sin un solo link interno</h3>
+  </div>
+  <p style="font-size:14px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">Es el mayor gap del ecosistema TLW. Contenido histórico movido a <code>/historico/</code> — Google sigue indexándolo, sigue enviando <b>1.861 clics/trimestre</b>. Pero el crawler no encuentra ni un enlace hacia esta carpeta desde la nav ni desde artículos. Ratio crawl:GSC de <b>1:84</b> — el más extremo del sitio.</p>
+
+  <table>
+    <thead><tr><th>URL /historico/</th><th class="num">Clics</th><th class="num">Impresiones</th><th class="num">CTR</th></tr></thead>
+    <tbody>
+      <tr><td class="url">/historico/conoce-el-centro-de-distribucion-de-amazon-en-tepotzotlan/</td><td class="num"><b>185</b></td><td class="num">12.247</td><td class="num">1,5%</td></tr>
+      <tr><td class="url">/historico/alpura-del-rancho-a-la-mesa/</td><td class="num"><b>88</b></td><td class="num">3.977</td><td class="num">2,2%</td></tr>
+      <tr><td class="url">/historico/cubicaje-una-guia-rapida-en-5-pasos-2/</td><td class="num"><b>37</b></td><td class="num">2.354</td><td class="num">1,6%</td></tr>
+      <tr><td class="url">/historico/trp-capacitara-a-quienes-circulen-por-su-terminal/</td><td class="num"><b>37</b></td><td class="num">340</td><td class="num">10,9%</td></tr>
+      <tr><td class="url">/historico/regimen-especial-jubilatorio-para-transportistas-de-cargas/</td><td class="num"><b>30</b></td><td class="num">1.482</td><td class="num">2,0%</td></tr>
+      <tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic;padding:8px">…4.188 URLs más · concentradas en contenido de 2018-2022</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn" style="margin-top:14px;font-size:13px"><b>Fix en 3 fases:</b>
+    <ol style="margin:6px 0 0;padding-left:20px;line-height:1.65">
+      <li><b>Auditoría manual del top 100 por clics</b> — decidir cuáles siguen vigentes.</li>
+      <li><b>Los vigentes</b> → reintegrar al blog activo con nueva URL y redirect 301. Actualizar internal linking.</li>
+      <li><b>Los legacy sin valor</b> → dejar como están (mantiene tráfico residual) pero agregar módulo "Contenido histórico relacionado" al pie de artículos activos apuntando a los top 20 URLs con más clics.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- Detail: Canibalización -->
+<div class="card span-12" id="canib-detail" style="border-left:4px solid var(--muted);padding:24px 28px">
+  <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px">
+    <span class="p-badge p3">P3 · #11</span>
+    <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0;letter-spacing:-.015em;text-transform:none">Canibalización de queries · Top 10 casos por impresiones fragmentadas</h3>
+  </div>
+  <p style="font-size:14px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">20.110 queries donde ≥2 URLs del dominio compiten. Concentrado en menciones a marcas conocidas del ecosistema logístico. Cada query es una oportunidad de consolidación de autoridad si se identifica la URL canónica correcta.</p>
+
+  <table>
+    <thead><tr><th>Query</th><th class="num">URLs compitiendo</th><th class="num">Impresiones</th><th class="num">Clics</th><th class="num">CTR agregado</th></tr></thead>
+    <tbody>
+      <tr><td><b>walmart</b></td><td class="num">26</td><td class="num">776.358</td><td class="num">4</td><td class="num">0,001%</td></tr>
+      <tr><td><b>rappi</b></td><td class="num">8</td><td class="num">379.172</td><td class="num">6</td><td class="num">0,002%</td></tr>
+      <tr><td><b>mercado libre</b></td><td class="num">56</td><td class="num">119.529</td><td class="num">2</td><td class="num">0,002%</td></tr>
+      <tr><td><b>aduana</b></td><td class="num">16</td><td class="num">93.171</td><td class="num">3</td><td class="num">0,003%</td></tr>
+      <tr><td><b>bodega aurrera</b></td><td class="num">2</td><td class="num">60.258</td><td class="num">0</td><td class="num">0,0%</td></tr>
+      <tr><td><b>estafeta</b></td><td class="num">4</td><td class="num">51.181</td><td class="num">1</td><td class="num">0,002%</td></tr>
+      <tr><td><b>puerto</b></td><td class="num">24</td><td class="num">49.009</td><td class="num">13</td><td class="num">0,03%</td></tr>
+      <tr><td><b>aduanas</b></td><td class="num">17</td><td class="num">42.685</td><td class="num">1</td><td class="num">0,002%</td></tr>
+      <tr><td><b>industria automotriz</b></td><td class="num">12</td><td class="num">37.923</td><td class="num">5</td><td class="num">0,013%</td></tr>
+      <tr><td><b>economía de argentina</b></td><td class="num">2</td><td class="num">22.660</td><td class="num">0</td><td class="num">0,0%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn" style="margin-top:14px;font-size:13px"><b>Nota importante:</b> muchas de estas queries brand ("walmart", "rappi", "mercado libre") son de <b>alta impresión pero muy bajo CTR</b> porque el user busca la marca en sí, no un artículo sobre ella. TLW aparece por menciones editoriales pero no rankea alto. Consolidar URLs no cambia esto — se necesitaría contenido específico para posicionarse. Priorizar consolidación en queries genéricas ("aduana", "puerto", "industria automotriz") donde el intent editorial coincide con el contenido.</div>
+</div>
+
+<!-- Detail: Tags -->
+<div class="card span-12" id="tags-detail" style="border-left:4px solid var(--muted);padding:24px 28px">
+  <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:8px">
+    <span class="p-badge p3">P3 · #12</span>
+    <h3 style="font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--ink);margin:0;letter-spacing:-.015em;text-transform:none">Archive <code style="font-family:JetBrains Mono,monospace;font-size:16px">/tag/</code> · 1.187 tags semi-huérfanos</h3>
+  </div>
+  <p style="font-size:14px;color:var(--charcoal);line-height:1.55;margin:0 0 16px;max-width:90ch">Google indexa 1.636 URLs de /tag/ (páginas de archivo por etiqueta) que generan 2.712 clics/trimestre. El crawler solo alcanza 449 — ratio 1:3,6, mucho mejor que /historico/ pero aún hay 1.187 tags que Google conoce y el sitio no linkea explícitamente.</p>
+
+  <div class="callout" style="margin-top:14px;font-size:13px"><b>Fix en 2 partes:</b>
+    <ol style="margin:6px 0 0;padding-left:20px;line-height:1.65">
+      <li><b>Crear hub /tags/</b> — una página HTML con listado de los top 50-100 tags más populares como cloud de enlaces reales <code>&lt;a href&gt;</code>.</li>
+      <li><b>Módulo "Etiquetas relacionadas"</b> al pie de cada artículo con 3-5 tags relacionados como links HTML.</li>
+    </ol>
+    Esto sube el ratio crawl:GSC de 1:3,6 a probable 1:1,5 en tag pages y activa el crawl del catálogo completo.
+  </div>
+</div>
+
+</div>
+
+</section><!-- /tab-roadmap -->
+
+</div>
+
+<script>
+(function(){
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  function activate(name){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
+  }
+  tabs.forEach(t => t.addEventListener('click', () => {
+    activate(t.dataset.tab);
+    window.scrollTo({top:0, behavior:'instant'});
+  }));
+
+  document.querySelectorAll('a.p-link[href^="#"]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const targetId = a.getAttribute('href').slice(1);
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const panel = el.closest('.tab-panel');
+      if (panel) {
+        const tabName = panel.id.replace('tab-','');
+        activate(tabName);
+      }
+      requestAnimationFrame(() => {
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null,'','#'+targetId);
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

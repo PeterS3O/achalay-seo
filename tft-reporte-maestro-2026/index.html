@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard ejecutivo SEO · The Food Tech · Reporte maestro 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101820; --text:#2c3641; --muted:#697887; --bg:#f4f5f1; --panel:#ffffff;
+    --line:#dfe4e8; --soft:#eef2f4; --red:#bf2f24; --gold:#a77617; --green:#1c6a4b;
+    --blue:#215b8f; --cyan:#147b82; --violet:#69479c; --shadow:0 14px 34px -28px rgba(16,24,32,.45);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5}
+  button,input,select{font:inherit}
+  .wrap{max-width:1440px;margin:0 auto;padding:28px 24px 56px}
+  header{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:end;margin-bottom:22px}
+  .eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+  h1{font-family:Fraunces,Georgia,serif;font-size:44px;line-height:1.02;margin:6px 0 10px;letter-spacing:0;font-weight:650;max-width:850px}
+  .lead{font-size:16px;color:var(--text);max-width:900px;margin:0}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .meta .box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:13px 14px;box-shadow:var(--shadow)}
+  .meta span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:850;letter-spacing:.08em}
+  .meta strong{display:block;margin-top:4px;font-family:Fraunces,serif;font-size:18px}
+  .nav{position:sticky;top:0;z-index:10;background:rgba(244,245,241,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:8px;padding:6px;display:flex;gap:4px;margin:20px 0}
+  .nav button{border:0;background:transparent;color:var(--muted);font-weight:800;padding:10px 12px;border-radius:6px;cursor:pointer;flex:1}
+  .nav button.active{background:var(--ink);color:white}
+  section{display:none}
+  section.active{display:block}
+  .grid{display:grid;gap:14px}
+  .kpis{grid-template-columns:repeat(6,1fr)}
+  .two{grid-template-columns:1fr 1fr}
+  .three{grid-template-columns:repeat(3,1fr)}
+  .four{grid-template-columns:repeat(4,1fr)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;box-shadow:var(--shadow);min-width:0}
+  .panel h2,.panel h3{margin:0 0 10px}
+  .panel h2{font-family:Fraunces,serif;font-size:28px;font-weight:650;letter-spacing:0}
+  .panel h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900}
+  .kpi{min-height:132px;display:flex;flex-direction:column;justify-content:space-between}
+  .kpi .value{font-family:Fraunces,serif;font-size:34px;line-height:1;font-weight:650;letter-spacing:0}
+  .kpi .label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:900;margin-top:8px}
+  .kpi .note{font-size:12px;color:var(--muted);margin-top:8px}
+  .red{color:var(--red)} .gold{color:var(--gold)} .green{color:var(--green)} .blue{color:var(--blue)} .cyan{color:var(--cyan)} .violet{color:var(--violet)}
+  .callout{border-left:4px solid var(--red);background:#fff8f7;padding:14px 16px;border-radius:6px;color:var(--text)}
+  .callout.good{border-left-color:var(--green);background:#eef8f3}
+  .callout.info{border-left-color:var(--blue);background:#eef5fb}
+  .tabs-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 11px;color:var(--muted);font-size:12px;font-weight:850;cursor:pointer}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .bar{display:grid;grid-template-columns:190px 1fr 72px;gap:10px;align-items:center;margin:9px 0}
+  .bar .name{font-weight:750;color:var(--text);font-size:12px;overflow:hidden;text-overflow:ellipsis}
+  .track{height:16px;background:var(--soft);border-radius:4px;overflow:hidden}
+  .fill{height:100%;border-radius:4px;background:var(--blue)}
+  .bar .val{text-align:right;font-weight:850;font-variant-numeric:tabular-nums}
+  .mini-bars{display:flex;gap:12px;align-items:end;height:160px;margin-top:10px;border-bottom:1px solid var(--line);padding:0 6px 8px}
+  .mini-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .mini-col .v{font-family:Fraunces,serif;font-size:18px;font-weight:650}
+  .mini-col .b{width:100%;max-width:74px;border-radius:5px 5px 0 0;background:var(--red);min-height:6px}
+  .mini-col .l{font-size:11px;color:var(--muted);font-weight:800;text-align:center}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:12px}
+  th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#edf2f5;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
+  tr:last-child td{border-bottom:0}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .priority-list{display:grid;gap:12px}
+  .issue{display:grid;grid-template-columns:76px 1fr 170px;gap:14px;align-items:start;border:1px solid var(--line);background:#fff;border-radius:8px;padding:14px}
+  .badge{display:inline-flex;align-items:center;justify-content:center;border-radius:4px;color:#fff;font-weight:900;font-size:12px;padding:6px 8px;min-width:48px}
+  .p0{background:var(--red)} .p1{background:var(--gold)} .p2{background:var(--blue)} .p3{background:var(--muted)}
+  .issue h4{margin:0 0 4px;font-size:16px}
+  .issue p{margin:0;color:var(--text)}
+  .issue small{display:block;margin-top:7px;color:var(--muted)}
+  .issue .score{font-family:Fraunces,serif;font-size:30px;text-align:right}
+  .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .tag{background:var(--soft);color:var(--muted);border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+  .risk-map{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .risk-cell{min-height:86px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px}
+  .risk-cell strong{display:block;font-size:12px}
+  .risk-cell span{display:block;margin-top:4px;color:var(--muted);font-size:11.5px}
+  .source{font-family:JetBrains Mono,monospace;font-size:11px;color:var(--muted);background:#f9fafb;border:1px solid var(--line);border-radius:6px;padding:8px;margin-top:10px}
+  .hidden{display:none!important}
+  @media (max-width:1100px){header,.two{grid-template-columns:1fr}.kpis,.four{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:1fr}.issue{grid-template-columns:64px 1fr}.issue .score{text-align:left}.risk-map{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:700px){.wrap{padding:18px 14px 40px}h1{font-size:34px}.kpis{grid-template-columns:1fr}.nav{overflow:auto}.nav button{min-width:140px}.bar{grid-template-columns:1fr}.bar .val{text-align:left}.meta{grid-template-columns:1fr}.risk-map{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Reporte maestro · The Food Tech · Julio 2026</div>
+      <h1>Dashboard ejecutivo de insights SEO</h1>
+      <p class="lead">Resumen dinámico del documento maestro: señales orgánicas, GA4, auditoría técnica, migración, performance, Schema, contenidos premium, IA/LLM, Expo y hubs temáticos. Los hallazgos están priorizados por impacto, urgencia y dependencia técnica.</p>
+    </div>
+    <div class="meta">
+      <div class="box"><span>Fuente</span><strong>DOCX maestro</strong></div>
+      <div class="box"><span>Periodo foco</span><strong>H1 2026</strong></div>
+      <div class="box"><span>Capítulos</span><strong>28</strong></div>
+      <div class="box"><span>Tablas leídas</span><strong>378</strong></div>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Secciones del dashboard">
+    <button class="active" data-panel="summary">Resumen</button>
+    <button data-panel="evidence">Evidencia</button>
+    <button data-panel="roadmap">Roadmap</button>
+    <button data-panel="explorer">Explorador</button>
+  </nav>
+
+  <section id="summary" class="active">
+    <div class="grid kpis">
+      <div class="panel kpi"><div><div class="value blue">148.858</div><div class="label">Clics GSC H1</div></div><div class="note">20,48M impresiones · CTR 0,73%</div></div>
+      <div class="panel kpi"><div><div class="value red">-77,4%</div><div class="label">Clics YoY</div></div><div class="note">94.409 vs 417.599 en periodo comparable</div></div>
+      <div class="panel kpi"><div><div class="value green">48,2%</div><div class="label">Peso Organic Search</div></div><div class="note">208.245 sesiones GA4 en H1 2026</div></div>
+      <div class="panel kpi"><div><div class="value red">96,7%</div><div class="label">Indexables sin H1</div></div><div class="note">9.247 de 9.563 HTML 2xx indexables</div></div>
+      <div class="panel kpi"><div><div class="value gold">50.065</div><div class="label">URLs _rsc</div></div><div class="note">Ruido técnico dentro del sitemap/export</div></div>
+      <div class="panel kpi"><div><div class="value violet">7.490</div><div class="label">Sesiones IA/LLM</div></div><div class="note">Señal temprana de circulación generativa</div></div>
+    </div>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>Lectura ejecutiva</h2>
+        <div class="callout"><b>No hay una causa única defendible para la caída.</b> El patrón más sólido es una convergencia: transición de arquitectura, caída de visibilidad, señales canónicas incompletas, problemas de plantilla, dependencia de JavaScript, performance débil y baja consolidación de rutas históricas.</div>
+        <p>The Food Tech mantiene un activo orgánico importante, pero su base técnica no está transmitiendo con suficiente claridad qué URLs son finales, rastreables, canónicas y semánticamente prioritarias. La prioridad no es producir más contenido sin reparar antes la arquitectura que lo sostiene.</p>
+      </div>
+      <div class="panel">
+        <h2>Prioridades maestras</h2>
+        <div class="risk-map">
+          <div class="risk-cell"><strong class="red">1. Sitemap</strong><span>Depurar _rsc, /embed/, redirecciones, errores y no HTML.</span></div>
+          <div class="risk-cell"><strong class="red">2. Plantilla</strong><span>H1, title/meta/canonical/directivas dentro del head.</span></div>
+          <div class="risk-cell"><strong class="gold">3. Migración</strong><span>Consolidar históricas, finales, slash y enlaces internos.</span></div>
+          <div class="risk-cell"><strong class="blue">4. Render</strong><span>Reducir dependencia JS y asegurar HTML inicial útil.</span></div>
+          <div class="risk-cell"><strong class="green">5. Semántica</strong><span>Hubs, Schema, GEO/AEO, premium y Expo por separado.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px">
+      <div class="panel">
+        <h3>YoY GSC</h3>
+        <div class="mini-bars" id="yoyBars"></div>
+        <div class="source">Periodo comparable: 2 mar-30 jun 2025 vs 2 mar-30 jun 2026.</div>
+      </div>
+      <div class="panel">
+        <h3>Distribución por dispositivo</h3>
+        <div id="deviceBars"></div>
+        <div class="callout info" style="margin-top:12px">Mobile concentra 67,9% de impresiones, pero solo 47,6% de clics. El CTR mobile es 0,51% vs 1,21% desktop.</div>
+      </div>
+      <div class="panel">
+        <h3>Ruido en sitemap/export</h3>
+        <div id="sitemapBars"></div>
+        <div class="source">Universo sitemap/export: 88.562 URLs.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="evidence">
+    <div class="grid two">
+      <div class="panel">
+        <h2>Concentración orgánica por carpeta</h2>
+        <div id="folderBars"></div>
+      </div>
+      <div class="panel">
+        <h2>Rutas históricas: pérdida estructural</h2>
+        <table id="historicTable"></table>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>GA4: Organic Search sigue siendo crítico</h2>
+        <table id="gaTable"></table>
+        <div class="callout good" style="margin-top:12px">Aunque GSC cae con fuerza, Organic Search sigue siendo el principal canal de adquisición: 208.245 sesiones y 154.701 usuarios activos.</div>
+      </div>
+      <div class="panel">
+        <h2>IA/LLM referrals</h2>
+        <div id="llmBars"></div>
+        <div class="source">Se interpreta como señal temprana de circulación, no como canal maduro ni equivalente a SEO.</div>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px">
+      <div class="panel">
+        <h2>Plantilla editorial</h2>
+        <p><b>9.247 URLs HTML 2xx indexables sin H1</b>. La falla afecta especialmente artículos editoriales: 7.657 artículos indexables sin H1, con 882.800 impresiones GSC asociadas.</p>
+        <div id="h1Bars"></div>
+      </div>
+      <div class="panel">
+        <h2>JavaScript y renderizado</h2>
+        <p><b>9.590 URLs</b> con contenido JavaScript y <b>9.596</b> con errores JS. La mediana del contenido dependiente de JS es <b>88,28%</b>.</p>
+        <div id="jsBars"></div>
+      </div>
+      <div class="panel">
+        <h2>Performance</h2>
+        <p>El score mediano es <b>53</b>, LCP mediano <b>11,69s</b>, TTI mediano <b>20,45s</b> y 6.805 URLs tienen LCP superior a 4s.</p>
+        <div id="perfBars"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="panel">
+      <h2>Roadmap priorizado</h2>
+      <p style="color:var(--muted);margin-top:-4px">Filtrá por frente o prioridad. El score combina impacto SEO, volumen afectado, urgencia y dependencia de implementación.</p>
+      <div class="tabs-tools" id="filters"></div>
+      <div class="priority-list" id="issueList"></div>
+    </div>
+  </section>
+
+  <section id="explorer">
+    <div class="grid two">
+      <div class="panel">
+        <h2>KPIs técnicos comparables</h2>
+        <table id="techTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Schema y capa semántica</h2>
+        <table id="schemaTable"></table>
+        <div class="callout info" style="margin-top:12px">Hay base válida de Article/WebPage/Organization, pero faltan señales estructurales: BreadcrumbList, CollectionPage, NewsArticle y Schema para taxonomías/Expo/autores.</div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>Contenidos premium 2026</h2>
+        <table id="premiumTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Taxonomías /y/ como hubs</h2>
+        <table id="hubTable"></table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const fmt = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+
+const datasets = {
+  yoy:[
+    {label:'Clics 2025',value:417599,color:'var(--muted)'},{label:'Clics 2026',value:94409,color:'var(--red)'},
+    {label:'Impr. 2025',value:35252423,color:'var(--muted)'},{label:'Impr. 2026',value:12235994,color:'var(--gold)'}
+  ],
+  devices:[
+    ['Desktop',76150,6304930,'1,21%'],['Mobile',70921,13909793,'0,51%'],['Tablet',1787,270140,'0,66%']
+  ],
+  folders:[
+    ['/soluciones-y-tecnologia-alimentaria/',37482,5772810],['/metodos-de-control-y-regulaciones/',14094,1585777],
+    ['/packaging-y-procesamiento/',11936,1175569],['Expo',9534,283312],['/archivo/',5814,973576],
+    ['Home',5383,76351],['/ingredientes-y-aditivos-alimentarios/',3527,432471],['/eventos-de-la-industria/',2962,106246],
+    ['/industria-alimentaria-hoy/',1863,375803],['/nutricion-y-salud/',1393,347915]
+  ],
+  sitemap:[
+    ['_rsc',50065],['Recursos no HTML',71214],['No indexables',15765],['Redirigidas',14093],['JSON/API',13969],['/embed/',2251],['4xx',430],['5xx',177]
+  ],
+  historic:[
+    ['/ingredientes-y-aditivos-alimentarios/',65817,2520,'-96,2%'],['/nutricion-y-salud/',36542,955,'-97,4%'],
+    ['/tecnologia-de-los-alimentos/',20071,336,'-98,3%'],['/seguridad-alimentaria/',21476,393,'-98,2%'],
+    ['/normatividad-y-certificaciones/',13963,162,'-98,8%'],['/industria-alimentaria-hoy/',52830,1248,'-97,6%']
+  ],
+  ga:[
+    ['Organic Search',208245,116608,253334,154701,'44,0%'],['Direct',103033,33165,124901,84288,'67,8%'],['Display',49929,'-','-','-','81,3%'],['Email',18171,'-','-','-','55,1%']
+  ],
+  llm:[
+    ['ChatGPT / OpenAI',2747],['Gemini',1865],['Copilot',1050],['Claude',631],['NotebookLM',594],['Perplexity',593]
+  ],
+  h1:[
+    ['HTML 2xx sin H1',9349],['Indexables sin H1',9247],['Artículos sin H1',7658],['Artículos indexables sin H1',7657]
+  ],
+  js:[
+    ['Contenido JS',9590],['Enlaces JS',9583],['Errores JS',9596],['>75% dependiente JS',7446],['>90% dependiente JS',3233]
+  ],
+  perf:[
+    ['LCP > 4s',6805],['TBT > 600ms',5630],['Score < 50',3645],['Score >= 90',161]
+  ],
+  premium:[
+    ['Piezas monitoreadas','112'],['Sesiones totales','4.047'],['Sesiones con engagement','1.771'],['Usuarios activos','3.152'],['Clics GSC','806'],['Usuarios IA/LLM','108']
+  ],
+  hubs:[
+    ['Bebidas','0','60','517','92,6%'],['Lácteos','0','23','375','93,3%'],['Panificación/snacks','Sin dato','Sin dato','384','94,8%'],
+    ['Inocuidad','Sin dato','Sin dato','324','95,1%'],['Diseño e innovación','Sin dato','Sin dato','189','93,7%'],['Cárnicos/plant-based','0','3','331','94,6%']
+  ],
+  schema:[
+    ['URLs HTML evaluadas','9.711'],['URLs con Schema','7.006'],['URLs sin Schema','2.705'],['Indexables sin Schema','2.575'],['Errores/Warnings','0 / 0'],['BreadcrumbList','3'],['CollectionPage','1'],['NewsArticle','0']
+  ],
+  tech:[
+    ['URLs internas','110.056'],['HTML internas','17.348'],['HTML internas 2xx','9.711'],['HTML 2xx indexables','9.563'],['Redirecciones HTML','7.258'],['4xx HTML','204'],['5xx HTML','175'],['Sitemap/export','88.562']
+  ]
+};
+
+const issues = [
+  {p:'Crítica',area:'Sitemap',score:98,title:'Regenerar sitemap como señal canónica limpia',body:'El sitemap/export contiene 88.562 URLs, pero incluye 50.065 _rsc, 14.093 redirigidas, 15.765 no indexables, 13.969 JSON/API y 71.214 recursos no HTML.',action:'Dejar solo HTML 200 indexables canónicas; separar Expo; excluir recursos, UTMs y errores.'},
+  {p:'Crítica',area:'Plantilla',score:96,title:'Corregir H1 en plantilla editorial',body:'96,70% de URLs HTML 2xx indexables carecen de H1; 7.657 artículos editoriales indexables están afectados.',action:'Emitir H1 único, visible y consistente con title en artículos, premium, taxonomías y Expo.'},
+  {p:'Crítica',area:'Migración',score:94,title:'Consolidar rutas históricas y finales',body:'Rutas históricas muestran caídas de -96% a -98,8% y conviven señales entre antiguas, intermedias y finales.',action:'Mapear equivalencias, redirigir directo con 301/308, actualizar enlaces internos y validar slash/canonical.'},
+  {p:'Crítica',area:'Head',score:91,title:'Mover señales SEO al head válido',body:'1.075 URLs únicas presentan title/meta/canonical/directivas fuera del head o duplicadas; 971 solapan con H1 faltante.',action:'Corregir layout base para emitir title, meta description, canonical y robots dentro del head.'},
+  {p:'Alta',area:'JavaScript',score:88,title:'Reducir dependencia crítica de renderizado JS',body:'9.590 URLs con contenido JS, 9.596 con errores JS y mediana de 88,28% de palabras dependientes del render.',action:'Asegurar HTML inicial suficiente, enlaces internos en HTML y revisión de errores por plantilla.'},
+  {p:'Alta',area:'Performance',score:84,title:'Optimizar LCP/TBT/TTI por plantilla',body:'Score mediano 53, LCP mediano 11,69s, TTI 20,45s, TBT 689,5ms; 6.805 URLs superan LCP de 4s.',action:'Trabajar primero artículos actuales, taxonomías y plantillas con mayor tráfico; priorizar imágenes LCP, JS y terceros.'},
+  {p:'Alta',area:'Schema',score:78,title:'Completar arquitectura semántica para SEO/GEO/AEO',body:'Hay base Article/WebPage/Organization, pero BreadcrumbList aparece solo en 3 URLs, CollectionPage en 1 y NewsArticle en 0.',action:'Agregar BreadcrumbList sistemático, CollectionPage en hubs, Event/Organization en Expo y autor/ebook según plantilla.'},
+  {p:'Alta',area:'CTR',score:74,title:'Optimizar páginas con alta impresión y bajo CTR',body:'Casos como maní/cacahuate tienen mucha visibilidad y CTR muy bajo; mobile también muestra brecha de captación.',action:'Revisar intención, title/snippet, respuesta directa, fecha, FAQ y enlaces internos hacia URL final.'},
+  {p:'Media',area:'Hubs',score:70,title:'Fortalecer taxonomías /y/ como hubs temáticos',body:'Bebidas, lácteos, snacks, inocuidad y plant-based tienen alto engagement GA4 pero baja señal GSC y sin Schema.',action:'Crear introducción útil, H1/title específicos, CollectionPage/BreadcrumbList y curaduría de contenidos premium.'},
+  {p:'Media',area:'Expo',score:67,title:'Tratar Expo como activo SEO/comercial separado',body:'Expo suma 9.534 clics GSC y la home es la URL con más clics, pero requiere medición y optimización independiente.',action:'Separar KPIs por hostname, sitemap limpio, Schema Event/Organization y enlaces contextuales desde contenidos editoriales.'},
+  {p:'Media',area:'Premium',score:62,title:'Conectar premium con hubs y GEO/AEO',body:'112 piezas premium generan 4.047 sesiones, 806 clics GSC y señales IA/LLM incipientes.',action:'Priorizar regulación/inocuidad, bebidas, lácteos y packaging; enlazar desde hubs y estructurar respuesta directa.'}
+];
+
+function makeBars(el, data, valueIndex=1, color='var(--blue)', labelIndex=0){
+  const max = Math.max(...data.map(d=>Number(String(d[valueIndex]).replace(/\./g,''))||0),1);
+  el.innerHTML = data.map(d=>{
+    const v = Number(String(d[valueIndex]).replace(/\./g,''))||0;
+    return `<div class="bar"><div class="name">${d[labelIndex]}</div><div class="track"><div class="fill" style="width:${(v/max*100).toFixed(1)}%;background:${color}"></div></div><div class="val">${fmt(v)}</div></div>`;
+  }).join('');
+}
+function makeMiniBars(el,data){
+  const max=Math.max(...data.map(d=>d.value));
+  el.innerHTML=data.map(d=>`<div class="mini-col"><div class="v">${fmt(d.value)}</div><div class="b" style="height:${Math.max(6,d.value/max*108)}px;background:${d.color}"></div><div class="l">${d.label}</div></div>`).join('');
+}
+function makeTable(el, headers, rows){
+  el.innerHTML = `<thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${i>0?'num':''}">${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+}
+function renderIssues(filter='Todos'){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.filter===filter));
+  const list=document.getElementById('issueList');
+  const data=issues.filter(i=>filter==='Todos'||i.p===filter||i.area===filter).sort((a,b)=>b.score-a.score);
+  list.innerHTML=data.map(i=>`<article class="issue"><div><span class="badge ${i.p==='Crítica'?'p0':i.p==='Alta'?'p1':i.p==='Media'?'p2':'p3'}">${i.p}</span></div><div><h4>${i.title}</h4><p>${i.body}</p><small><b>Acción:</b> ${i.action}</small><div class="tagrow"><span class="tag">${i.area}</span><span class="tag">Score ${i.score}</span></div></div><div class="score ${i.score>=90?'red':i.score>=80?'gold':'blue'}">${i.score}</div></article>`).join('');
+}
+
+document.querySelectorAll('.nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+makeMiniBars(document.getElementById('yoyBars'), datasets.yoy);
+makeBars(document.getElementById('deviceBars'), datasets.devices, 2, 'var(--cyan)');
+makeBars(document.getElementById('sitemapBars'), datasets.sitemap, 1, 'var(--red)');
+makeBars(document.getElementById('folderBars'), datasets.folders, 1, 'var(--green)');
+makeBars(document.getElementById('llmBars'), datasets.llm, 1, 'var(--violet)');
+makeBars(document.getElementById('h1Bars'), datasets.h1, 1, 'var(--red)');
+makeBars(document.getElementById('jsBars'), datasets.js, 1, 'var(--gold)');
+makeBars(document.getElementById('perfBars'), datasets.perf, 1, 'var(--blue)');
+makeTable(document.getElementById('historicTable'), ['Ruta histórica','Clics 2025','Clics 2026','Variación'], datasets.historic);
+makeTable(document.getElementById('gaTable'), ['Canal','Sesiones','Engagement','Vistas','Usuarios','Bounce'], datasets.ga);
+makeTable(document.getElementById('premiumTable'), ['Métrica premium 2026','Valor'], datasets.premium);
+makeTable(document.getElementById('hubTable'), ['Taxonomía','Clics GSC','Impresiones','Sesiones orgánicas','Engagement'], datasets.hubs);
+makeTable(document.getElementById('schemaTable'), ['Indicador Schema','Valor'], datasets.schema);
+makeTable(document.getElementById('techTable'), ['Universo técnico','Total'], datasets.tech);
+
+const filters=['Todos','Crítica','Alta','Media','Sitemap','Plantilla','Migración','Head','JavaScript','Performance','Schema','CTR','Hubs','Expo','Premium'];
+document.getElementById('filters').innerHTML=filters.map(f=>`<button class="chip" data-filter="${f}">${f}</button>`).join('');
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>renderIssues(c.dataset.filter)));
+renderIssues();
+</script>
+</body>
+</html>

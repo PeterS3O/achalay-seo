@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard ejecutivo SEO · The Logistics World · Reporte maestro 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101820; --text:#2d3945; --muted:#6a7886; --bg:#f3f5f4; --panel:#ffffff;
+    --line:#dde4e7; --soft:#edf2f4; --red:#b8322a; --gold:#a36f13; --green:#19704f;
+    --blue:#1f5f91; --cyan:#087985; --violet:#6247a1; --shadow:0 18px 42px -32px rgba(16,24,32,.48);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5}
+  button,input,select{font:inherit}
+  .wrap{max-width:1480px;margin:0 auto;padding:28px 24px 58px}
+  header{display:grid;grid-template-columns:1.18fr .82fr;gap:22px;align-items:end;margin-bottom:22px}
+  .eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+  h1{font-family:Fraunces,Georgia,serif;font-size:46px;line-height:1.02;margin:6px 0 10px;font-weight:650;letter-spacing:0;max-width:900px}
+  .lead{font-size:16px;color:var(--text);max-width:920px;margin:0}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .meta .box,.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+  .meta .box{padding:13px 14px}
+  .meta span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:850;letter-spacing:.08em}
+  .meta strong{display:block;margin-top:4px;font-family:Fraunces,serif;font-size:18px}
+  .nav{position:sticky;top:0;z-index:10;background:rgba(243,245,244,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:8px;padding:6px;display:flex;gap:4px;margin:20px 0}
+  .nav button{border:0;background:transparent;color:var(--muted);font-weight:850;padding:10px 12px;border-radius:6px;cursor:pointer;flex:1}
+  .nav button.active{background:var(--ink);color:white}
+  section{display:none}
+  section.active{display:block}
+  .grid{display:grid;gap:14px}
+  .kpis{grid-template-columns:repeat(6,1fr)}
+  .two{grid-template-columns:1fr 1fr}
+  .three{grid-template-columns:repeat(3,1fr)}
+  .four{grid-template-columns:repeat(4,1fr)}
+  .panel{padding:18px;min-width:0}
+  .panel h2,.panel h3{margin:0 0 10px}
+  .panel h2{font-family:Fraunces,serif;font-size:28px;font-weight:650;letter-spacing:0}
+  .panel h3{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900}
+  .kpi{min-height:132px;display:flex;flex-direction:column;justify-content:space-between}
+  .kpi .value{font-family:Fraunces,serif;font-size:34px;line-height:1;font-weight:650;letter-spacing:0}
+  .kpi .label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:900;margin-top:8px}
+  .kpi .note{font-size:12px;color:var(--muted);margin-top:8px}
+  .red{color:var(--red)} .gold{color:var(--gold)} .green{color:var(--green)} .blue{color:var(--blue)} .cyan{color:var(--cyan)} .violet{color:var(--violet)}
+  .callout{border-left:4px solid var(--blue);background:#eef5fb;padding:14px 16px;border-radius:6px;color:var(--text)}
+  .callout.warn{border-left-color:var(--red);background:#fff7f6}
+  .callout.good{border-left-color:var(--green);background:#eef8f3}
+  .callout.gold{border-left-color:var(--gold);background:#fff8e8}
+  .tabs-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 11px;color:var(--muted);font-size:12px;font-weight:850;cursor:pointer}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .bar{display:grid;grid-template-columns:210px 1fr 82px;gap:10px;align-items:center;margin:9px 0}
+  .bar .name{font-weight:750;color:var(--text);font-size:12px;overflow:hidden;text-overflow:ellipsis}
+  .track{height:16px;background:var(--soft);border-radius:4px;overflow:hidden}
+  .fill{height:100%;border-radius:4px;background:var(--blue)}
+  .bar .val{text-align:right;font-weight:850;font-variant-numeric:tabular-nums}
+  .mini-bars{display:flex;gap:12px;align-items:end;height:166px;margin-top:10px;border-bottom:1px solid var(--line);padding:0 6px 8px}
+  .mini-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .mini-col .v{font-family:Fraunces,serif;font-size:18px;font-weight:650}
+  .mini-col .b{width:100%;max-width:74px;border-radius:5px 5px 0 0;background:var(--blue);min-height:6px}
+  .mini-col .l{font-size:11px;color:var(--muted);font-weight:800;text-align:center}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:12px}
+  th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#edf2f5;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
+  tr:last-child td{border-bottom:0}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .priority-list{display:grid;gap:12px}
+  .issue{display:grid;grid-template-columns:76px 1fr 176px;gap:14px;align-items:start;border:1px solid var(--line);background:#fff;border-radius:8px;padding:14px}
+  .badge{display:inline-flex;align-items:center;justify-content:center;border-radius:4px;color:#fff;font-weight:900;font-size:12px;padding:6px 8px;min-width:48px}
+  .p0{background:var(--red)} .p1{background:var(--gold)} .p2{background:var(--blue)} .p3{background:var(--muted)}
+  .issue h4{margin:0 0 4px;font-size:16px}
+  .issue p{margin:0;color:var(--text)}
+  .issue small{display:block;margin-top:7px;color:var(--muted)}
+  .issue .score{font-family:Fraunces,serif;font-size:30px;text-align:right}
+  .tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .tag{background:var(--soft);color:var(--muted);border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+  .risk-map{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .risk-cell{min-height:88px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px}
+  .risk-cell strong{display:block;font-size:12px}
+  .risk-cell span{display:block;margin-top:4px;color:var(--muted);font-size:11.5px}
+  .source{font-family:JetBrains Mono,monospace;font-size:11px;color:var(--muted);background:#f9fafb;border:1px solid var(--line);border-radius:6px;padding:8px;margin-top:10px}
+  .split-note{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  @media (max-width:1100px){header,.two{grid-template-columns:1fr}.kpis,.four{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:1fr}.issue{grid-template-columns:64px 1fr}.issue .score{text-align:left}.risk-map{grid-template-columns:repeat(2,1fr)}.split-note{grid-template-columns:1fr}}
+  @media (max-width:700px){.wrap{padding:18px 14px 40px}h1{font-size:34px}.kpis{grid-template-columns:1fr}.nav{overflow:auto}.nav button{min-width:138px}.bar{grid-template-columns:1fr}.bar .val{text-align:left}.meta{grid-template-columns:1fr}.risk-map{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Reporte maestro · The Logistics World · Julio 2026</div>
+      <h1>Dashboard ejecutivo de insights SEO</h1>
+      <p class="lead">Resumen dinámico del reporte maestro para TLW / B2B LATAM: desempeño orgánico, calidad de tráfico, auditoría técnica, keywords, contenidos premium, IA/LLM, Expo, backlinks y roadmap operativo priorizado.</p>
+    </div>
+    <div class="meta">
+      <div class="box"><span>Fuente</span><strong>DOCX maestro TLW</strong></div>
+      <div class="box"><span>Periodo foco</span><strong>Mar-jun 2026</strong></div>
+      <div class="box"><span>Párrafos leídos</span><strong>3.792</strong></div>
+      <div class="box"><span>Tablas leídas</span><strong>165</strong></div>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Secciones del dashboard">
+    <button class="active" data-panel="summary">Resumen</button>
+    <button data-panel="organic">Orgánico</button>
+    <button data-panel="technical">Técnico</button>
+    <button data-panel="growth">Crecimiento</button>
+    <button data-panel="roadmap">Roadmap</button>
+    <button data-panel="explorer">Explorador</button>
+  </nav>
+
+  <section id="summary" class="active">
+    <div class="grid kpis">
+      <div class="panel kpi"><div><div class="value blue">63.095</div><div class="label">Clics GSC Web</div></div><div class="note">8,82M impresiones · CTR 0,72%</div></div>
+      <div class="panel kpi"><div><div class="value red">-35,9%</div><div class="label">Clics GSC 6M</div></div><div class="note">115.475 vs 180.056 en ventana anterior</div></div>
+      <div class="panel kpi"><div><div class="value green">93.486</div><div class="label">Sesiones Organic Search</div></div><div class="note">52,3% del total · 69,0% engagement</div></div>
+      <div class="panel kpi"><div><div class="value red">0</div><div class="label">Eventos clave GA4</div></div><div class="note">Bloquea medición confiable de leads/descargas</div></div>
+      <div class="panel kpi"><div><div class="value gold">29.367</div><div class="label">HTML indexables</div></div><div class="note">Base prioritaria de acciones SEO</div></div>
+      <div class="panel kpi"><div><div class="value violet">3.245</div><div class="label">Sesiones IA/LLM</div></div><div class="note">ChatGPT, Gemini, Perplexity, Copilot y Claude</div></div>
+    </div>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>Lectura ejecutiva</h2>
+        <div class="callout warn"><b>La caída está confirmada por GSC y GA4, pero no debe leerse como un problema único.</b> El reporte sostiene una lectura multifactorial: cambios editoriales, menor capacidad operativa SEO, medición incompleta, deuda técnica, performance, señales semánticas ausentes y necesidad de ejecución sostenida.</div>
+        <p>TLW conserva visibilidad y una base orgánica fuerte: México concentra el mercado principal, Organic Search sigue siendo el canal dominante y Expo funciona como activo estacional de alto rendimiento. La brecha crítica está en convertir diagnóstico en implementación medible.</p>
+      </div>
+      <div class="panel">
+        <h2>Prioridades maestras</h2>
+        <div class="risk-map">
+          <div class="risk-cell"><strong class="red">1. Medición</strong><span>Eventos clave, formularios, descargas, registros y host Expo.</span></div>
+          <div class="risk-cell"><strong class="red">2. Señales técnicas</strong><span>Sitemaps, canónicas, noindex, redirecciones y errores.</span></div>
+          <div class="risk-cell"><strong class="gold">3. Schema</strong><span>0 páginas con Schema.org detectado en 36.967 HTML.</span></div>
+          <div class="risk-cell"><strong class="blue">4. CTR</strong><span>Alta impresión con CTR bajo en URLs ya posicionadas.</span></div>
+          <div class="risk-cell"><strong class="green">5. Operación</strong><span>Roadmap con responsables, frecuencia y adopción sostenida.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px">
+      <div class="panel">
+        <h3>YoY GSC marzo-mayo</h3>
+        <div class="mini-bars" id="yoyBars"></div>
+        <div class="source">Clics: 133.633 → 66.053 · Impresiones: 13,15M → 9,03M.</div>
+      </div>
+      <div class="panel">
+        <h3>Canales GA4 2026</h3>
+        <div id="channelBars"></div>
+      </div>
+      <div class="panel">
+        <h3>Riesgos técnicos agregados</h3>
+        <div id="riskBars"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="organic">
+    <div class="grid two">
+      <div class="panel">
+        <h2>GSC: países y dispositivos</h2>
+        <div class="split-note">
+          <div><h3>Países por clics</h3><div id="countryBars"></div></div>
+          <div><h3>Dispositivos por clics</h3><div id="deviceBars"></div></div>
+        </div>
+        <div class="callout" style="margin-top:12px">México explica 65,8% de los clics GSC Web. Mobile concentra más impresiones que desktop, pero tiene CTR más bajo: 0,53% vs 0,95%.</div>
+      </div>
+      <div class="panel">
+        <h2>Clusters de búsqueda</h2>
+        <div id="clusterBars"></div>
+        <div class="source">Eventos/Expo y marca capturan bien; genéricas, comercio exterior y transporte muestran brechas de CTR.</div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>URLs con mayor tráfico GSC</h2>
+        <table id="topUrlTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Alta impresión + bajo CTR</h2>
+        <table id="ctrTable"></table>
+        <div class="callout gold" style="margin-top:12px">Estas URLs no parten de cero: tienen demanda y posiciones razonables. La oportunidad está en intención, snippet, estructura, títulos, H1/H2, datos frescos y enlaces internos.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="technical">
+    <div class="grid two">
+      <div class="panel">
+        <h2>Universo rastreado</h2>
+        <div id="crawlBars"></div>
+        <div class="source">Crawl Screaming Frog del 8 de junio de 2026.</div>
+      </div>
+      <div class="panel">
+        <h2>Indexabilidad, canónicas y sitemap</h2>
+        <table id="indexTable"></table>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px">
+      <div class="panel">
+        <h2>Metadata</h2>
+        <div id="metaBars"></div>
+      </div>
+      <div class="panel">
+        <h2>Encabezados</h2>
+        <div id="headingBars"></div>
+      </div>
+      <div class="panel">
+        <h2>Performance e imágenes</h2>
+        <div id="perfBars"></div>
+        <div class="source">7.384 HTML medidos · score promedio 58/100 · TTI medio ~22s.</div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>Schema: oportunidad semántica</h2>
+        <div class="callout warn"><b>0 páginas con Schema.org detectado</b> sobre 36.967 HTML analizadas. No se presenta como causa directa de caída, pero sí como una limitación clara para señales semánticas, rich results y preparación AEO/GEO.</div>
+        <table id="schemaPlanTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Backlinks y hosts</h2>
+        <table id="backlinkTable"></table>
+        <div id="backlinkBars" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="growth">
+    <div class="grid two">
+      <div class="panel">
+        <h2>Semrush: distribución de posiciones</h2>
+        <div id="positionBars"></div>
+        <div class="source">7.042 keywords únicas normalizadas · 811 en top 1-3 · 1.022 en top 4-10.</div>
+      </div>
+      <div class="panel">
+        <h2>IA/LLM y Answer Engines</h2>
+        <div id="llmBars"></div>
+        <table id="answerTable" style="margin-top:12px"></table>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px">
+      <div class="panel">
+        <h2>Contenidos premium</h2>
+        <table id="premiumTable"></table>
+        <div class="callout warn" style="margin-top:12px">Los e-books de mayor volumen tienen engagement muy bajo. La prioridad es validar medición de descarga/formulario antes de juzgar valor comercial.</div>
+      </div>
+      <div class="panel">
+        <h2>Categorías con señal IA/GEO</h2>
+        <div id="geoCategoryBars"></div>
+      </div>
+      <div class="panel">
+        <h2>Expo TLW</h2>
+        <div class="kpi panel" style="box-shadow:none;margin-bottom:10px"><div><div class="value blue">9.152</div><div class="label">Clics home Expo</div></div><div class="note">113.500 impresiones · CTR 8,06% · posición 6,14</div></div>
+        <table id="expoTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="panel">
+      <h2>Roadmap priorizado</h2>
+      <p style="color:var(--muted);margin-top:-4px">Filtrá por frente o prioridad. El score combina criticidad, impacto SEO, volumen afectado, dependencia de implementación y facilidad de medición.</p>
+      <div class="tabs-tools" id="filters"></div>
+      <div class="priority-list" id="issueList"></div>
+    </div>
+  </section>
+
+  <section id="explorer">
+    <div class="grid two">
+      <div class="panel">
+        <h2>KPIs consolidados</h2>
+        <table id="kpiTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Riesgos de no implementación</h2>
+        <table id="riskTable"></table>
+      </div>
+    </div>
+    <div class="grid two" style="margin-top:14px">
+      <div class="panel">
+        <h2>Responsables sugeridos</h2>
+        <table id="ownerTable"></table>
+      </div>
+      <div class="panel">
+        <h2>KPIs de avance</h2>
+        <table id="progressTable"></table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const fmt = new Intl.NumberFormat('es-AR');
+const pct = v => typeof v === 'number' ? `${v.toLocaleString('es-AR')}%` : v;
+
+const data = {
+  yoy: [
+    ['Clics 2025',133633,'#64748b'],['Clics 2026',66053,'#b8322a'],
+    ['Impr. 2025',13146500,'#64748b'],['Impr. 2026',9031141,'#b8322a']
+  ],
+  channels: [
+    ['Organic Search',93486,'69,0%'],['Direct',58840,'34,1%'],['Referral',9989,'71,0%'],
+    ['Organic Social',9986,'16,3%'],['Display',4647,'26,9%']
+  ],
+  risks: [
+    ['Sitemap no indexable',9088],['Canonical + noindex',5018],['Sin canonical',2334],
+    ['3xx HTML',1442],['Schema detectado',0],['Eventos clave GA4',0]
+  ],
+  countries: [
+    ['México',41485,4726429,'0,88%'],['Colombia',3494,623077,'0,56%'],['Perú',2469,303355,'0,81%'],
+    ['Estados Unidos',2285,816130,'0,28%'],['España',2212,655091,'0,34%']
+  ],
+  devices: [
+    ['Desktop',36618,3865518,'0,95%'],['Móvil',25967,4880097,'0,53%'],['Tablet',510,75056,'0,68%']
+  ],
+  clusters: [
+    ['Eventos / Expo',3973,66330,'5,99%'],['Marca TLW',3916,14921,'26,24%'],
+    ['Otros / genéricas',3756,1640042,'0,23%'],['Transporte',1170,105027,'1,11%'],
+    ['Comercio exterior',1028,274560,'0,37%'],['Ecommerce logístico',959,85875,'1,12%'],
+    ['Supply chain',833,19818,'4,20%']
+  ],
+  topUrls: [
+    ['Home Expo TLW',9152,113500,'8,06%','6,14'],['Home TLW',2192,146029,'1,50%','6,05'],
+    ['Ruta Logística MX 2026',1178,31990,'3,68%','5,23'],['Home Depot Centroamérica',1005,22778,'4,41%','5,53'],
+    ['Summit Expo 2026',655,23832,'2,75%','4,97'],['Torton vs rabón',586,153857,'0,38%','4,01'],
+    ['Historia de Tesla',527,57387,'0,92%','7,69'],['Puertos de Latinoamérica',462,14903,'3,10%','4,25']
+  ],
+  ctrUrls: [
+    ['Rappi Colombia cumple siete años',268226,'6,74','0,00%','Validar intención'],
+    ['Torton vs rabón',153857,'4,01','0,38%','Alta'],
+    ['Aduanas marítimas y terrestres',137956,'8,34','0,01%','Alta'],
+    ['Cedis Mercado Libre México',109088,'7,76','0,32%','Alta'],
+    ['Pedido Shein México',105703,'5,13','0,16%','Media-alta'],
+    ['Puertos más importantes del mundo',89698,'5,91','0,06%','Alta']
+  ],
+  crawl: [
+    ['URLs internas',68219],['HTML internas',38404],['HTML indexables',29367],
+    ['No indexables',9085],['Imágenes internas',29725],['HTML PageSpeed',7384]
+  ],
+  indexability: [
+    ['Canonical + noindex','5.018','Señal potencialmente conflictiva; revisar intención y plantilla.'],
+    ['Canonicalizada','1.733','Puede ser correcto si consolida duplicados; requiere control.'],
+    ['Redirigida','1.442','No debería sostenerse en enlaces internos ni sitemaps.'],
+    ['Noindex','849','Validar alcance estratégico.'],
+    ['Errores 4xx/5xx','43','Cruzar con valor orgánico, enlaces y sitemaps.'],
+    ['Sitemap no indexable','9.088','Depuración prioritaria.'],
+    ['HTML sin canónica','2.334','Revisar templates.']
+  ],
+  metadata: [
+    ['Sin meta description indexable',5612],['Titles duplicados indexables',4454],['Meta desc duplicadas indexables',1726],
+    ['Sin title indexable',0]
+  ],
+  headings: [
+    ['H1 duplicados indexables',4653],['Sin H1 indexable',29],['H2 duplicados indexables',29367],['Sin H2 indexable',0]
+  ],
+  performance: [
+    ['Páginas >2 MB',84],['Imágenes >100 kB',34],['Imágenes >300 kB',4.5],['Score promedio',58]
+  ],
+  schemaPlan: [
+    ['Organization','Alta','Identidad de TLW / B2B LATAM.'],
+    ['WebSite','Alta','Sitio principal y búsqueda interna.'],
+    ['Article / NewsArticle','Alta','Notas editoriales y contenidos noticiosos.'],
+    ['BreadcrumbList','Alta','Jerarquía y contexto de navegación.'],
+    ['Event','Alta en temporada','Expo, registro, agenda y cobertura.'],
+    ['FAQPage / HowTo','Media','Solo donde mejore respuesta directa y citabilidad.']
+  ],
+  positions: [
+    ['Top 1-3',811],['Top 4-10',1022],['11-20',1111],['21-50',2425],['51-100',1673]
+  ],
+  llm: [
+    ['ChatGPT',1632,'73,8%'],['Gemini',1479,'68,8%'],['Perplexity',966,'75,6%'],['Copilot',408,'77,0%'],['Claude',392,'71,9%']
+  ],
+  answer: [
+    ['google',242],['google-ai',240],['search-gpt',117],['gemini',82]
+  ],
+  premium: [
+    ['Peak Demand 2026',4998,'13,9%','Alto volumen, baja interacción.'],
+    ['Logística humanitaria',3717,'11,9%','Validar medición de descarga.'],
+    ['Resiliencia en supply chain',3321,'11,5%','Alto volumen, baja interacción.'],
+    ['Estrategias Supply Chain 2026',318,'71,1%','Menor volumen, mejor calidad.']
+  ],
+  geoCategories: [
+    ['Planeación estratégica',4893,56],['Transporte',2538,29],['Logística y distribución',2206,53],
+    ['Comercio internacional',1728,23],['Abastecimiento y compras',1233,22]
+  ],
+  expo: [
+    ['Home Expo',9152,113500,'8,06%'],['Queries evento',3973,66330,'5,99%'],
+    ['Backlinks host Expo',788,'',''],['Por qué asistir',503,'3 dominios','']
+  ],
+  backlinks: [
+    ['registro.thelogisticsworld.com','5.199','Alto volumen; revisar impacto ecosistémico.'],
+    ['thelogisticsworld.com','3.989','Dominio editorial principal.'],
+    ['expo.thelogisticsworld.com','788','Activo estacional de evento.'],
+    ['www.thelogisticsworld.com','18','Revisar consistencia/canonicalización.']
+  ],
+  backlinkStatus: [['200',9040],['404',453],['301',397],['403',101],['410',3],['500',1]],
+  kpis: [
+    ['GSC Web clics','63.095'],['GSC Web impresiones','8.820.671'],['CTR GSC','0,72%'],['Posición media ponderada','9,54'],
+    ['GA4 sesiones','178.646'],['Usuarios activos','130.114'],['Sesiones con interacción','94.891'],['Vistas','500.673'],
+    ['URLs internas crawl','68.219'],['HTML internas','38.404'],['HTML indexables','29.367'],['Schema detectado','0 páginas'],
+    ['Keywords únicas Semrush','7.042'],['Dominios fuente backlinks','456']
+  ],
+  risksNoAction: [
+    ['Eventos clave sin validar','No poder medir leads, descargas o registros.'],
+    ['Sitemaps sin depurar','Señales poco limpias para Google.'],
+    ['Canónicas/noindex sin revisar','Posible exclusión o consolidación incorrecta de URLs.'],
+    ['Sin schema','Menor claridad semántica y elegibilidad a rich results.'],
+    ['CTR sin optimizar','Pérdida de clics pese a mantener posiciones.'],
+    ['Evergreen sin actualizar','Continuidad de caída en contenidos históricos.'],
+    ['Performance lenta','Menor engagement, especialmente mobile.'],
+    ['Expo sin planificación','Aprovechamiento incompleto de demanda estacional.']
+  ],
+  owners: [
+    ['SEO / Agencia','Priorización, análisis, reportería, recomendaciones, QA y seguimiento.'],
+    ['Editorial TLW','Refresh, nuevos contenidos, FAQs, estructura, metadatos y calendario.'],
+    ['Tecnología','Schema, sitemaps, canónicas, redirecciones, performance y GA4/GTM.'],
+    ['Marketing / B2B LATAM','Expo, e-books, registros, campañas, leads y prioridades comerciales.'],
+    ['Analítica','Eventos clave, formularios, descargas, dashboards y validación de datos.'],
+    ['Dirección / Coordinación','Definir recursos, responsables, fechas y prioridades.']
+  ],
+  progress: [
+    ['Medición','Eventos clave activos, descargas medidas, formularios medidos.'],
+    ['CTR','Mejora de CTR en URLs optimizadas.'],
+    ['Evergreen','Recuperación de clics, impresiones y sesiones.'],
+    ['Técnico','Reducción de no indexables en sitemap, redirecciones y errores.'],
+    ['Schema','Templates con datos estructurados válidos.'],
+    ['Performance','Mejora en LCP, TTI, peso promedio y PageSpeed.'],
+    ['Premium','Sesiones orgánicas, engagement, descargas y usuarios IA/LLM.'],
+    ['Expo','Clics, impresiones, registros, backlinks y performance de campaña.']
+  ]
+};
+
+const issues = [
+  {p:'P0',front:'Medición',score:99,title:'Validar GA4/GTM antes de usar conversiones como KPI ejecutivo',body:'Los exports muestran eventos clave en cero. No significa ausencia de leads, sino falta de confiabilidad para medir descargas, formularios y registros.',evidence:'GA4: 178.646 sesiones, 1.023.236 eventos y 0 eventos clave.'},
+  {p:'P0',front:'Técnico',score:94,title:'Corregir errores críticos y disponibilidad',body:'Los 5xx y URLs sin respuesta son pocos, pero tienen prioridad porque afectan acceso, rastreo y medición.',evidence:'2 URLs 5xx, 1 sin respuesta, 10 URLs 404 y 31 URLs 410.'},
+  {p:'P1',front:'Indexabilidad',score:91,title:'Depurar sitemaps y señales canónicas/noindex',body:'El sitemap tiene buena cobertura, pero también URLs no indexables, redirigidas y combinaciones canonical + noindex que deben revisarse por grupos.',evidence:'38.463 URLs en sitemaps; 9.088 no indexables; 1.442 redirigidas; 5.018 canonical + noindex.'},
+  {p:'P1',front:'Schema',score:89,title:'Implementar Schema base en templates prioritarios',body:'La ausencia total de Schema.org limita claridad semántica, elegibilidad para rich results y preparación para AEO/GEO.',evidence:'0 páginas con Schema.org detectado sobre 36.967 HTML analizadas.'},
+  {p:'P1',front:'CTR',score:86,title:'Optimizar URLs con muchas impresiones y CTR muy bajo',body:'Hay URLs con posiciones competitivas y enorme exposición que casi no capturan clics. Es el frente de recuperación más directo.',evidence:'Rappi 268.226 impr/0,00% CTR; Torton vs rabón 153.857/0,38%; Aduanas 137.956/0,01%.'},
+  {p:'P1',front:'Evergreen',score:82,title:'Ejecutar refresh de contenidos históricos y semievergreen',body:'El reporte identifica pérdida de tracción en activos con demanda. La actualización debe combinar intención, fecha, estructura, snippet, FAQ y enlazado interno.',evidence:'GA4 y GSC confirman contracción; Semrush muestra 1.111 keywords en posiciones 11-20.'},
+  {p:'P1-P2',front:'Performance',score:78,title:'Optimizar performance mobile, peso de página e imágenes',body:'El sitio mantiene mucho tráfico mobile y de Imagen, pero presenta peso alto y tiempos de interacción lentos.',evidence:'Score promedio 58/100; TTI ~22s; 84% de páginas >2 MB; 10.173 imágenes >100 kB.'},
+  {p:'P1-P2',front:'Premium',score:74,title:'Medir y optimizar e-books con bajo engagement',body:'Los e-books aportan volumen, pero los principales recursos muestran engagement muy bajo; sin eventos confiables no puede medirse su valor comercial real.',evidence:'Peak Demand 4.998 sesiones/13,9%; Logística humanitaria 3.717/11,9%; Resiliencia 3.321/11,5%.'},
+  {p:'P1',front:'Expo',score:72,title:'Separar Expo como frente SEO estacional con medición por hostname',body:'Expo es un activo orgánico fuerte, pero no debe absorber la estrategia permanente del sitio editorial. Necesita precampaña, campaña, evento y post-evento.',evidence:'Home Expo: 9.152 clics, CTR 8,06%; 788 backlinks detectados hacia host Expo.'},
+  {p:'P2',front:'IA/AEO/GEO',score:69,title:'Fortalecer citabilidad y respuestas directas en contenidos alineados',body:'GA4 y Semrush ya muestran señales de IA/LLM y AI Overview. Hay que priorizar contenidos B2B con buena intención, no solo volumen amplio.',evidence:'ChatGPT 1.632 sesiones; Gemini 1.479; queries con AI Overview tienen CTR agregado 0,89% vs 1,93% sin AI Overview.'},
+  {p:'P2-P3',front:'Operación',score:65,title:'Convertir recomendaciones documentadas en ciclos de ejecución',body:'El diagnóstico existe; la brecha principal es adopción, responsables, fechas y validación posterior.',evidence:'Roadmap recomendado por frentes: técnico, editorial, medición, premium, Expo, backlinks, performance, IA/GEO y adopción.'}
+];
+
+function bars(id, rows, opts={}){
+  const max = opts.max ?? Math.max(...rows.map(r => Number(r[1]) || 0), 1);
+  const color = opts.color || 'var(--blue)';
+  document.getElementById(id).innerHTML = rows.map(r => {
+    const value = Number(r[1]) || 0;
+    const label = opts.value ? opts.value(r) : fmt.format(value);
+    const width = Math.max(1, Math.min(100, value / max * 100));
+    return `<div class="bar"><div class="name" title="${r[0]}">${r[0]}</div><div class="track"><div class="fill" style="width:${width}%;background:${opts.colors?.(r) || color}"></div></div><div class="val">${label}</div></div>`;
+  }).join('');
+}
+
+function miniBars(id, rows){
+  const max = Math.max(...rows.map(r => r[1]), 1);
+  document.getElementById(id).innerHTML = rows.map(r => `<div class="mini-col"><div class="v">${fmt.format(r[1])}</div><div class="b" style="height:${Math.max(6, r[1]/max*112)}px;background:${r[2]}"></div><div class="l">${r[0]}</div></div>`).join('');
+}
+
+function table(id, headers, rows){
+  document.getElementById(id).innerHTML = `<thead><tr>${headers.map(h => `<th${h.num?' class="num"':''}>${h.t || h}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c,i) => `<td${headers[i]?.num?' class="num"':''}>${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+}
+
+function init(){
+  document.querySelectorAll('.nav button').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  }));
+
+  miniBars('yoyBars', data.yoy);
+  bars('channelBars', data.channels, {value:r=>fmt.format(r[1]), color:'var(--green)'});
+  bars('riskBars', data.risks, {color:'var(--red)', value:r=>r[1]===0?'0':fmt.format(r[1])});
+  bars('countryBars', data.countries, {color:'var(--blue)'});
+  bars('deviceBars', data.devices, {color:'var(--cyan)'});
+  bars('clusterBars', data.clusters, {color:'var(--gold)'});
+  bars('crawlBars', data.crawl, {color:'var(--blue)'});
+  bars('metaBars', data.metadata, {color:'var(--gold)'});
+  bars('headingBars', data.headings, {color:'var(--cyan)'});
+  bars('perfBars', data.performance, {max:100, color:'var(--red)', value:r=>r[0]==='Score promedio' ? `${r[1]}/100` : `${r[1]}%`});
+  bars('positionBars', data.positions, {color:'var(--blue)'});
+  bars('llmBars', data.llm, {color:'var(--violet)'});
+  bars('geoCategoryBars', data.geoCategories, {color:'var(--green)', value:r=>`${fmt.format(r[1])} ses.`});
+  bars('backlinkBars', data.backlinkStatus, {color:'var(--gold)'});
+
+  table('topUrlTable', ['URL / activo',{t:'Clics',num:true},{t:'Impr.',num:true},{t:'CTR',num:true},{t:'Pos.',num:true}], data.topUrls);
+  table('ctrTable', ['URL / tema',{t:'Impr.',num:true},{t:'Pos.',num:true},{t:'CTR',num:true},'Prioridad'], data.ctrUrls);
+  table('indexTable', ['Hallazgo',{t:'URLs',num:true},'Lectura'], data.indexability);
+  table('schemaPlanTable', ['Tipo de Schema','Prioridad','Aplicación'], data.schemaPlan);
+  table('backlinkTable', ['Host',{t:'Filas',num:true},'Lectura'], data.backlinks);
+  table('answerTable', ['Answer Engine',{t:'URLs detectadas',num:true}], data.answer);
+  table('premiumTable', ['E-book / recurso',{t:'Sesiones',num:true},{t:'Engagement',num:true},'Lectura'], data.premium);
+  table('expoTable', ['Activo',{t:'Clics / filas',num:true},{t:'Impr. / dato',num:true},{t:'CTR',num:true}], data.expo);
+  table('kpiTable', ['Métrica','Valor'], data.kpis);
+  table('riskTable', ['Riesgo','Impacto posible'], data.risksNoAction);
+  table('ownerTable', ['Responsable / área','Acciones principales'], data.owners);
+  table('progressTable', ['Frente','KPI de avance'], data.progress);
+
+  const fronts = ['Todos', ...Array.from(new Set(issues.flatMap(i => [i.p, i.front])))];
+  const filters = document.getElementById('filters');
+  filters.innerHTML = fronts.map((f,i)=>`<button class="chip ${i===0?'active':''}" data-filter="${f}">${f}</button>`).join('');
+  function renderIssues(filter='Todos'){
+    const rows = issues.filter(i => filter==='Todos' || i.p===filter || i.front===filter);
+    document.getElementById('issueList').innerHTML = rows.map(i => `<article class="issue"><div><span class="badge ${i.p.startsWith('P0')?'p0':i.p.startsWith('P1')?'p1':i.p.startsWith('P2')?'p2':'p3'}">${i.p}</span></div><div><h4>${i.title}</h4><p>${i.body}</p><small><b>Evidencia:</b> ${i.evidence}</small><div class="tagrow"><span class="tag">${i.front}</span></div></div><div class="score">${i.score}</div></article>`).join('');
+  }
+  filters.addEventListener('click', e => {
+    const btn = e.target.closest('.chip');
+    if(!btn) return;
+    filters.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderIssues(btn.dataset.filter);
+  });
+  renderIssues();
+}
+
+init();
+</script>
+</body>
+</html>

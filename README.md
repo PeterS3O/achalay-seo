@@ -7,3 +7,5 @@ Dashboard tecnico SEO publicado como sitio estatico en GitHub Pages.
 - Version fuente: `dashboard_crawl.html`
 - Dashboard reporte maestro TFT 2026: `tft-reporte-maestro-2026/index.html`
 - Dashboard reporte maestro TLW 2026: `tlw-reporte-maestro-2026/index.html`
+- Dashboard mensual The Food Tech: `thefoodtech-dashboard-mensual/index.html`
+- Dashboard mensual The Logistics World: `thelogisticsworld-dashboard-mensual/index.html`

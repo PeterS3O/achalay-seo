@@ -186,6 +186,30 @@
     .takeaways .neutral { color: var(--accent); }
     .takeaways b { font-weight: 700; }
     .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .time-controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(220px, 320px) minmax(240px, 420px);
+      gap: 16px;
+      align-items: end;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .time-status { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .time-status span { display: block; margin-top: 2px; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .range-field input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      display: block;
+    }
+    .range-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
     .chart { padding: 16px; min-height: 330px; }
     .chart.wide { grid-column: 1 / -1; }
     .chart-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; margin-bottom: 12px; }
@@ -320,6 +344,7 @@
       .month-chip, select, .view-switch { width: 100%; }
       .view-switch button { flex: 1; }
       .score-grid, .chart-grid { grid-template-columns: 1fr; }
+      .time-controls { grid-template-columns: 1fr; }
       .ratio-strip, .ratio-strip.triple { grid-template-columns: 1fr; }
       .chart.wide { grid-column: auto; }
       main, .topbar { padding-left: 14px; padding-right: 14px; }
@@ -357,6 +382,22 @@
     <section class="card takeaways">
       <h2 id="highlightsTitle">Highlights del mes</h2>
       <ul id="takeaways"></ul>
+    </section>
+    <section class="card time-controls">
+      <div>
+        <label>Zoom temporal</label>
+        <div class="time-status" id="timeWindowLabel"></div>
+      </div>
+      <div class="range-field">
+        <label for="timeWindowSize" id="timeWindowSizeLabel">Períodos visibles</label>
+        <input id="timeWindowSize" type="range" min="3" max="12" value="12">
+        <div class="range-meta"><span id="timeWindowMinLabel"></span><span id="timeWindowSizeValue"></span></div>
+      </div>
+      <div class="range-field">
+        <label for="timeWindowStart">Desplazar en el tiempo</label>
+        <input id="timeWindowStart" type="range" min="0" max="0" value="0">
+        <div class="range-meta"><span>Más antiguo</span><span>Más reciente</span></div>
+      </div>
     </section>
     <section class="chart-grid">
       <div class="card chart wide">
@@ -460,6 +501,10 @@
     let chartMonths = [];
     let chartMonthly = [];
     let byMonth = {};
+    const chartWindow = {
+      monthly: { size: 12, start: 0 },
+      weekly: { size: 16, start: 0 }
+    };
 
     function syncActiveData() {
       activeData = DATA.views ? DATA.views[activeView] : DATA;
@@ -510,6 +555,69 @@
 
     function tickLabel(value) {
       return isWeekly() ? value.slice(5) : value.slice(2);
+    }
+
+    function currentWindowState() {
+      const key = isWeekly() ? "weekly" : "monthly";
+      const state = chartWindow[key];
+      const preferred = isWeekly() ? 16 : 12;
+      if (!state.size) state.size = Math.min(preferred, chartMonths.length);
+      return state;
+    }
+
+    function minWindowSize() {
+      return Math.min(isWeekly() ? 4 : 3, Math.max(chartMonths.length, 1));
+    }
+
+    function clampWindow() {
+      const state = currentWindowState();
+      const minSize = minWindowSize();
+      state.size = Math.max(minSize, Math.min(state.size, chartMonths.length || minSize));
+      const maxStart = Math.max(0, chartMonths.length - state.size);
+      state.start = Math.max(0, Math.min(state.start, maxStart));
+      return state;
+    }
+
+    function focusWindowOn(selectedMonth) {
+      const state = clampWindow();
+      const maxStart = Math.max(0, chartMonths.length - state.size);
+      const selectedIndex = chartMonths.indexOf(selectedMonth);
+      if (selectedIndex >= 0 && (selectedIndex < state.start || selectedIndex >= state.start + state.size)) {
+        state.start = Math.max(0, Math.min(selectedIndex - state.size + 1, maxStart));
+      }
+      return state;
+    }
+
+    function visibleChartMonths() {
+      const state = clampWindow();
+      return chartMonths.slice(state.start, state.start + state.size);
+    }
+
+    function visibleChartRows(labels) {
+      return labels.map(m => byMonth[m]).filter(Boolean);
+    }
+
+    function updateTimeControls(selectedMonth) {
+      const state = clampWindow();
+      const labels = visibleChartMonths();
+      const sizeInput = document.getElementById("timeWindowSize");
+      const startInput = document.getElementById("timeWindowStart");
+      const minSize = minWindowSize();
+      const maxStart = Math.max(0, chartMonths.length - state.size);
+      sizeInput.min = minSize;
+      sizeInput.max = Math.max(minSize, chartMonths.length);
+      sizeInput.value = state.size;
+      startInput.min = 0;
+      startInput.max = maxStart;
+      startInput.value = state.start;
+      startInput.disabled = maxStart === 0;
+      sizeInput.disabled = chartMonths.length <= minSize;
+      document.getElementById("timeWindowSizeLabel").textContent = isWeekly() ? "Semanas visibles" : "Meses visibles";
+      document.getElementById("timeWindowMinLabel").textContent = `${minSize} mín.`;
+      document.getElementById("timeWindowSizeValue").textContent = `${state.size} de ${chartMonths.length}`;
+      const first = labels[0] || selectedMonth;
+      const last = labels[labels.length - 1] || selectedMonth;
+      document.getElementById("timeWindowLabel").innerHTML = `${shortMonthLabel(first)} - ${shortMonthLabel(last)}<span>${isWeekly() ? "Ventana semanal" : "Ventana mensual"} sincronizada en todos los gráficos</span>`;
     }
 
     function delta(current, month, key, mode) {
@@ -688,12 +796,12 @@
       });
     }
 
-    function dimensionSeries(rows, dimKey, metricKey, palette) {
-      const dims = [...new Set(rows.filter(r => chartMonths.includes(r.month)).map(r => r[dimKey]))];
+    function dimensionSeries(rows, dimKey, metricKey, palette, labels) {
+      const dims = [...new Set(rows.filter(r => labels.includes(r.month)).map(r => r[dimKey]))];
       return dims.map((dim, i) => ({
         name: dim,
         color: palette[i % palette.length],
-        values: chartMonths.map(month => {
+        values: labels.map(month => {
           const row = rows.find(r => r.month === month && r[dimKey] === dim);
           return row ? row[metricKey] : 0;
         })
@@ -787,8 +895,12 @@
       const selectMonth = m => {
         const sel = document.getElementById("monthSelect");
         if (sel) sel.value = m;
+        focusWindowOn(m);
         render(m);
       };
+      const visibleMonths = visibleChartMonths();
+      const visibleRows = visibleChartRows(visibleMonths);
+      updateTimeControls(month);
       const partials = activeData.partialPeriods || [];
       const label = isWeekly() ? "semana" : "mes";
       const partialCopy = partials.length ? `${partials.map(monthLabel).join(", ")} existe en la fuente, pero queda excluido hasta que cierre el ${label}.` : `No hay ${label}s parciales en la fuente.`;
@@ -816,35 +928,35 @@
       document.getElementById("takeaways").innerHTML = takeaways(current, month);
 
       lineChart(document.getElementById("chartClicks"), [
-        {name:"Total", color:COLORS.total, values:chartMonthly.map(d=>d.clicks)},
-        {name:"Brand", color:COLORS.brand, values:chartMonthly.map(d=>d.clicksBrand)},
-        {name:"No brand", color:COLORS.nonBrand, values:chartMonthly.map(d=>d.clicksNonBrand)}
-      ], chartMonths, month, selectMonth);
+        {name:"Total", color:COLORS.total, values:visibleRows.map(d=>d.clicks)},
+        {name:"Brand", color:COLORS.brand, values:visibleRows.map(d=>d.clicksBrand)},
+        {name:"No brand", color:COLORS.nonBrand, values:visibleRows.map(d=>d.clicksNonBrand)}
+      ], visibleMonths, month, selectMonth);
       lineChart(document.getElementById("chartImpressions"), [
-        {name:"Total", color:COLORS.total, values:chartMonthly.map(d=>d.impressions)},
-        {name:"Brand", color:COLORS.brand, values:chartMonthly.map(d=>d.impressionsBrand)},
-        {name:"No brand", color:COLORS.nonBrand, values:chartMonthly.map(d=>d.impressionsNonBrand)}
-      ], chartMonths, month, selectMonth);
+        {name:"Total", color:COLORS.total, values:visibleRows.map(d=>d.impressions)},
+        {name:"Brand", color:COLORS.brand, values:visibleRows.map(d=>d.impressionsBrand)},
+        {name:"No brand", color:COLORS.nonBrand, values:visibleRows.map(d=>d.impressionsNonBrand)}
+      ], visibleMonths, month, selectMonth);
       lineChart(document.getElementById("chartPages"), [
-        {name:"Activas", color:COLORS.pages, values:chartMonthly.map(d=>d.activePages)},
-        {name:"Vistas", color:COLORS.viewed, values:chartMonthly.map(d=>d.viewedPages)}
-      ], chartMonths, month, selectMonth);
+        {name:"Activas", color:COLORS.pages, values:visibleRows.map(d=>d.activePages)},
+        {name:"Vistas", color:COLORS.viewed, values:visibleRows.map(d=>d.viewedPages)}
+      ], visibleMonths, month, selectMonth);
       document.getElementById("pagesStrip").innerHTML =
         metricCard("Páginas activas", current.activePages, delta(current, month, "activePages", "lm"), delta(current, month, "activePages", "ly"), money) +
         metricCard("Páginas vistas", current.viewedPages, delta(current, month, "viewedPages", "lm"), delta(current, month, "viewedPages", "ly"), money);
       lineChart(document.getElementById("chartKeywords"), [
-        {name:"Activas", color:COLORS.pages, values:chartMonthly.map(d=>d.activeKeywords)},
-        {name:"Vistas", color:COLORS.viewed, values:chartMonthly.map(d=>d.viewedKeywords)}
-      ], chartMonths, month, selectMonth);
+        {name:"Activas", color:COLORS.pages, values:visibleRows.map(d=>d.activeKeywords)},
+        {name:"Vistas", color:COLORS.viewed, values:visibleRows.map(d=>d.viewedKeywords)}
+      ], visibleMonths, month, selectMonth);
       document.getElementById("ratioStrip").innerHTML =
         metricCard("Clics por URL activa", current.clicksPerActivePage, delta(current, month, "clicksPerActivePage", "lm"), delta(current, month, "clicksPerActivePage", "ly"), v => fmt1.format(v)) +
         metricCard("Clics por keyword activa", current.clicksPerActiveKeyword, delta(current, month, "clicksPerActiveKeyword", "lm"), delta(current, month, "clicksPerActiveKeyword", "ly"), v => fmt1.format(v));
 
       const pal = [COLORS.total, COLORS.violet, COLORS.orange, COLORS.brand, COLORS.cyan, COLORS.red];
-      lineChart(document.getElementById("deviceClicks"), dimensionSeries(activeData.devices, "device", "clicks", pal), chartMonths, month, selectMonth);
-      lineChart(document.getElementById("deviceImpressions"), dimensionSeries(activeData.devices, "device", "impressions", pal), chartMonths, month, selectMonth);
-      lineChart(document.getElementById("countryClicks"), dimensionSeries(activeData.countries, "country", "clicks", pal), chartMonths, month, selectMonth);
-      lineChart(document.getElementById("countryImpressions"), dimensionSeries(activeData.countries, "country", "impressions", pal), chartMonths, month, selectMonth);
+      lineChart(document.getElementById("deviceClicks"), dimensionSeries(activeData.devices, "device", "clicks", pal, visibleMonths), visibleMonths, month, selectMonth);
+      lineChart(document.getElementById("deviceImpressions"), dimensionSeries(activeData.devices, "device", "impressions", pal, visibleMonths), visibleMonths, month, selectMonth);
+      lineChart(document.getElementById("countryClicks"), dimensionSeries(activeData.countries, "country", "clicks", pal, visibleMonths), visibleMonths, month, selectMonth);
+      lineChart(document.getElementById("countryImpressions"), dimensionSeries(activeData.countries, "country", "impressions", pal, visibleMonths), visibleMonths, month, selectMonth);
       document.getElementById("deviceClicksStrip").innerHTML = dimensionCards(activeData.devices, "device", month, "clicks", 3);
       document.getElementById("deviceImpressionsStrip").innerHTML = dimensionCards(activeData.devices, "device", month, "impressions", 3);
       document.getElementById("countryClicksStrip").innerHTML = dimensionCards(activeData.countries, "country", month, "clicks", 3);
@@ -854,18 +966,34 @@
     }
 
     const select = document.getElementById("monthSelect");
-    select.addEventListener("change", e => render(e.target.value));
+    select.addEventListener("change", e => {
+      focusWindowOn(e.target.value);
+      render(e.target.value);
+    });
+    document.getElementById("timeWindowSize").addEventListener("input", e => {
+      const state = currentWindowState();
+      const previousEnd = state.start + state.size;
+      state.size = Number(e.target.value);
+      state.start = Math.max(0, Math.min(previousEnd - state.size, Math.max(0, chartMonths.length - state.size)));
+      render(document.getElementById("monthSelect").value);
+    });
+    document.getElementById("timeWindowStart").addEventListener("input", e => {
+      currentWindowState().start = Number(e.target.value);
+      render(document.getElementById("monthSelect").value);
+    });
     document.querySelectorAll("#viewSwitch button").forEach(btn => {
       btn.addEventListener("click", () => {
         activeView = btn.dataset.view;
         document.querySelectorAll("#viewSwitch button").forEach(item => item.classList.toggle("is-active", item === btn));
         syncActiveData();
         populatePeriodSelect(activeData.defaultPeriod);
+        focusWindowOn(activeData.defaultPeriod);
         render(activeData.defaultPeriod);
       });
     });
     syncActiveData();
     populatePeriodSelect(activeData.defaultPeriod);
+    focusWindowOn(activeData.defaultPeriod);
     render(activeData.defaultPeriod);
   </script>
 </body>

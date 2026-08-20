@@ -9,3 +9,4 @@ Dashboard tecnico SEO publicado como sitio estatico en GitHub Pages.
 - Dashboard reporte maestro TLW 2026: `tlw-reporte-maestro-2026/index.html`
 - Dashboard mensual The Food Tech: `thefoodtech-dashboard-mensual/index.html`
 - Dashboard mensual The Logistics World: `thelogisticsworld-dashboard-mensual/index.html`
+- Dashboard mensual Expo The Food Tech: `expo-thefoodtech-dashboard-mensual/index.html`

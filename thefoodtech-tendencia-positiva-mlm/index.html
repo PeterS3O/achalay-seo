@@ -63,9 +63,21 @@
     li { margin:5px 0; }
     li span { color:var(--green); font-weight:800; }
     .callout { background:var(--soft-blue); border:1px solid #c9d8f3; border-radius:8px; padding:20px; line-height:1.55; color:#29405f; }
+    .evidence-hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px; }
+    .compare-strip { display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; margin:8px 0 20px; }
+    .compare-point { background:#f3f6f2; border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .compare-point span { display:block; color:var(--muted); font-size:13px; font-weight:800; }
+    .compare-point b { display:block; font-size:36px; line-height:1; margin-top:8px; }
+    .compare-arrow { color:var(--green); font-size:42px; font-weight:900; text-align:center; }
+    .compare-note { color:var(--muted); line-height:1.55; margin:0; }
+    .evidence-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:18px; }
+    .evidence-card { margin:0; background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+    .evidence-card img { display:block; width:100%; height:auto; background:#eef2f8; }
+    .evidence-card figcaption { padding:14px; color:var(--muted); line-height:1.5; font-size:14px; }
+    .evidence-card figcaption b { display:block; color:var(--ink); margin-bottom:5px; }
     footer { margin-top:34px; border-top:1px solid var(--line); padding-top:18px; color:var(--muted); font-size:13px; }
-    @media (max-width:900px) { header,.grid-2,.insights,.page-grid { grid-template-columns:1fr; } .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:560px) { main { padding:24px 16px 44px; } .kpis,.mini-kpis { grid-template-columns:1fr; } h1 { font-size:36px; } }
+    @media (max-width:900px) { header,.grid-2,.insights,.page-grid,.evidence-grid { grid-template-columns:1fr; } .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:560px) { main { padding:24px 16px 44px; } .kpis,.mini-kpis,.compare-strip { grid-template-columns:1fr; } h1 { font-size:36px; } .compare-arrow { transform:rotate(90deg); } }
   </style>
 </head>
 <body>
@@ -97,6 +109,42 @@
     <div class="insight"><b>El crecimiento es editorial.</b> Los artículos concentran 97% del incremento neto de clicks, por encima de hubs, home o recursos descargables.</div>
     <div class="insight"><b>Hay dos motores simultáneos.</b> El Summit y las búsquedas de marca aportan una capa visible, mientras Soluciones, Packaging y Métodos explican la expansión editorial evergreen.</div>
     <div class="insight"><b>La causa más probable es una combinación.</b> Mayor demanda del evento, más cobertura en contenidos informacionales y recuperación de artículos existentes empujan la aceleración.</div>
+  </section>
+
+  <section class="evidence-hero">
+    <h2>Evidencia visual desde Google Search Console</h2>
+    <div class="compare-strip">
+      <div class="compare-point"><span>Lunes 27 de julio de 2026</span><b>560</b><small>clicks orgánicos en la vista general de GSC.</small></div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-point"><span>Lunes 14 de septiembre de 2026</span><b>1.148</b><small>clicks orgánicos en la vista general de GSC.</small></div>
+    </div>
+    <p class="compare-note"><b>Lectura:</b> el salto puntual es de +588 clicks, equivalente a +105,0%. La validación por API sobre el dominio completo da 567 → 1.167 clicks, y el filtro estricto del sitio principal usado en este entregable también duplica su nivel: 485 → 996 clicks. Es decir, el crecimiento no es sólo una percepción del gráfico: se sostiene al bajar al dato diario.</p>
+    <div class="evidence-grid">
+      
+        <figure class="evidence-card">
+          <img src="assets/gsc-rendimiento-web.png" alt="Rendimiento orgánico web">
+          <figcaption><b>Rendimiento orgánico web</b>La curva diaria muestra una aceleración clara desde mediados de agosto: los picos recientes superan con más frecuencia la zona de 1.000 clicks.</figcaption>
+        </figure>
+        
+
+        <figure class="evidence-card">
+          <img src="assets/gsc-indexadas.png" alt="Cobertura indexada e impresiones">
+          <figcaption><b>Cobertura indexada e impresiones</b>El volumen indexado se mantiene amplio y la línea de impresiones crece hacia septiembre, señal de mayor superficie disponible para capturar demanda.</figcaption>
+        </figure>
+        
+
+        <figure class="evidence-card">
+          <img src="assets/gsc-sin-indexar.png" alt="Páginas rastreadas sin indexar">
+          <figcaption><b>Páginas rastreadas sin indexar</b>El bloque de páginas afectadas se reduce de forma visible; ayuda a explicar por qué más URLs empiezan a participar en resultados orgánicos.</figcaption>
+        </figure>
+        
+
+        <figure class="evidence-card">
+          <img src="assets/gsc-video-indexado.png" alt="Video indexado">
+          <figcaption><b>Video indexado</b>La presencia de video indexado suma otra capa de visibilidad: las impresiones se activan con más fuerza desde la segunda mitad de agosto.</figcaption>
+        </figure>
+        
+    </div>
   </section>
 
   <section class="grid-2">

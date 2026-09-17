@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TheFoodTech | Reporte de tendencia positiva SEO</title>
+  <style>
+    :root {
+      --ink:#17212b; --muted:#60707d; --paper:#f6f7f3; --panel:#fff;
+      --line:#dce2dc; --green:#0f7b5c; --blue:#2f68bd; --amber:#c17920;
+      --soft:#e7f3ee; --soft-blue:#e9effb;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); background:var(--paper); letter-spacing:0; }
+    main { max-width:1200px; margin:0 auto; padding:34px 22px 60px; }
+    header { display:grid; grid-template-columns:minmax(0,1.3fr) 360px; gap:28px; align-items:end; padding-bottom:28px; border-bottom:1px solid var(--line); }
+    .eyebrow { color:var(--green); font-size:13px; font-weight:800; text-transform:uppercase; margin:0 0 12px; }
+    h1 { font-size:clamp(34px,5vw,66px); line-height:.98; margin:0; max-width:860px; letter-spacing:0; }
+    .lede { color:var(--muted); font-size:18px; line-height:1.55; max-width:800px; margin:18px 0 0; }
+    .box { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; }
+    .box p { margin:8px 0 0; color:var(--muted); line-height:1.45; }
+    section { margin-top:34px; }
+    h2 { margin:0 0 16px; font-size:25px; }
+    h3 { margin:0; font-size:20px; }
+    .kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .kpi { min-height:136px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; }
+    .kpi.primary { background:var(--soft); border-color:#bbd9ce; }
+    .kpi span { color:var(--muted); font-size:13px; font-weight:800; display:block; }
+    .kpi b { display:block; margin-top:12px; font-size:35px; line-height:1; }
+    .kpi small { display:block; margin-top:10px; color:var(--muted); line-height:1.35; }
+    .insights { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .insight { border-top:3px solid var(--green); padding-top:14px; color:var(--muted); line-height:1.55; }
+    .insight b { color:var(--ink); }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; overflow:hidden; }
+    .panel-head { display:flex; justify-content:space-between; gap:18px; align-items:start; margin-bottom:16px; }
+    .panel-head p { margin:5px 0 0; color:var(--muted); font-size:13px; }
+    .chart-labels text { fill:var(--muted); font-size:12px; }
+    .axis-line { stroke:var(--line); }
+    table { width:100%; border-collapse:collapse; min-width:760px; }
+    .table-wrap { overflow:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    th,td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:14px; }
+    th { color:var(--muted); background:#eef2ec; font-size:12px; text-transform:uppercase; }
+    td small { display:block; color:var(--muted); margin-top:4px; }
+    td.url { max-width:430px; overflow-wrap:anywhere; color:#315476; }
+    .num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .positive { color:var(--green); font-weight:800; }
+    .bar-cell { width:170px; }
+    .bar-track { height:8px; background:#edf1ed; border-radius:3px; overflow:hidden; }
+    .bar-track span { display:block; height:100%; background:var(--green); }
+    .page-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .page-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:18px; }
+    .page-card .tag { margin:0 0 10px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; }
+    .page-card a { display:block; color:#315476; font-size:13px; overflow-wrap:anywhere; margin:8px 0 14px; }
+    .mini-kpis { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:12px 0; }
+    .mini-kpis span { background:#f3f6f2; border-radius:6px; padding:10px; color:var(--muted); font-size:12px; }
+    .mini-kpis b { display:block; color:var(--ink); font-size:18px; margin-bottom:4px; }
+    h4 { margin:14px 0 8px; font-size:14px; }
+    ul { margin:0; padding-left:18px; color:var(--muted); }
+    li { margin:5px 0; }
+    li span { color:var(--green); font-weight:800; }
+    .callout { background:var(--soft-blue); border:1px solid #c9d8f3; border-radius:8px; padding:20px; line-height:1.55; color:#29405f; }
+    footer { margin-top:34px; border-top:1px solid var(--line); padding-top:18px; color:var(--muted); font-size:13px; }
+    @media (max-width:900px) { header,.grid-2,.insights,.page-grid { grid-template-columns:1fr; } .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:560px) { main { padding:24px 16px 44px; } .kpis,.mini-kpis { grid-template-columns:1fr; } h1 { font-size:36px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <p class="eyebrow">TheFoodTech · Entregable SEO · MLM</p>
+      <h1>Tendencia positiva en las últimas semanas: qué crece y por qué</h1>
+      <p class="lede">Análisis de crecimiento orgánico en TheFoodTech, con foco en el bloque reciente de 4 semanas completas. El objetivo es entender si la mejora se concentra en artículos, categorías o queries específicas, y qué señales explican la aceleración.</p>
+    </div>
+    <aside class="box">
+      <b>Ventanas comparadas</b>
+      <p>Periodo reciente: 2026-08-17 a 2026-09-13</p>
+      <p>Periodo previo: 2026-07-20 a 2026-08-16</p>
+      <p>Fuente: Google Search Console, búsqueda web, dominio thefoodtech.com.</p>
+    </aside>
+  </header>
+
+  <section>
+    <div class="kpis">
+      <div class="kpi primary"><span>Clicks recientes</span><b>19.671</b><small>vs 13.393 en las 4 semanas previas.</small></div>
+      <div class="kpi"><span>Crecimiento neto</span><b>+6.278</b><small>+46,9% de variación en clicks.</small></div>
+      <div class="kpi"><span>Impresiones incrementales</span><b>+422.887</b><small>Mayor superficie de aparición orgánica.</small></div>
+      <div class="kpi"><span>Clicks editoriales incrementales</span><b>+6.102</b><small>Equivale a 97% del crecimiento neto.</small></div>
+    </div>
+  </section>
+
+  <section class="insights">
+    <div class="insight"><b>El crecimiento es editorial.</b> Los artículos concentran 97% del incremento neto de clicks, por encima de hubs, home o recursos descargables.</div>
+    <div class="insight"><b>Hay dos motores simultáneos.</b> El Summit y las búsquedas de marca aportan una capa visible, mientras Soluciones, Packaging y Métodos explican la expansión editorial evergreen.</div>
+    <div class="insight"><b>La causa más probable es una combinación.</b> Mayor demanda del evento, más cobertura en contenidos informacionales y recuperación de artículos existentes empujan la aceleración.</div>
+  </section>
+
+  <section class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><div><h2>Evolución semanal</h2><p>Clicks totales por semana completa.</p></div></div>
+      
+    <svg viewBox="0 0 560 194" role="img" aria-label="Evolución semanal">
+      <line x1="0" y1="160" x2="560" y2="160" class="axis-line" />
+      <polyline points="0.0,139.1 80.0,148.0 160.0,141.5 240.0,110.4 320.0,93.3 400.0,57.3 480.0,34.6 560.0,12.0" fill="none" stroke="#0f7b5c" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+      <g fill="#0f7b5c"><circle cx="0.0" cy="139.1" r="4" />
+<circle cx="80.0" cy="148.0" r="4" />
+<circle cx="160.0" cy="141.5" r="4" />
+<circle cx="240.0" cy="110.4" r="4" />
+<circle cx="320.0" cy="93.3" r="4" />
+<circle cx="400.0" cy="57.3" r="4" />
+<circle cx="480.0" cy="34.6" r="4" />
+<circle cx="560.0" cy="12.0" r="4" /></g>
+      <g class="chart-labels"><text x="0.0" y="180" text-anchor="middle">07-20</text>
+<text x="80.0" y="180" text-anchor="middle">07-27</text>
+<text x="160.0" y="180" text-anchor="middle">08-03</text>
+<text x="240.0" y="180" text-anchor="middle">08-10</text>
+<text x="320.0" y="180" text-anchor="middle">08-17</text>
+<text x="400.0" y="180" text-anchor="middle">08-24</text>
+<text x="480.0" y="180" text-anchor="middle">08-31</text>
+<text x="560.0" y="180" text-anchor="middle">09-07</text></g>
+    </svg>
+    
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><h2>Tipos de página</h2><p>Dónde se concentra el crecimiento.</p></div></div>
+      <table>
+        <thead><tr><th>Tipo</th><th class="num">Reciente</th><th class="num">Previo</th><th class="num">Delta</th><th></th></tr></thead>
+        <tbody>
+            <tr>
+              <td>Artículo editorial</td>
+              <td class="num">18.587</td>
+              <td class="num">12.485</td>
+              <td class="num positive">6.102</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:100.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Home</td>
+              <td class="num">910</td>
+              <td class="num">584</td>
+              <td class="num positive">326</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:5.3%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Multimedia</td>
+              <td class="num">20</td>
+              <td class="num">6</td>
+              <td class="num positive">14</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Ebooks y descargables</td>
+              <td class="num">32</td>
+              <td class="num">19</td>
+              <td class="num positive">13</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Jobs</td>
+              <td class="num">1</td>
+              <td class="num">2</td>
+              <td class="num positive">-1</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:0.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Hub / categoría</td>
+              <td class="num">26</td>
+              <td class="num">28</td>
+              <td class="num positive">-2</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:0.0%"></span></div></td>
+            </tr>
+            </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><div><h2>Categorías que empujan</h2><p>Clasificación por carpeta editorial de URL.</p></div></div>
+      <table>
+        <thead><tr><th>Categoría</th><th class="num">Reciente</th><th class="num">Previo</th><th class="num">Delta</th><th></th></tr></thead>
+        <tbody>
+            <tr>
+              <td>Soluciones y tecnología alimentaria</td>
+              <td class="num">9.143</td>
+              <td class="num">6.612</td>
+              <td class="num positive">2.531</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:100.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Packaging y procesamiento</td>
+              <td class="num">3.382</td>
+              <td class="num">2.140</td>
+              <td class="num positive">1.242</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:49.1%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Métodos de control y regulaciones</td>
+              <td class="num">2.981</td>
+              <td class="num">2.017</td>
+              <td class="num positive">964</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:38.1%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Archivo</td>
+              <td class="num">1.355</td>
+              <td class="num">665</td>
+              <td class="num positive">690</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:27.3%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Eventos de la Industria</td>
+              <td class="num">1.627</td>
+              <td class="num">939</td>
+              <td class="num positive">688</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:27.2%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Home</td>
+              <td class="num">910</td>
+              <td class="num">584</td>
+              <td class="num positive">326</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:12.9%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Author</td>
+              <td class="num">57</td>
+              <td class="num">34</td>
+              <td class="num positive">23</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Multimedia</td>
+              <td class="num">20</td>
+              <td class="num">6</td>
+              <td class="num positive">14</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><h2>Temas de keywords</h2><p>Clusters semánticos con mayor incremento.</p></div></div>
+      <table>
+        <thead><tr><th>Tema</th><th class="num">Reciente</th><th class="num">Previo</th><th class="num">Delta</th><th></th></tr></thead>
+        <tbody>
+            <tr>
+              <td>Evento / Summit / marca</td>
+              <td class="num">2.566</td>
+              <td class="num">1.419</td>
+              <td class="num positive">1.147</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:100.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Marcas / productos</td>
+              <td class="num">446</td>
+              <td class="num">166</td>
+              <td class="num positive">280</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:24.4%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Otros temas</td>
+              <td class="num">2.218</td>
+              <td class="num">1.991</td>
+              <td class="num positive">227</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:19.8%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Endulzantes / azúcar</td>
+              <td class="num">446</td>
+              <td class="num">356</td>
+              <td class="num positive">90</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:7.8%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Inocuidad / regulación</td>
+              <td class="num">209</td>
+              <td class="num">119</td>
+              <td class="num positive">90</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:7.8%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Packaging / envases</td>
+              <td class="num">78</td>
+              <td class="num">49</td>
+              <td class="num positive">29</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Ingredientes / formulación</td>
+              <td class="num">78</td>
+              <td class="num">55</td>
+              <td class="num positive">23</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            
+
+            <tr>
+              <td>Tecnología / procesos</td>
+              <td class="num">39</td>
+              <td class="num">17</td>
+              <td class="num positive">22</td>
+              <td class="bar-cell"><div class="bar-track"><span style="width:4.0%"></span></div></td>
+            </tr>
+            </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Artículos que más explican la mejora</h2>
+    <div class="page-grid">
+      
+            <article class="page-card">
+              <p class="tag">Eventos de la Industria · Artículo editorial</p>
+              <h3>The Food Tech Summit Expo 2026</h3>
+              <a href="https://thefoodtech.com/eventos-de-la-industria/the-food-tech-summit-expo-2026" target="_blank" rel="noreferrer">https://thefoodtech.com/eventos-de-la-industria/the-food-tech-summit-expo-2026</a>
+              <div class="mini-kpis">
+                <span><b>1.038</b> clicks actuales</span>
+                <span><b>+550</b> vs 4 semanas previas</span>
+                <span><b>+112,7%</b> variación</span>
+              </div>
+              <h4>Queries que empujan</h4>
+              <ul><li><b>the food tech summit &amp; expo 2026</b> <span>+82 clicks</span></li><li><b>food tech summit &amp; expo 2026</b> <span>+62 clicks</span></li><li><b>summit 2026</b> <span>+60 clicks</span></li><li><b>food tech summit 2026</b> <span>+41 clicks</span></li></ul>
+            </article>
+            
+            <article class="page-card">
+              <p class="tag">Home · Home</p>
+              <h3>Home</h3>
+              <a href="https://thefoodtech.com/" target="_blank" rel="noreferrer">https://thefoodtech.com/</a>
+              <div class="mini-kpis">
+                <span><b>908</b> clicks actuales</span>
+                <span><b>+325</b> vs 4 semanas previas</span>
+                <span><b>+55,7%</b> variación</span>
+              </div>
+              <h4>Queries que empujan</h4>
+              <ul><li><b>food tech</b> <span>+104 clicks</span></li><li><b>the food tech</b> <span>+91 clicks</span></li><li><b>thefoodtech</b> <span>+11 clicks</span></li><li><b>foodtech</b> <span>+7 clicks</span></li></ul>
+            </article>
+            
+            <article class="page-card">
+              <p class="tag">Archivo · Artículo editorial</p>
+              <h3>Nestle y Sus Marcas Cuantas Son y Cuales Son las Mas Populares en Mexico</h3>
+              <a href="https://thefoodtech.com/archivo/nestle-y-sus-marcas-cuantas-son-y-cuales-son-las-mas-populares-en-mexico" target="_blank" rel="noreferrer">https://thefoodtech.com/archivo/nestle-y-sus-marcas-cuantas-son-y-cuales-son-las-mas-populares-en-mexico</a>
+              <div class="mini-kpis">
+                <span><b>189</b> clicks actuales</span>
+                <span><b>+153</b> vs 4 semanas previas</span>
+                <span><b>+425,0%</b> variación</span>
+              </div>
+              <h4>Queries que empujan</h4>
+              <ul><li><b>productos nestle</b> <span>+14 clicks</span></li><li><b>marcas de nestle</b> <span>+12 clicks</span></li><li><b>nestle</b> <span>+10 clicks</span></li><li><b>nestle productos</b> <span>+7 clicks</span></li></ul>
+            </article>
+            
+            <article class="page-card">
+              <p class="tag">Métodos de control y regulaciones · Artículo editorial</p>
+              <h3>Norma Oficial Mexicana 043 Educacion para la Salud en Materia Alimentaria</h3>
+              <a href="https://thefoodtech.com/metodos-de-control-y-regulaciones/norma-oficial-mexicana-043-educacion-para-la-salud-en-materia-alimentaria" target="_blank" rel="noreferrer">https://thefoodtech.com/metodos-de-control-y-regulaciones/norma-oficial-mexicana-043-educacion-para-la-salud-en-materia-alimentaria</a>
+              <div class="mini-kpis">
+                <span><b>172</b> clicks actuales</span>
+                <span><b>+97</b> vs 4 semanas previas</span>
+                <span><b>+129,3%</b> variación</span>
+              </div>
+              <h4>Queries que empujan</h4>
+              <ul><li><b>nom 043</b> <span>+11 clicks</span></li><li><b>norma 043</b> <span>+4 clicks</span></li><li><b>nom 043 ssa2 2012</b> <span>+4 clicks</span></li><li><b>nom-043 actualizada 2023</b> <span>+2 clicks</span></li></ul>
+            </article>
+            
+            <article class="page-card">
+              <p class="tag">Soluciones y tecnología alimentaria · Artículo editorial</p>
+              <h3>Una Nueva Bebida Sin Azucar Calorias Ni Cafeina Llega Al Mercado Europeo</h3>
+              <a href="https://thefoodtech.com/soluciones-y-tecnologia-alimentaria/una-nueva-bebida-sin-azucar-calorias-ni-cafeina-llega-al-mercado-europeo" target="_blank" rel="noreferrer">https://thefoodtech.com/soluciones-y-tecnologia-alimentaria/una-nueva-bebida-sin-azucar-calorias-ni-cafeina-llega-al-mercado-europeo</a>
+              <div class="mini-kpis">
+                <span><b>107</b> clicks actuales</span>
+                <span><b>+85</b> vs 4 semanas previas</span>
+                <span><b>+386,4%</b> variación</span>
+              </div>
+              <h4>Queries que empujan</h4>
+              <ul><li><b>coca cola triple z</b> <span>+21 clicks</span></li><li><b>coca cola triple zero</b> <span>+10 clicks</span></li><li><b>cocacola triple 0</b> <span>+7 clicks</span></li><li><b>triple z</b> <span>+4 clicks</span></li></ul>
+            </article>
+            
+            <article class="page-card">
+              <p class="tag">Archivo · Artículo editorial</p>
+              <h3>la Industria de Alimentos Mexico</h3>
+              <a href="https://thefoodtech.com/archivo/la-industria-de-alimentos-mexico" target="_blank" rel="noreferrer">https://thefoodtech.com/archivo/la-industria-de-alimentos-mexico</a>
+              <div class="mini-kpis">
+                <span><b>82</b> clicks actuales</span>
+                <span><b>+76</b> vs 4 semanas previas</span>
+                <span><b>+1266,7%</b> variación</span>
+              </div>
+              <h4>Queries que empujan</h4>
+              <ul><li><b>antecedentes de la industria alimentaria en méxico</b> <span>+3 clicks</span></li><li><b>industria alimentaria</b> <span>+1 clicks</span></li></ul>
+            </article>
+            
+    </div>
+  </section>
+
+  <section>
+    <h2>Keywords con mayor crecimiento</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Keyword</th><th>Tema</th><th class="num">Clicks recientes</th><th class="num">Clicks previos</th><th class="num">Delta</th><th class="num">Delta impresiones</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>the food tech summit &amp; expo 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">298</td>
+          <td class="num">127</td>
+          <td class="num positive">+171</td>
+          <td class="num">752</td>
+        </tr>
+        
+
+        <tr>
+          <td>food tech</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">241</td>
+          <td class="num">130</td>
+          <td class="num positive">+111</td>
+          <td class="num">1.011</td>
+        </tr>
+        
+
+        <tr>
+          <td>food tech summit &amp; expo 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">130</td>
+          <td class="num">29</td>
+          <td class="num positive">+101</td>
+          <td class="num">429</td>
+        </tr>
+        
+
+        <tr>
+          <td>the food tech</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">256</td>
+          <td class="num">161</td>
+          <td class="num positive">+95</td>
+          <td class="num">200</td>
+        </tr>
+        
+
+        <tr>
+          <td>food tech summit 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">186</td>
+          <td class="num">109</td>
+          <td class="num positive">+77</td>
+          <td class="num">324</td>
+        </tr>
+        
+
+        <tr>
+          <td>summit 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">85</td>
+          <td class="num">27</td>
+          <td class="num positive">+58</td>
+          <td class="num">378</td>
+        </tr>
+        
+
+        <tr>
+          <td>food tech summit</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">78</td>
+          <td class="num">38</td>
+          <td class="num positive">+40</td>
+          <td class="num">114</td>
+        </tr>
+        
+
+        <tr>
+          <td>summit expo 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">55</td>
+          <td class="num">16</td>
+          <td class="num positive">+39</td>
+          <td class="num">63</td>
+        </tr>
+        
+
+        <tr>
+          <td>food tech 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">77</td>
+          <td class="num">43</td>
+          <td class="num positive">+34</td>
+          <td class="num">405</td>
+        </tr>
+        
+
+        <tr>
+          <td>foodtech 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">61</td>
+          <td class="num">28</td>
+          <td class="num positive">+33</td>
+          <td class="num">197</td>
+        </tr>
+        
+
+        <tr>
+          <td>food tech mexico 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">44</td>
+          <td class="num">20</td>
+          <td class="num positive">+24</td>
+          <td class="num">83</td>
+        </tr>
+        
+
+        <tr>
+          <td>summit</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">34</td>
+          <td class="num">10</td>
+          <td class="num positive">+24</td>
+          <td class="num">926</td>
+        </tr>
+        
+
+        <tr>
+          <td>licuado sin licuadora</td>
+          <td>Cocina / preparación</td>
+          <td class="num">28</td>
+          <td class="num">4</td>
+          <td class="num positive">+24</td>
+          <td class="num">3.148</td>
+        </tr>
+        
+
+        <tr>
+          <td>expo summit 2026 mexico</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">26</td>
+          <td class="num">3</td>
+          <td class="num positive">+23</td>
+          <td class="num">35</td>
+        </tr>
+        
+
+        <tr>
+          <td>eritritol o stevia</td>
+          <td>Endulzantes / azúcar</td>
+          <td class="num">47</td>
+          <td class="num">25</td>
+          <td class="num positive">+22</td>
+          <td class="num">-4</td>
+        </tr>
+        
+
+        <tr>
+          <td>summit food tech 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">29</td>
+          <td class="num">7</td>
+          <td class="num positive">+22</td>
+          <td class="num">134</td>
+        </tr>
+        
+
+        <tr>
+          <td>expo foodtech 2026</td>
+          <td>Evento / Summit / marca</td>
+          <td class="num">38</td>
+          <td class="num">17</td>
+          <td class="num positive">+21</td>
+          <td class="num">182</td>
+        </tr>
+        
+
+        <tr>
+          <td>coca cola triple z</td>
+          <td>Marcas / productos</td>
+          <td class="num">21</td>
+          <td class="num">0</td>
+          <td class="num positive">+21</td>
+          <td class="num">2.616</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ranking de URLs incrementales</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Artículo / página</th><th>URL</th><th class="num">Clicks recientes</th><th class="num">Clicks previos</th><th class="num">Delta</th><th class="num">Delta impresiones</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>
+            <b>The Food Tech Summit Expo 2026</b>
+            <small>Eventos de la Industria · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/eventos-de-la-industria/the-food-tech-summit-expo-2026</td>
+          <td class="num">1.038</td>
+          <td class="num">488</td>
+          <td class="num positive">+550</td>
+          <td class="num">7.858</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Home</b>
+            <small>Home · Home</small>
+          </td>
+          <td class="url">https://thefoodtech.com/</td>
+          <td class="num">908</td>
+          <td class="num">583</td>
+          <td class="num positive">+325</td>
+          <td class="num">5.720</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Nestle y Sus Marcas Cuantas Son y Cuales Son las Mas Populares en Mexico</b>
+            <small>Archivo · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/archivo/nestle-y-sus-marcas-cuantas-son-y-cuales-son-las-mas-populares-en-mexico</td>
+          <td class="num">189</td>
+          <td class="num">36</td>
+          <td class="num positive">+153</td>
+          <td class="num">62.775</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Norma Oficial Mexicana 043 Educacion para la Salud en Materia Alimentaria</b>
+            <small>Métodos de control y regulaciones · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/metodos-de-control-y-regulaciones/norma-oficial-mexicana-043-educacion-para-la-salud-en-materia-alimentaria</td>
+          <td class="num">172</td>
+          <td class="num">75</td>
+          <td class="num positive">+97</td>
+          <td class="num">9.508</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Una Nueva Bebida Sin Azucar Calorias Ni Cafeina Llega Al Mercado Europeo</b>
+            <small>Soluciones y tecnología alimentaria · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/soluciones-y-tecnologia-alimentaria/una-nueva-bebida-sin-azucar-calorias-ni-cafeina-llega-al-mercado-europeo</td>
+          <td class="num">107</td>
+          <td class="num">22</td>
+          <td class="num positive">+85</td>
+          <td class="num">7.292</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>la Industria de Alimentos Mexico</b>
+            <small>Archivo · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/archivo/la-industria-de-alimentos-mexico</td>
+          <td class="num">82</td>
+          <td class="num">6</td>
+          <td class="num positive">+76</td>
+          <td class="num">943</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Eritritol Vs Stevia Cual Es la Mejor Alternativa Saludable Al Azucar</b>
+            <small>Soluciones y tecnología alimentaria · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/soluciones-y-tecnologia-alimentaria/eritritol-vs-stevia-cual-es-la-mejor-alternativa-saludable-al-azucar</td>
+          <td class="num">282</td>
+          <td class="num">208</td>
+          <td class="num positive">+74</td>
+          <td class="num">918</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Sector Lacteo 2026 Lo Que Debes Saber Sobre Consumo Produccion y Mercado en Mexico</b>
+            <small>Soluciones y tecnología alimentaria · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/soluciones-y-tecnologia-alimentaria/sector-lacteo-2026-lo-que-debes-saber-sobre-consumo-produccion-y-mercado-en-mexico</td>
+          <td class="num">115</td>
+          <td class="num">50</td>
+          <td class="num positive">+65</td>
+          <td class="num">924</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Un Mensaje Molecular Contra los Hongos Asi Funciona el Biofungicida de Rna</b>
+            <small>Métodos de control y regulaciones · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/metodos-de-control-y-regulaciones/un-mensaje-molecular-contra-los-hongos-asi-funciona-el-biofungicida-de-rna</td>
+          <td class="num">60</td>
+          <td class="num">0</td>
+          <td class="num positive">+60</td>
+          <td class="num">1.199</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>la Quimica Alimentaria y Su Impacto en la Industria de la Teoria a la Produccion</b>
+            <small>Packaging y procesamiento · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/packaging-y-procesamiento/la-quimica-alimentaria-y-su-impacto-en-la-industria-de-la-teoria-a-la-produccion</td>
+          <td class="num">59</td>
+          <td class="num">3</td>
+          <td class="num positive">+56</td>
+          <td class="num">1.984</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>Hay Algun Riesgo en el Consumo de Stevia Efectos Secundarios Asociados a Su Consumo</b>
+            <small>Soluciones y tecnología alimentaria · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/soluciones-y-tecnologia-alimentaria/hay-algun-riesgo-en-el-consumo-de-stevia-efectos-secundarios-asociados-a-su-consumo</td>
+          <td class="num">171</td>
+          <td class="num">118</td>
+          <td class="num positive">+53</td>
+          <td class="num">2.177</td>
+        </tr>
+        
+
+        <tr>
+          <td>
+            <b>la Historia de Oxxo el Ascenso Imparable del Gigante del Retail en Mexico</b>
+            <small>Archivo · Artículo editorial</small>
+          </td>
+          <td class="url">https://thefoodtech.com/archivo/la-historia-de-oxxo-el-ascenso-imparable-del-gigante-del-retail-en-mexico</td>
+          <td class="num">111</td>
+          <td class="num">58</td>
+          <td class="num positive">+53</td>
+          <td class="num">2.677</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout">
+      <b>Lectura ejecutiva.</b> La tendencia positiva de TheFoodTech en las últimas semanas se explica principalmente por artículos editoriales, no por una sola página o un cambio aislado. La demanda del Summit amplifica el crecimiento de marca y eventos, pero el mayor aprendizaje está en el avance de contenidos evergreen de Soluciones, Packaging y Métodos. El siguiente paso recomendado es reforzar interlinking hacia los artículos ganadores, actualizar contenidos que ya muestran crecimiento y construir piezas satélite para las queries relacionadas que aparecen en expansión.
+    </div>
+  </section>
+
+  <footer>
+    Generado el 2026-09-17. Datos: Google Search Console, search type web. Ventana reciente de 28 días vs 28 días previos.
+  </footer>
+</main>
+</body>
+</html>

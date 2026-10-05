@@ -3,27 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Auditoría SEO y plan integral de optimización del directorio Multimedia de The Food Tech.">
-  <title>Plan SEO para Multimedia · The Food Tech</title>
+  <meta name="description" content="Backlog ejecutivo de optimización SEO para el directorio Multimedia de The Food Tech.">
+  <title>Backlog SEO para Multimedia · The Food Tech</title>
   <style>
     :root {
       color-scheme: light;
       --bg: #f3f5f0;
-      --paper: #ffffff;
+      --paper: #fff;
       --paper-2: #f8faf6;
       --ink: #142019;
-      --ink-2: #45524a;
-      --muted: #758078;
+      --ink-2: #46534b;
+      --muted: #748078;
       --line: #dce2dc;
       --brand: #174f3f;
-      --brand-2: #0f3c30;
+      --brand-dark: #0f3c30;
       --acid: #c9f24d;
       --acid-soft: #effbc9;
       --amber: #f1b43b;
       --red: #c95043;
-      --code: #10201a;
       --shadow: 0 18px 60px rgba(30, 50, 38, .10);
-      --radius: 22px;
+      --radius: 20px;
     }
     :root[data-theme="dark"] {
       color-scheme: dark;
@@ -35,737 +34,272 @@
       --muted: #86928a;
       --line: #29372e;
       --brand: #9ddbc4;
-      --brand-2: #bdebd9;
-      --acid: #c9f24d;
+      --brand-dark: #bdebd9;
       --acid-soft: #25351f;
-      --amber: #f4c45f;
       --red: #ed8277;
-      --code: #07100b;
-      --shadow: 0 22px 70px rgba(0, 0, 0, .28);
+      --shadow: 0 22px 70px rgba(0,0,0,.28);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at 92% 0%, rgba(201, 242, 77, .16), transparent 27rem),
-        var(--bg);
+      background: radial-gradient(circle at 92% 0%, rgba(201,242,77,.16), transparent 27rem), var(--bg);
       color: var(--ink);
-      font: 16px/1.58 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 16px/1.56 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    button, a { font: inherit; }
     a { color: inherit; }
-    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
-
+    button { font: inherit; }
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      z-index: 20;
       border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(18px);
     }
-    .topbar-inner {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand-lockup { display: flex; align-items: center; gap: 12px; min-width: 205px; }
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: var(--brand-2);
-      color: var(--acid);
-      font-weight: 850;
-      letter-spacing: -.06em;
-    }
-    .brand-name { font-weight: 760; letter-spacing: -.02em; }
-    .brand-name small { display: block; color: var(--muted); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
-    .tabs { display: flex; align-self: stretch; gap: 4px; }
-    .tab {
-      position: relative;
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      padding: 0 18px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 680;
-    }
-    .tab::after {
-      content: "";
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: -1px;
-      height: 3px;
-      border-radius: 3px 3px 0 0;
-      background: transparent;
-    }
-    .tab[aria-selected="true"] { color: var(--ink); }
-    .tab[aria-selected="true"]::after { background: var(--acid); }
-    .tab-index {
-      display: inline-grid;
-      place-items: center;
-      min-width: 22px;
-      height: 22px;
-      margin-right: 7px;
-      border-radius: 999px;
-      background: var(--paper-2);
-      color: var(--muted);
-      font-size: 11px;
-    }
-    .top-actions { display: flex; gap: 8px; min-width: 205px; justify-content: flex-end; }
-    .icon-button {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--paper);
-      color: var(--ink-2);
-      cursor: pointer;
-    }
-
-    main { padding: 46px 0 92px; }
-    [role="tabpanel"][hidden] { display: none; }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--brand);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--acid); }
-    h1, h2, h3, h4 { letter-spacing: -.035em; line-height: 1.12; }
-    h1 { max-width: 820px; margin: 18px 0 20px; font-size: clamp(42px, 7vw, 82px); font-weight: 780; }
-    h2 { margin: 0 0 14px; font-size: clamp(28px, 4vw, 46px); font-weight: 760; }
-    h3 { margin: 0 0 10px; font-size: 22px; font-weight: 730; }
-    h4 { margin: 0 0 8px; font-size: 17px; }
-    p { margin: 0 0 16px; }
-    .lead { max-width: 760px; color: var(--ink-2); font-size: clamp(18px, 2.3vw, 23px); line-height: 1.5; }
-    .hero { padding: 42px 0 28px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 0 19px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: var(--paper);
-      color: var(--ink);
-      text-decoration: none;
-      cursor: pointer;
-      font-weight: 720;
-      transition: transform .16s ease, box-shadow .16s ease;
-    }
-    .button:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-    .button.primary { background: var(--brand-2); color: #fff; border-color: transparent; }
-    .button.primary .arrow { color: var(--acid); }
-
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 54px 0 72px; }
-    .metric { min-height: 170px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
-    .metric .value { display: block; color: var(--brand); font-size: 42px; font-weight: 780; letter-spacing: -.055em; line-height: 1; }
-    .metric .label { display: block; max-width: 25ch; margin-top: 18px; color: var(--ink-2); }
-    .metric .source { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; }
-
-    .section { margin-top: 82px; }
-    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 30px; }
-    .section-head p { max-width: 58ch; color: var(--ink-2); }
-    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-      padding: 26px;
-    }
-    .card-icon {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 24px;
-      border-radius: 13px;
-      background: var(--acid-soft);
-      color: var(--brand-2);
-      font-weight: 850;
-    }
-    .card p { color: var(--ink-2); font-size: 14px; }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-    }
-    .flow-step { position: relative; min-height: 176px; padding: 26px 22px; border-right: 1px solid var(--line); }
-    .flow-step:last-child { border-right: 0; }
-    .flow-step:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      top: 27px;
-      right: -12px;
-      z-index: 2;
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: var(--paper);
-      color: var(--muted);
-    }
-    .flow-step span { color: var(--brand); font-size: 12px; font-weight: 820; letter-spacing: .1em; }
-    .flow-step h3 { margin-top: 22px; font-size: 18px; }
-    .flow-step p { color: var(--ink-2); font-size: 13px; }
-    .guardrail {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 22px;
-      align-items: center;
-      margin-top: 28px;
-      padding: 26px;
-      border: 1px solid color-mix(in srgb, var(--amber) 55%, var(--line));
-      border-radius: var(--radius);
-      background: color-mix(in srgb, var(--amber) 9%, var(--paper));
-    }
-    .guardrail strong { font-size: 18px; }
-    .guardrail p { margin: 4px 0 0; color: var(--ink-2); }
-    .guardrail-mark { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; background: var(--amber); color: #2d2108; font-size: 24px; font-weight: 900; }
-
-    .chapter-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr);
-      gap: 30px;
-      padding: 34px;
-      border-radius: 28px;
-      background: var(--brand-2);
-      color: #fff;
-      box-shadow: var(--shadow);
-    }
-    .chapter-hero .eyebrow { color: var(--acid); }
-    .chapter-hero h1 { max-width: 720px; margin-bottom: 18px; font-size: clamp(40px, 6vw, 70px); }
-    .chapter-hero .lead { color: #c7d8cf; }
-    .priority-card {
-      align-self: stretch;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 24px;
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 20px;
-      background: rgba(255,255,255,.07);
-    }
-    .priority-pill { align-self: flex-start; padding: 6px 10px; border-radius: 999px; background: var(--acid); color: #15200e; font-size: 12px; font-weight: 850; }
-    .priority-card strong { display: block; margin-top: 26px; font-size: 42px; line-height: 1; letter-spacing: -.05em; }
-    .priority-card span:last-child { color: #c7d8cf; font-size: 13px; }
-
-    .toc {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 28px 0 0;
-    }
+    .topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 780; letter-spacing: -.02em; }
+    .mark { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: var(--brand-dark); color: var(--acid); font-weight: 850; }
+    .brand small { display: block; color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .actions { display: flex; gap: 8px; }
+    .icon-button { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); cursor: pointer; }
+    main { padding: 56px 0 84px; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(270px, .6fr); gap: 28px; padding: 36px; border-radius: 28px; background: var(--brand-dark); color: #fff; box-shadow: var(--shadow); }
+    .eyebrow { color: var(--acid); font-size: 12px; font-weight: 820; letter-spacing: .13em; text-transform: uppercase; }
+    h1, h2, h3 { margin-top: 0; letter-spacing: -.035em; line-height: 1.12; }
+    h1 { max-width: 760px; margin: 16px 0 18px; font-size: clamp(42px, 6vw, 68px); }
+    h2 { margin-bottom: 12px; font-size: clamp(29px, 4vw, 43px); }
+    h3 { margin-bottom: 7px; font-size: 19px; }
+    p { margin: 0 0 15px; }
+    .lead { max-width: 730px; color: #c7d8cf; font-size: 20px; }
+    .decision { display: flex; flex-direction: column; justify-content: space-between; padding: 23px; border: 1px solid rgba(255,255,255,.16); border-radius: 20px; background: rgba(255,255,255,.07); }
+    .pill { align-self: flex-start; padding: 6px 10px; border-radius: 999px; background: var(--acid); color: #15200e; font-size: 11px; font-weight: 850; }
+    .decision strong { display: block; margin: 28px 0 7px; font-size: 40px; line-height: 1; letter-spacing: -.05em; }
+    .decision span:last-child { color: #c7d8cf; font-size: 13px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; }
     .toc a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink-2); text-decoration: none; font-size: 13px; }
-    .toc a:hover { border-color: var(--brand); color: var(--brand); }
-
-    .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
-    .split > *, .section-head > *, .chapter-hero > *, [role="tabpanel"] { min-width: 0; }
-    .why-list { display: grid; gap: 12px; }
-    .why-item { display: grid; grid-template-columns: auto 1fr; gap: 16px; padding: 20px; border: 1px solid var(--line); border-radius: 17px; background: var(--paper); }
-    .why-item b { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--acid-soft); color: var(--brand); }
-    .why-item p { margin: 4px 0 0; color: var(--ink-2); font-size: 14px; }
-
-    .crumb-demo { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
-    .browser-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--paper-2); }
-    .browser-bar { display: flex; gap: 6px; padding: 12px; border-bottom: 1px solid var(--line); }
-    .browser-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
-    .browser-body { padding: 26px; }
-    .crumb { display: flex; flex-wrap: wrap; gap: 9px; color: var(--muted); font-size: 13px; }
-    .crumb a { color: var(--brand); text-decoration: none; }
-    .crumb i { font-style: normal; color: var(--muted); }
-    .fake-title { max-width: 580px; margin: 24px 0 12px; font-size: 30px; font-weight: 760; letter-spacing: -.04em; line-height: 1.17; }
-    .fake-copy { height: 9px; width: 84%; margin: 9px 0; border-radius: 9px; background: var(--line); }
-    .fake-copy.short { width: 57%; }
-
+    .section { margin-top: 68px; }
+    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: end; margin-bottom: 24px; }
+    .section-head p { max-width: 58ch; color: var(--ink-2); }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .metric { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .metric.alert { border-color: color-mix(in srgb, var(--red) 45%, var(--line)); }
+    .metric strong { display: block; color: var(--brand); font-size: 35px; line-height: 1; letter-spacing: -.05em; }
+    .metric.alert strong { color: var(--red); }
+    .metric p { margin: 14px 0 0; color: var(--ink-2); font-size: 13px; }
+    .summary { display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; margin-top: 14px; }
+    .card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .card ul { margin: 15px 0 0; padding-left: 20px; color: var(--ink-2); }
+    .card li + li { margin-top: 8px; }
+    .opportunity { background: linear-gradient(135deg, var(--paper), var(--acid-soft)); }
+    .opportunity strong { display: block; color: var(--brand); font-size: 35px; line-height: 1; letter-spacing: -.04em; }
+    .opportunity p { margin-top: 13px; color: var(--ink-2); }
     .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
-    table { width: 100%; border-collapse: collapse; min-width: 840px; }
-    th { padding: 15px 18px; background: var(--paper-2); color: var(--muted); text-align: left; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
-    td { padding: 16px 18px; border-top: 1px solid var(--line); vertical-align: top; font-size: 14px; }
-    td:first-child { font-weight: 730; }
-    td code { font-size: 12px; }
-    .status { display: inline-block; padding: 4px 8px; border-radius: 999px; background: var(--acid-soft); color: var(--brand); font-size: 11px; font-weight: 800; }
-    .status.no { background: color-mix(in srgb, var(--red) 13%, var(--paper)); color: var(--red); }
-
+    table { width: 100%; min-width: 940px; border-collapse: collapse; }
+    th { padding: 14px 16px; background: var(--paper-2); color: var(--muted); text-align: left; font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
+    td { padding: 16px; border-top: 1px solid var(--line); vertical-align: top; font-size: 14px; }
+    td p { margin: 4px 0 0; color: var(--ink-2); font-size: 13px; }
     code { padding: 2px 5px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-2); font: .9em/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    .code-block { position: relative; max-width: 100%; overflow: hidden; border: 1px solid #294238; border-radius: 18px; background: var(--code); }
-    .code-head { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #294238; color: #9fb4a8; font-size: 12px; }
-    .copy-button { border: 1px solid #385748; border-radius: 8px; background: transparent; color: #cfe0d6; padding: 5px 9px; cursor: pointer; font-size: 11px; }
-    pre { overflow-x: auto; margin: 0; padding: 22px; color: #e4eee8; font: 12.5px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; tab-size: 2; }
-    .tok-key { color: #c9f24d; }
-    .tok-str { color: #aad8ff; }
-    .tok-num { color: #ffc66d; }
-    .code-note { margin-top: 12px; color: var(--muted); font-size: 13px; }
-
-    .rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .rule { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
-    .rule-mark { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--brand-2); color: var(--acid); font-size: 12px; font-weight: 820; }
-    .rule p { margin: 4px 0 0; color: var(--ink-2); font-size: 13px; }
-
-    .timeline { position: relative; display: grid; gap: 0; }
-    .timeline::before { content: ""; position: absolute; left: 19px; top: 20px; bottom: 20px; width: 2px; background: var(--line); }
-    .timeline-item { position: relative; display: grid; grid-template-columns: 40px 1fr auto; gap: 16px; align-items: start; padding: 0 0 28px; }
-    .timeline-item:last-child { padding-bottom: 0; }
-    .timeline-number { z-index: 1; width: 40px; height: 40px; display: grid; place-items: center; border: 2px solid var(--bg); border-radius: 50%; background: var(--brand-2); color: var(--acid); font-weight: 850; }
-    .timeline-body { padding-top: 7px; }
-    .timeline-body p { margin: 5px 0 0; color: var(--ink-2); font-size: 14px; }
-    .timeline-time { margin-top: 8px; color: var(--muted); font-size: 12px; white-space: nowrap; }
-
+    .priority { display: inline-grid; place-items: center; min-width: 42px; height: 30px; border-radius: 9px; background: var(--brand-dark); color: var(--acid); font-size: 12px; font-weight: 850; }
+    .owner { color: var(--muted); font-size: 12px; }
+    .template { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; counter-reset: step; }
+    .template article { position: relative; min-height: 158px; padding: 22px; border: 1px solid var(--line); border-radius: 17px; background: var(--paper); }
+    .template article::before { counter-increment: step; content: "0" counter(step); display: block; margin-bottom: 18px; color: var(--brand); font-size: 12px; font-weight: 850; letter-spacing: .1em; }
+    .template p { color: var(--ink-2); font-size: 13px; }
+    .mapping { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    .mapping .card { min-height: 158px; }
+    .mapping .tag { display: inline-block; margin-bottom: 18px; padding: 5px 8px; border-radius: 8px; background: var(--acid-soft); color: var(--brand); font-size: 11px; font-weight: 820; }
+    .impact-note { margin-bottom: 14px; padding: 16px 18px; border-left: 4px solid var(--amber); background: color-mix(in srgb, var(--amber) 8%, var(--paper)); color: var(--ink-2); font-size: 13px; }
+    .delta { color: var(--brand); font-weight: 820; }
     .checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .check { position: relative; padding: 16px 16px 16px 48px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); font-size: 14px; }
-    .check::before { content: "✓"; position: absolute; left: 16px; top: 15px; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 7px; background: var(--acid-soft); color: var(--brand); font-weight: 900; }
-    .acceptance { padding: 30px; border-radius: var(--radius); background: var(--brand-2); color: #fff; }
-    .acceptance h3 { color: var(--acid); }
-    .acceptance-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: rgba(255,255,255,.14); }
-    .acceptance-item { padding: 18px; background: var(--brand-2); }
-    .acceptance-item strong { display: block; font-size: 27px; letter-spacing: -.04em; }
-    .acceptance-item span { color: #c7d8cf; font-size: 12px; }
-    .sources { padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .check { position: relative; padding: 15px 15px 15px 46px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); font-size: 14px; }
+    .check::before { content: "✓"; position: absolute; left: 15px; top: 14px; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 7px; background: var(--acid-soft); color: var(--brand); font-weight: 900; }
+    .sources { margin-top: 58px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
     .sources a { color: var(--brand); }
-    .audit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .audit-signal { min-height: 172px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); }
-    .audit-signal.danger { border-color: color-mix(in srgb, var(--red) 42%, var(--line)); }
-    .audit-signal.warning { border-color: color-mix(in srgb, var(--amber) 55%, var(--line)); }
-    .audit-signal .value { display: block; color: var(--brand); font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -.05em; }
-    .audit-signal.danger .value { color: var(--red); }
-    .audit-signal p { margin: 15px 0 0; color: var(--ink-2); font-size: 13px; }
-    .architecture { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: stretch; }
-    .architecture-node { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); }
-    .architecture-node.bad { border-color: color-mix(in srgb, var(--red) 48%, var(--line)); background: color-mix(in srgb, var(--red) 5%, var(--paper)); }
-    .architecture-node.good { border-color: color-mix(in srgb, var(--acid) 60%, var(--line)); }
-    .architecture-node small { display: block; margin-bottom: 10px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-    .architecture-node p { margin: 8px 0 0; color: var(--ink-2); font-size: 13px; }
-    .architecture-arrow { display: grid; place-items: center; color: var(--muted); font-size: 24px; }
-    .opportunity { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(135deg, var(--paper), var(--acid-soft)); }
-    .opportunity strong { display: block; margin-bottom: 8px; color: var(--brand); font-size: clamp(30px, 5vw, 54px); line-height: 1; letter-spacing: -.05em; }
-    .query-list { display: grid; gap: 8px; margin-top: 20px; }
-    .query-row { display: grid; grid-template-columns: minmax(0, 1fr) 90px 90px; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); font-size: 13px; }
-    .query-row span:nth-child(n+2) { color: var(--muted); text-align: right; }
-    .template-map { display: grid; grid-template-columns: 74px minmax(0, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
-    .template-map .order { display: grid; place-items: center; border-bottom: 1px solid var(--line); background: var(--paper-2); color: var(--brand); font-size: 12px; font-weight: 850; }
-    .template-map .block { padding: 18px 22px; border-bottom: 1px solid var(--line); }
-    .template-map .order:last-of-type, .template-map .block:last-child { border-bottom: 0; }
-    .template-map .block p { margin: 4px 0 0; color: var(--ink-2); font-size: 13px; }
-    .priority-stack { display: grid; gap: 12px; }
-    .priority-row { display: grid; grid-template-columns: 76px minmax(0, 1fr) 150px; gap: 18px; align-items: center; padding: 20px; border: 1px solid var(--line); border-radius: 17px; background: var(--paper); }
-    .priority-label { display: grid; place-items: center; min-height: 44px; border-radius: 12px; background: var(--brand-2); color: var(--acid); font-weight: 850; }
-    .priority-row p { margin: 4px 0 0; color: var(--ink-2); font-size: 13px; }
-    .priority-owner { color: var(--muted); font-size: 12px; text-align: right; }
-    .formula { padding: 18px; border: 1px dashed color-mix(in srgb, var(--brand) 55%, var(--line)); border-radius: 15px; background: var(--paper-2); color: var(--ink-2); font-size: 13px; text-align: center; }
-    .formula code { color: var(--brand); font-weight: 750; }
-    .delta { color: var(--brand); font-weight: 800; }
-    .note { padding: 16px 18px; border-left: 4px solid var(--amber); background: color-mix(in srgb, var(--amber) 8%, var(--paper)); color: var(--ink-2); font-size: 13px; }
-    footer { padding: 30px 0 54px; color: var(--muted); font-size: 12px; text-align: center; }
-
-    @media (max-width: 900px) {
-      .topbar-inner { min-height: auto; padding: 12px 0; flex-wrap: wrap; }
-      .brand-lockup, .top-actions { min-width: auto; }
-      .tabs { order: 3; width: 100%; height: 48px; overflow-x: auto; border-top: 1px solid var(--line); }
-      .tab { flex: 1; white-space: nowrap; }
-      .metrics, .card-grid, .audit-grid { grid-template-columns: 1fr 1fr; }
-      .section-head, .chapter-hero, .split { grid-template-columns: 1fr; }
-      .architecture { grid-template-columns: 1fr; }
-      .architecture-arrow { transform: rotate(90deg); }
-      .flow { grid-template-columns: 1fr 1fr; }
-      .flow-step:nth-child(2) { border-right: 0; }
-      .flow-step:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .flow-step::after { display: none; }
-      .acceptance-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 28px 0 50px; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 880px) {
+      .hero, .section-head, .summary { grid-template-columns: 1fr; }
+      .metrics, .template, .mapping { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 620px) {
-      .shell { width: min(100% - 22px, 1180px); }
+    @media (max-width: 590px) {
+      .shell { width: min(100% - 22px, 1120px); }
       main { padding-top: 28px; }
-      .hero { padding-top: 18px; }
-      h1 { font-size: 42px; }
-      .metrics { margin: 40px 0 58px; }
-      .section { margin-top: 62px; }
-      .section-head { gap: 8px; }
-      .flow, .rules, .checks, .acceptance-grid, .audit-grid { grid-template-columns: 1fr; }
-      .flow-step { border-right: 0; border-bottom: 1px solid var(--line); }
-      .flow-step:last-child { border-bottom: 0; }
-      .guardrail { grid-template-columns: 1fr; }
-      .chapter-hero { padding: 24px; }
-      .timeline-item { grid-template-columns: 40px 1fr; }
-      .timeline-time { grid-column: 2; margin-top: -20px; }
-      .query-row { grid-template-columns: 1fr; }
-      .query-row span:nth-child(n+2) { text-align: left; }
-      .priority-row { grid-template-columns: 64px 1fr; }
-      .priority-owner { grid-column: 2; text-align: left; }
-      .top-actions .print { display: none; }
+      .hero { padding: 24px; }
+      h1 { font-size: 41px; }
+      .metrics, .template, .mapping, .checks { grid-template-columns: 1fr; }
+      .section { margin-top: 54px; }
+      .print { display: none; }
     }
     @media print {
-      .topbar, .hero-actions, .toc, .copy-button { display: none !important; }
+      .topbar, .toc { display: none !important; }
       body { background: #fff; color: #111; }
       main { padding-top: 0; }
-      [role="tabpanel"][hidden] { display: block; }
-      [role="tabpanel"] + [role="tabpanel"] { break-before: page; }
-      .card, .metric, .table-wrap, .code-block, .acceptance, .chapter-hero { break-inside: avoid; }
+      .hero, .metric, .card, .table-wrap, .template article { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="shell topbar-inner">
-      <div class="brand-lockup" aria-label="The Food Tech, plan SEO para Multimedia">
-        <div class="brand-mark">TF</div>
-        <div class="brand-name">THE FOOD TECH <small>Plan SEO · Multimedia</small></div>
-      </div>
-      <nav class="tabs" aria-label="Documento">
-        <span class="tab" style="display:flex;align-items:center;color:var(--ink)"><span class="tab-index">01</span>Multimedia</span>
-      </nav>
-      <div class="top-actions">
-        <button class="icon-button print" type="button" title="Imprimir o guardar como PDF" aria-label="Imprimir" onclick="window.print()">⌑</button>
-        <button class="icon-button" id="theme-toggle" type="button" title="Cambiar tema" aria-label="Cambiar tema">◐</button>
+      <div class="brand"><span class="mark">TF</span><span>THE FOOD TECH<small>Backlog SEO · Multimedia</small></span></div>
+      <div class="actions">
+        <button class="icon-button print" type="button" title="Imprimir o guardar como PDF" onclick="window.print()">⌑</button>
+        <button class="icon-button" id="theme-toggle" type="button" title="Cambiar tema">◐</button>
       </div>
     </div>
   </header>
 
   <main class="shell">
-    <section id="multimedia-report">
-      <div class="chapter-hero">
-        <div>
-          <span class="eyebrow">Tab 02 · crecimiento orgánico</span>
-          <h1>Convertir /multimedia/ en una biblioteca temática indexable.</h1>
-          <p class="lead">Hoy existe un archivo valioso de videos y podcasts, pero Google recibe URLs erróneas, páginas aisladas y muy poco texto interpretable. La oportunidad no es “agregar transcripciones”: es reconstruir descubrimiento, arquitectura, contenido y datos estructurados como un solo sistema.</p>
-        </div>
-        <aside class="priority-card" aria-label="Potencial estimado de Multimedia">
-          <span class="priority-pill">PRIORIDAD P0 + P1</span>
-          <div>
-            <strong>80–300</strong>
-            <span>clics orgánicos mensuales como rango orientativo a 6–9 meses; no es una garantía.</span>
-          </div>
-        </aside>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Entregable ejecutivo · Octubre 2026</span>
+        <h1>Backlog SEO para /multimedia/</h1>
+        <p class="lead">El directorio tiene contenido y demanda, pero hoy falla en descubrimiento, arquitectura y profundidad. Este documento define qué corregir y cómo validar cada tarea.</p>
+      </div>
+      <aside class="decision">
+        <span class="pill">RECOMENDACIÓN</span>
+        <div><strong>Priorizar</strong><span>Hay 146 activos reutilizables y señales de demanda orgánica con una implementación técnica muy débil.</span></div>
+      </aside>
+    </section>
+
+    <nav class="toc" aria-label="Índice">
+      <a href="#diagnostico">Diagnóstico</a>
+      <a href="#backlog">Backlog</a>
+      <a href="#template">Template</a>
+      <a href="#impacto">Impacto</a>
+      <a href="#medicion">Medición</a>
+    </nav>
+
+    <section class="section" id="diagnostico">
+      <div class="section-head">
+        <div><span class="eyebrow" style="color:var(--brand)">Diagnóstico</span><h2>Qué está frenando el directorio.</h2></div>
+        <p>El rastreo cubrió el hub, su sitemap y las 146 fichas correctas bajo <code>/multimedia/</code>.</p>
       </div>
 
-      <nav class="toc" aria-label="Índice de Multimedia">
-        <a href="#diagnostico">Diagnóstico</a>
-        <a href="#potencial">Potencial</a>
-        <a href="#arquitectura">Arquitectura</a>
-        <a href="#template">Template</a>
-        <a href="#schema">Schema</a>
-        <a href="#sitemap">Sitemaps</a>
-        <a href="#impacto">Impacto</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#kpis">KPIs</a>
-      </nav>
+      <div class="metrics">
+        <article class="metric alert"><strong>146/146</strong><p>URLs del sitemap omiten <code>/multimedia/</code> y redirigen a la home.</p></article>
+        <article class="metric alert"><strong>127</strong><p>fichas no son alcanzables siguiendo enlaces desde el hub.</p></article>
+        <article class="metric"><strong>0/146</strong><p>fichas contienen un H2; el contenido carece de estructura editorial.</p></article>
+        <article class="metric"><strong>110 + 36</strong><p>videos YouTube y piezas principalmente de Spotify, respectivamente.</p></article>
+      </div>
 
-      <section class="section" id="diagnostico">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Rastreo completo · 5 oct 2026</span>
-            <h2>El inventario existe; la arquitectura casi no.</h2>
-          </div>
-          <p>Se rastreó el hub, el sitemap específico y las 146 URLs correspondientes, revisando HTML inicial, DOM renderizado, canonicals, headings, embeds, metadatos, schema e interlinking del subgrafo multimedia.</p>
-        </div>
+      <div class="summary">
+        <article class="card">
+          <h3>Problemas adicionales</h3>
+          <ul>
+            <li>El hub solo enlaza siete fichas y <code>?page=2</code> repite el mismo contenido.</li>
+            <li>52 fichas no reciben inlinks dentro del grafo Multimedia.</li>
+            <li>El schema se inyecta por JavaScript, llega incompleto y trata podcasts como videos.</li>
+            <li>137 titles superan 60 caracteres y 131 descriptions tienen menos de 120.</li>
+            <li>48 páginas tienen menos de 150 palabras incluso contando elementos globales.</li>
+          </ul>
+        </article>
+        <article class="card opportunity">
+          <strong>+329%</strong>
+          <h3 style="margin-top:14px">crecieron las impresiones entre ambas mitades de la ventana analizada.</h3>
+          <p>En 30 días, 26 URLs activas generaron 1.895 impresiones y 13 clics. Ya existen consultas relevantes en posiciones 7–12 sin clics, como “jugosidad en productos cárnicos” y “empaques funcionales”.</p>
+        </article>
+      </div>
+    </section>
 
-        <div class="audit-grid">
-          <article class="audit-signal danger"><span class="value">146/146</span><p>URLs del sitemap omiten <code>/multimedia/</code> y redirigen a la home. El sitemap declara destinos equivocados.</p></article>
-          <article class="audit-signal warning"><span class="value">7</span><p>fichas enlazadas desde el hub. Cambiar a <code>?page=2</code> devuelve exactamente los mismos siete contenidos.</p></article>
-          <article class="audit-signal danger"><span class="value">127</span><p>fichas no alcanzables siguiendo enlaces desde el hub y sus relacionados. Hay 52 sin ningún inlink dentro del grafo Multimedia.</p></article>
-          <article class="audit-signal warning"><span class="value">0/146</span><p>páginas con un <code>H2</code>. Todas tienen H1, pero ninguna construye una estructura editorial debajo.</p></article>
-          <article class="audit-signal"><span class="value">110</span><p>páginas con video de YouTube. Las 36 restantes son principalmente episodios de Spotify y requieren un modelo distinto.</p></article>
-          <article class="audit-signal danger"><span class="value">0</span><p>objetos JSON-LD presentes en el HTML inicial. El <code>VideoObject</code> aparece por cliente y llega incompleto.</p></article>
-          <article class="audit-signal warning"><span class="value">137</span><p>títulos de más de 60 caracteres; 131 metadescripciones tienen menos de 120 caracteres.</p></article>
-          <article class="audit-signal"><span class="value">48</span><p>URLs con menos de 150 palabras incluso contando navegación, footer y contenidos relacionados.</p></article>
-        </div>
+    <section class="section" id="backlog">
+      <div class="section-head">
+        <div><span class="eyebrow" style="color:var(--brand)">Backlog priorizado</span><h2>Qué tienen que ejecutar.</h2></div>
+        <p>Las tareas están ordenadas por dependencia. P0 habilita descubrimiento; P1 convierte cada ficha en una landing útil; P2 permite escalar.</p>
+      </div>
 
-        <div class="guardrail">
-          <div class="guardrail-mark">!</div>
-          <div>
-            <strong>El problema más crítico precede al contenido.</strong>
-            <p>Los 146 destinos correctos bajo <code>/multimedia/{slug}/</code> responden 200 y son autocanónicos, pero ninguno está declarado así en el sitemap. Antes de escalar transcripciones hay que conseguir que Google pueda descubrir, rastrear y asociar las URLs correctas.</p>
-          </div>
-        </div>
-      </section>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Prioridad</th><th>Tarea</th><th>Resultado esperado / aceptación</th><th>Responsable</th></tr></thead>
+          <tbody>
+            <tr><td><span class="priority">P0</span></td><td><strong>Corregir el sitemap</strong><p>Reemplazar los 146 <code>&lt;loc&gt;</code> por las URLs reales bajo <code>/multimedia/</code>.</p></td><td>146 URLs 200, indexables y autocanónicas; cero redirecciones a home.</td><td class="owner">Backend + SEO</td></tr>
+            <tr><td><span class="priority">P0</span></td><td><strong>Separar video y podcast</strong><p>Sitemap de video para 110 YouTube; sitemap XML canónico para 36 podcasts.</p></td><td>Video sitemap con thumbnail, title, description y player URL. Ningún audio declarado como video.</td><td class="owner">Backend</td></tr>
+            <tr><td><span class="priority">P0</span></td><td><strong>Rehacer el hub</strong><p>H1, introducción breve, categorías y paginación HTML.</p></td><td>Las 146 fichas quedan alcanzables mediante enlaces HTML en un máximo de tres clics.</td><td class="owner">Frontend + SEO</td></tr>
+            <tr><td><span class="priority">P1</span></td><td><strong>Crear template editorial</strong><p>Resumen, claves, transcripción editada, experto y recursos relacionados.</p></td><td>Cada ficha priorizada responde la intención sin depender exclusivamente del reproductor.</td><td class="owner">Contenido + Frontend</td></tr>
+            <tr><td><span class="priority">P1</span></td><td><strong>Implementar schema server-side</strong><p><code>VideoObject</code> para YouTube; <code>PodcastEpisode</code> + <code>AudioObject</code> para Spotify.</p></td><td>JSON-LD presente en HTML inicial, completo, visible y sin errores críticos.</td><td class="owner">Backend + SEO</td></tr>
+            <tr><td><span class="priority">P1</span></td><td><strong>Añadir breadcrumbs</strong><p>Inicio › Multimedia › Tema › Contenido.</p></td><td>Breadcrumb visible y <code>BreadcrumbList</code> coincidentes.</td><td class="owner">Frontend</td></tr>
+            <tr><td><span class="priority">P1</span></td><td><strong>Construir interlinking</strong><p>Video ↔ artículos ↔ hub temático ↔ contenidos relacionados.</p></td><td>Cero huérfanas; cada ficha prioritaria recibe al menos cinco inlinks contextuales.</td><td class="owner">SEO + Contenido</td></tr>
+            <tr><td><span class="priority">P2</span></td><td><strong>Optimizar metadata</strong><p>Reescribir titles y descriptions según intención de búsqueda.</p></td><td>Metadata única, descriptiva y sin anteponer temporada/episodio a la consulta principal.</td><td class="owner">SEO + Contenido</td></tr>
+            <tr><td><span class="priority">P2</span></td><td><strong>Crear clusters temáticos</strong><p>Solo para temas con inventario suficiente: ingredientes, packaging, bebidas, inocuidad, sostenibilidad, innovación y podcast.</p></td><td>Hubs indexables con texto propio, listado y enlaces cruzados.</td><td class="owner">SEO + Contenido</td></tr>
+            <tr><td><span class="priority">P2</span></td><td><strong>Normalizar publicación</strong><p>Incorporar transcripción, metadata, schema y enlaces al flujo editorial.</p></td><td>Ninguna nueva pieza se publica incompleta o aislada.</td><td class="owner">Operación editorial</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-      <section class="section" id="potencial">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Señales de demanda</span>
-            <h2>El directorio ya obtiene impresiones sin estar optimizado.</h2>
-          </div>
-          <p>En una ventana comparable de 30 días, 26 URLs activas generaron 1.895 impresiones y 13 clics. En la mitad más reciente de esa ventana, las impresiones crecieron de 358 a 1.537: +329%.</p>
-        </div>
+    <section class="section" id="template">
+      <div class="section-head">
+        <div><span class="eyebrow" style="color:var(--brand)">Template recomendado</span><h2>Qué debe contener cada ficha.</h2></div>
+        <p>La transcripción debe editarse: nombres correctos, headings descriptivos, timestamps y enlaces contextuales. No publicar el volcado automático.</p>
+      </div>
 
-        <div class="split">
-          <div class="opportunity">
-            <strong>0,69% CTR</strong>
-            <h3>Hay visibilidad, pero muy poca captura.</h3>
-            <p>Las páginas activas promediaron 72,9 impresiones mensuales. El hub obtuvo 307 impresiones sin clics y una ficha llegó a 612 impresiones también sin clics. Mejorar el snippet y responder la intención abre una vía de crecimiento incluso antes de ganar nuevas posiciones.</p>
-          </div>
-          <div class="card">
-            <h3>Consultas con demanda ya detectada</h3>
-            <div class="query-list" aria-label="Consultas de oportunidad en GSC">
-              <div class="query-row"><strong>aumento de la jugosidad en productos cárnicos</strong><span>92 imp.</span><span>pos. 7,9</span></div>
-              <div class="query-row"><strong>jugosidad</strong><span>57 imp.</span><span>pos. 11,5</span></div>
-              <div class="query-row"><strong>empaques funcionales</strong><span>48 imp.</span><span>pos. 9,0</span></div>
-              <div class="query-row"><strong>extrusión húmeda</strong><span>39 imp.</span><span>pos. 29,0</span></div>
-              <div class="query-row"><strong>diseño gráfico del envase</strong><span>30 imp.</span><span>pos. 22,5</span></div>
-            </div>
-          </div>
-        </div>
-        <p class="note" style="margin-top:14px"><strong>Lectura:</strong> no se parte de cero. El archivo ya coincide con búsquedas técnicas de alto valor B2B, pero el buscador encuentra fichas sin desarrollo temático suficiente para resolverlas.</p>
-      </section>
+      <div class="template">
+        <article><h3>Breadcrumb + H1</h3><p>Ruta visible, título orientado al tema y bajada que explique el valor del contenido.</p></article>
+        <article><h3>Reproductor principal</h3><p>Video o audio prominente, con datos consistentes entre embed, contenido y schema.</p></article>
+        <article><h3>Resumen y claves</h3><p>80–120 palabras y entre cuatro y siete conclusiones accionables.</p></article>
+        <article><h3>Transcripción estructurada</h3><p>H2 principal y H3 cada 2–4 minutos, con timestamps y hablantes.</p></article>
+        <article><h3>Especialista</h3><p>Nombre, cargo, empresa y bio breve. No atribuirle la autoría editorial si es invitado.</p></article>
+        <article><h3>Recursos relacionados</h3><p>Dos artículos, tres piezas multimedia y un hub temático relevante.</p></article>
+      </div>
 
-      <section class="section" id="arquitectura">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Arquitectura propuesta</span>
-            <h2>Del archivo plano a un sistema de hubs y clusters.</h2>
-          </div>
-          <p>El objetivo es que cualquier pieza prioritaria esté a un máximo de tres clics desde el hub y reciba enlaces contextuales desde páginas temáticamente relacionadas.</p>
-        </div>
+      <div class="mapping">
+        <article class="card"><span class="tag">VIDEO</span><h3><code>VideoObject</code></h3><p>name, description, thumbnailUrl, uploadDate, duration, embedUrl, inLanguage y publisher.</p></article>
+        <article class="card"><span class="tag">PODCAST</span><h3><code>PodcastEpisode</code></h3><p>Asociar <code>AudioObject</code>, serie, fecha, duración, descripción y URL del reproductor.</p></article>
+        <article class="card"><span class="tag">TODAS</span><h3><code>BreadcrumbList</code></h3><p>Generarlo desde la misma ruta que ve el usuario y usando URLs absolutas y canónicas.</p></article>
+      </div>
+    </section>
 
-        <div class="architecture" aria-label="Comparación de arquitectura actual y propuesta">
-          <article class="architecture-node bad"><small>Estado actual</small><h3>Sitemap roto</h3><p>146 URLs sin <code>/multimedia/</code> → redirección a home.</p></article>
-          <div class="architecture-arrow">→</div>
-          <article class="architecture-node bad"><small>Estado actual</small><h3>Hub de 7 piezas</h3><p>Sin H1, introducción, categorías ni paginación rastreable.</p></article>
-          <div class="architecture-arrow">→</div>
-          <article class="architecture-node bad"><small>Resultado</small><h3>127 aisladas</h3><p>La mayoría del catálogo no puede descubrirse desde el directorio.</p></article>
-        </div>
+    <section class="section" id="impacto">
+      <div class="section-head">
+        <div><span class="eyebrow" style="color:var(--brand)">Referencia de impacto</span><h2>Potencial estimado.</h2></div>
+        <p>Modelo direccional basado en cobertura activa, impresiones observadas por página, mayor profundidad temática y mejora de CTR. No es una garantía de tráfico.</p>
+      </div>
 
-        <div class="architecture" style="margin-top:14px" aria-label="Arquitectura multimedia futura">
-          <article class="architecture-node good"><small>Propuesta</small><h3>Hub editorial</h3><p>Introducción, destacados, formatos y paginación HTML autocanónica.</p></article>
-          <div class="architecture-arrow">→</div>
-          <article class="architecture-node good"><small>Clusters</small><h3>8 temas estables</h3><p>Innovación, ingredientes, packaging, inocuidad, sostenibilidad, proteínas, bebidas y podcast.</p></article>
-          <div class="architecture-arrow">→</div>
-          <article class="architecture-node good"><small>Fichas</small><h3>Video + respuesta</h3><p>Resumen, claves, transcripción, experto, recursos y relacionados contextuales.</p></article>
-        </div>
+      <p class="impact-note"><strong>Rango de trabajo:</strong> aproximadamente <strong>80–300 clics orgánicos mensuales</strong>. El escenario de 800 clics representa upside y requiere más de 100 fichas enriquecidas con buena indexación.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Escenario</th><th>Páginas activas</th><th>CTR</th><th>Impresiones/mes</th><th>Clics/mes</th><th>Lectura</th></tr></thead>
+          <tbody>
+            <tr><td>Base observada</td><td>26</td><td>0,69%</td><td>1.895</td><td>13</td><td>Situación previa a la optimización.</td></tr>
+            <tr><td>Conservador</td><td>60</td><td>1,2%</td><td>6.560</td><td class="delta">79</td><td>Correcciones técnicas y enriquecimiento parcial.</td></tr>
+            <tr><td>Probable</td><td>95</td><td>1,8%</td><td>17.310</td><td class="delta">312</td><td>Template, transcripciones, clusters e interlinking.</td></tr>
+            <tr><td>Upside</td><td>125</td><td>2,2%</td><td>36.442</td><td class="delta">802</td><td>Ejecución amplia y ganancia de cobertura temática.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="card-grid" style="margin-top:14px">
-          <article class="card"><div class="card-icon">H</div><h3>Hub /multimedia/</h3><p>H1: “Videos y podcasts de la industria alimentaria”. Añadir 250–400 palabras de presentación, acceso a formatos y temas, y listado paginado rastreable. Title sugerido: “Videos y podcasts sobre la industria de alimentos | The Food Tech”.</p></article>
-          <article class="card"><div class="card-icon">T</div><h3>Hubs temáticos</h3><p>Crear solo categorías con inventario y continuidad editorial. Cada hub necesita texto propio, title, description, H1, listado y enlaces hacia artículos, no solo filtros JavaScript.</p></article>
-          <article class="card"><div class="card-icon">↔</div><h3>Enlaces cruzados</h3><p>Video → 2 artículos + 3 piezas multimedia + hub temático. Artículo → módulo “Ver la entrevista / escuchar el episodio”. Relacionar por entidad y tema, no solo por recencia.</p></article>
-        </div>
-      </section>
+    <section class="section" id="medicion">
+      <div class="section-head">
+        <div><span class="eyebrow" style="color:var(--brand)">Definición de terminado</span><h2>Cómo comprobar la implementación.</h2></div>
+        <p>Estos controles permiten cerrar el backlog con evidencia, no solo con una validación visual.</p>
+      </div>
+      <div class="checks">
+        <div class="check">146/146 URLs correctas en los sitemaps.</div>
+        <div class="check">Cero URLs del sitemap redirigiendo a home.</div>
+        <div class="check">Todo el inventario accesible desde el hub en ≤3 clics.</div>
+        <div class="check">Cero fichas prioritarias sin inlinks contextuales.</div>
+        <div class="check">Schema correcto para video y podcast en HTML inicial.</div>
+        <div class="check">Transcripción editada, headings y metadata en cada ficha trabajada.</div>
+        <div class="check">Seguimiento en GSC de activas, indexadas, impresiones, clics y CTR.</div>
+        <div class="check">Primer umbral de CTR agregado: ≥1,2%.</div>
+      </div>
+    </section>
 
-      <section class="section" id="template">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Nueva ficha editorial</span>
-            <h2>El video debe ser el centro; el texto, su capa de comprensión.</h2>
-          </div>
-          <p>No conviene pegar una transcripción automática sin editar. Cada página debe convertirse en la mejor respuesta escrita y audiovisual sobre el tema, sin inflar contenido ni duplicar lo publicado en YouTube.</p>
-        </div>
-
-        <div class="template-map" aria-label="Orden recomendado de la plantilla multimedia">
-          <div class="order">01</div><div class="block"><h3>Breadcrumb visible</h3><p>Inicio › Multimedia › Tema › Título. La misma ruta alimenta <code>BreadcrumbList</code>.</p></div>
-          <div class="order">02</div><div class="block"><h3>H1 + bajada orientada a intención</h3><p>El H1 explica el tema; número de temporada o episodio pasa al final, no lidera el snippet.</p></div>
-          <div class="order">03</div><div class="block"><h3>Reproductor prominente</h3><p>Above the fold y como contenido principal. Miniatura, título y datos del embed deben coincidir con el schema.</p></div>
-          <div class="order">04</div><div class="block"><h3>Resumen ejecutivo · 80–120 palabras</h3><p>Qué aprenderá el profesional, quién participa y por qué el tema importa para la industria.</p></div>
-          <div class="order">05</div><div class="block"><h3>H2 · Claves del video / episodio</h3><p>Entre 4 y 7 conclusiones verificables. Sirve al usuario que todavía no puede reproducir el contenido.</p></div>
-          <div class="order">06</div><div class="block"><h3>H2 · Transcripción editada</h3><p>Separar por <code>H3</code> cada 2–4 minutos, con timestamps, nombres de hablantes, ortografía técnica y enlaces contextuales.</p></div>
-          <div class="order">07</div><div class="block"><h3>H2 · Sobre el especialista</h3><p>Bio breve, cargo, empresa y enlace a su entidad cuando exista. No inventar autoría editorial del invitado.</p></div>
-          <div class="order">08</div><div class="block"><h3>H2 · Recursos relacionados</h3><p>Enlaces a artículos de profundidad, hub temático y otras entrevistas del mismo cluster.</p></div>
-        </div>
-
-        <div class="rules" style="margin-top:16px">
-          <article class="rule"><span class="rule-mark">A</span><div><h4>Extensión útil, no cuota</h4><p>Referencia: 700–1.500 palabras únicas según la duración. Una pieza breve puede necesitar menos; nunca rellenar para llegar a un número.</p></div></article>
-          <article class="rule"><span class="rule-mark">B</span><div><h4>Transcripción editorial</h4><p>Corregir nombres, siglas, tecnicismos y muletillas; preservar el sentido. Añadir timestamps y headings descriptivos.</p></div></article>
-          <article class="rule"><span class="rule-mark">C</span><div><h4>Metadata orientada a búsquedas</h4><p>Title de ~50–60 caracteres y descripción de ~140–160; 137 titles y 131 descriptions hoy quedan fuera de esos rangos.</p></div></article>
-          <article class="rule"><span class="rule-mark">D</span><div><h4>FAQ solo cuando existe</h4><p>Puede añadirse como contenido útil si el video responde preguntas reales. No usar <code>FAQPage</code> como rutina ni esperar un rich result.</p></div></article>
-        </div>
-      </section>
-
-      <section class="section" id="schema">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Datos estructurados</span>
-            <h2>Dos formatos, dos modelos semánticos.</h2>
-          </div>
-          <p>El DOM renderizado hoy inyecta <code>VideoObject</code>, pero en las muestras deja vacíos <code>description</code>, <code>uploadDate</code> y <code>duration</code>, y usa como <code>embedUrl</code> la landing en lugar del reproductor. Además, también trata como video los episodios de Spotify.</p>
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Tipo de página</th><th>Schema principal</th><th>Propiedades mínimas</th><th>Complementos</th></tr></thead>
-            <tbody>
-              <tr><td>Video YouTube · 110 URLs</td><td><code>VideoObject</code></td><td><code>name</code>, <code>description</code>, <code>thumbnailUrl</code>, <code>uploadDate</code>, <code>duration</code>, <code>embedUrl</code></td><td><code>BreadcrumbList</code>, <code>publisher</code>, <code>inLanguage</code>; <code>Clip</code> para capítulos reales</td></tr>
-              <tr><td>Podcast Spotify · 36 URLs</td><td><code>PodcastEpisode</code> + <code>AudioObject</code></td><td>Nombre, descripción, fecha, duración, URL del episodio, serie y reproductor</td><td><code>BreadcrumbList</code>, <code>PodcastSeries</code>, participante/invitado cuando sea visible</td></tr>
-              <tr><td>Hub Multimedia</td><td><code>CollectionPage</code> + <code>ItemList</code></td><td>Nombre, URL y elementos visibles del listado</td><td><code>BreadcrumbList</code> solo en subhubs; no en la home</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="split" style="margin-top:16px">
-          <div class="code-block">
-            <div class="code-head"><span>VideoObject · patrón recomendado</span><button class="copy-button" type="button">Copiar</button></div>
-<pre>{
-  <span class="tok-key">"@context"</span>: <span class="tok-str">"https://schema.org"</span>,
-  <span class="tok-key">"@type"</span>: <span class="tok-str">"VideoObject"</span>,
-  <span class="tok-key">"@id"</span>: <span class="tok-str">"{canonical}#video"</span>,
-  <span class="tok-key">"name"</span>: <span class="tok-str">"{título visible}"</span>,
-  <span class="tok-key">"description"</span>: <span class="tok-str">"{resumen visible}"</span>,
-  <span class="tok-key">"thumbnailUrl"</span>: [<span class="tok-str">"{thumbnail absoluta}"</span>],
-  <span class="tok-key">"uploadDate"</span>: <span class="tok-str">"2026-10-05T09:00:00-03:00"</span>,
-  <span class="tok-key">"duration"</span>: <span class="tok-str">"PT18M42S"</span>,
-  <span class="tok-key">"embedUrl"</span>: <span class="tok-str">"https://www.youtube.com/embed/{id}"</span>,
-  <span class="tok-key">"inLanguage"</span>: <span class="tok-str">"es"</span>,
-  <span class="tok-key">"publisher"</span>: { <span class="tok-key">"@id"</span>: <span class="tok-str">"https://thefoodtech.com/#organization"</span> }
-}</pre>
-          </div>
-          <div class="card">
-            <h3>Reglas de implementación</h3>
-            <div class="why-list" style="margin-top:18px">
-              <article class="why-item"><b>1</b><div><h4>Server-side</h4><p>Incluir JSON-LD en el HTML inicial, no depender de una petición cliente.</p></div></article>
-              <article class="why-item"><b>2</b><div><h4>Paridad visible</h4><p>Nombre, resumen, fecha, duración y miniatura deben existir y coincidir con lo que ve el usuario.</p></div></article>
-              <article class="why-item"><b>3</b><div><h4>Un grafo común</h4><p>Reutilizar IDs estables para Organization, WebSite, breadcrumb y objeto multimedia.</p></div></article>
-              <article class="why-item"><b>4</b><div><h4>Validar dos veces</h4><p>Rich Results Test para elegibilidad y Schema Markup Validator para semántica completa.</p></div></article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="sitemap">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Descubrimiento</span>
-            <h2>Rehacer el sitemap, no solo corregir el prefijo.</h2>
-          </div>
-          <p>El arreglo mínimo es declarar las 146 URLs canónicas reales. La solución completa separa video de audio y añade a los videos los campos que Google necesita para descubrir y comprender cada pieza.</p>
-        </div>
-
-        <div class="priority-stack">
-          <article class="priority-row"><span class="priority-label">P0.1</span><div><h3>Corregir todos los <code>&lt;loc&gt;</code></h3><p>Usar <code>https://thefoodtech.com/multimedia/{slug}/</code>, solo URLs 200, indexables y autocanónicas. Eliminar del sitemap cualquier URL que redirige a home.</p></div><span class="priority-owner">SEO técnico + Backend<br>Semana 1</span></article>
-          <article class="priority-row"><span class="priority-label">P0.2</span><div><h3>Crear sitemap de video</h3><p>Para las 110 páginas YouTube: <code>thumbnail_loc</code>, <code>title</code>, <code>description</code> y <code>player_loc</code>. Generarlo desde la misma fuente del template.</p></div><span class="priority-owner">Backend<br>Semana 1</span></article>
-          <article class="priority-row"><span class="priority-label">P0.3</span><div><h3>Separar podcasts</h3><p>Las 36 fichas de audio permanecen en un sitemap XML canónico propio o en el sitemap multimedia general; no declararlas como video.</p></div><span class="priority-owner">Backend<br>Semana 1</span></article>
-          <article class="priority-row"><span class="priority-label">P0.4</span><div><h3>Limpiar señales inútiles</h3><p>Conservar <code>lastmod</code> solo cuando refleja un cambio material. Retirar <code>priority</code>: Google lo ignora. Corregir ocho slugs que comienzan con guion mediante 301 a una versión limpia.</p></div><span class="priority-owner">SEO técnico<br>Semana 2</span></article>
-          <article class="priority-row"><span class="priority-label">P0.5</span><div><h3>Enviar y comprobar</h3><p>Actualizar el índice de sitemaps y <code>robots.txt</code>, enviar en GSC, verificar “Descubiertas”, “Indexadas” y el reporte de video durante 28 días.</p></div><span class="priority-owner">SEO<br>Semana 2–6</span></article>
-        </div>
-
-        <p class="note" style="margin-top:14px">Un sitemap favorece descubrimiento y declara preferencia canónica, pero no reemplaza el enlazado interno ni garantiza indexación. El hub y los clusters deben poder recorrerse con enlaces HTML.</p>
-      </section>
-
-      <section class="section" id="impacto">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Modelo de impacto</span>
-            <h2>Un rango defendible, con supuestos explícitos.</h2>
-          </div>
-          <p>El cálculo usa la productividad observada de las páginas activas, aumenta cobertura, aplica un multiplicador por contenido/transcripciones y mejora el CTR. Sirve para dimensionar la oportunidad; no es una predicción garantizada.</p>
-        </div>
-
-        <div class="formula"><code>páginas activas × 72,9 impresiones base/página × multiplicador de contenido × CTR objetivo = clics/mes</code></div>
-
-        <div class="table-wrap" style="margin-top:16px">
-          <table>
-            <thead><tr><th>Escenario</th><th>Horizonte</th><th>Páginas activas</th><th>Multiplicador de impresiones</th><th>CTR</th><th>Impresiones/mes</th><th>Clics/mes</th><th>Incremento anual vs base</th></tr></thead>
-            <tbody>
-              <tr><td>Base observada</td><td>30 días</td><td>26</td><td>1,0×</td><td>0,69%</td><td>1.895</td><td>13</td><td>—</td></tr>
-              <tr><td>Conservador</td><td>6–9 meses</td><td>60</td><td>1,5×</td><td>1,2%</td><td>6.560</td><td class="delta">79</td><td>+792 clics</td></tr>
-              <tr><td>Probable</td><td>6–9 meses</td><td>95</td><td>2,5×</td><td>1,8%</td><td>17.310</td><td class="delta">312</td><td>+3.588 clics</td></tr>
-              <tr><td>Ambicioso</td><td>9–12 meses</td><td>125</td><td>4,0×</td><td>2,2%</td><td>36.442</td><td class="delta">802</td><td>+9.468 clics</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="card-grid" style="margin-top:14px">
-          <article class="card"><div class="card-icon">1</div><h3>80 clics/mes</h3><p>Escenario conservador: arreglos técnicos, hub rastreable y 60 fichas activas con enriquecimiento moderado.</p></article>
-          <article class="card"><div class="card-icon">2</div><h3>300 clics/mes</h3><p>Escenario de trabajo: 95 fichas activas, transcripciones editadas, clusters y mejora de CTR.</p></article>
-          <article class="card"><div class="card-icon">3</div><h3>800 clics/mes</h3><p>Upside, no compromiso: exige enriquecer más de 100 activos, ganar cobertura temática y sostener publicación e interlinking.</p></article>
-        </div>
-        <p class="note" style="margin-top:14px"><strong>Qué puede cambiar el resultado:</strong> velocidad de indexación, demanda estacional, autoridad del dominio, calidad real de las transcripciones, competencia en cada tema y capacidad de enlazar desde artículos que ya reciben tráfico.</p>
-      </section>
-
-      <section class="section" id="roadmap">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Plan de ejecución</span>
-            <h2>90 días para pasar de archivo a producto SEO.</h2>
-          </div>
-          <p>La secuencia evita producir decenas de transcripciones que sigan huérfanas. Primero se repara descubrimiento y template; luego se prioriza por impresiones, posición, negocio y vigencia.</p>
-        </div>
-
-        <div class="timeline">
-          <article class="timeline-item"><div class="timeline-number">1</div><div class="timeline-body"><h3>Semanas 1–2 · P0 técnico</h3><p>Corregir sitemaps, separar video/audio, limpiar slugs, reparar paginación, incorporar H1/intro del hub y asegurar enlaces HTML hacia todo el inventario.</p></div><span class="timeline-time">Backend + SEO</span></article>
-          <article class="timeline-item"><div class="timeline-number">2</div><div class="timeline-body"><h3>Semanas 2–3 · Template y schema</h3><p>Desarrollar ficha única con breadcrumbs, módulos editoriales y JSON-LD server-side. Piloto con 5 videos y 3 podcasts; validar HTML inicial, DOM y Rich Results Test.</p></div><span class="timeline-time">Frontend + SEO</span></article>
-          <article class="timeline-item"><div class="timeline-number">3</div><div class="timeline-body"><h3>Semanas 3–4 · Primer lote de 20</h3><p>Elegir las páginas con más impresiones, posiciones 4–20, intención B2B y contenido vigente. Editar transcripción, metadata, claves y enlaces hacia recursos.</p></div><span class="timeline-time">Contenido</span></article>
-          <article class="timeline-item"><div class="timeline-number">4</div><div class="timeline-body"><h3>Mes 2 · Escalar a 50 + clusters</h3><p>Publicar hubs temáticos con inventario suficiente, insertar módulos multimedia en artículos relacionados y revisar cobertura/indexación semanal.</p></div><span class="timeline-time">Contenido + Dev</span></article>
-          <article class="timeline-item"><div class="timeline-number">5</div><div class="timeline-body"><h3>Mes 3 · Llegar a 100</h3><p>Completar el backlog con una cadena YouTube/Spotify → borrador → edición técnica → headings → enlaces → QA. Actualizar solo contenido vigente y útil.</p></div><span class="timeline-time">Operación editorial</span></article>
-          <article class="timeline-item"><div class="timeline-number">6</div><div class="timeline-body"><h3>Día 90 · Evaluar y decidir</h3><p>Comparar cohortes editadas/no editadas, CTR por posición, páginas activas, video indexado y clics incrementales. Ajustar plantilla y priorización antes de completar las 146.</p></div><span class="timeline-time">SEO + Analytics</span></article>
-        </div>
-      </section>
-
-      <section class="section" id="kpis">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Medición y aceptación</span>
-            <h2>Éxito técnico primero; crecimiento después.</h2>
-          </div>
-          <p>Separar indicadores de implementación, indexación y performance evita declarar éxito solo porque el schema “valida”.</p>
-        </div>
-
-        <div class="checks">
-          <div class="check">146/146 URLs canónicas correctas declaradas en sitemaps.</div>
-          <div class="check">0 URLs del sitemap que redirigen a home.</div>
-          <div class="check">100% del inventario alcanzable desde el hub en ≤3 clics.</div>
-          <div class="check">0 fichas prioritarias sin inlinks contextuales.</div>
-          <div class="check">100% de videos piloto con VideoObject válido en HTML inicial.</div>
-          <div class="check">100% de podcasts piloto sin VideoObject incorrecto.</div>
-          <div class="check">H1, title y description únicos en todas las fichas editadas.</div>
-          <div class="check">Transcripción editada y headings en 100 páginas al día 90.</div>
-          <div class="check">Seguimiento de “páginas con video indexado” y causas de exclusión.</div>
-          <div class="check">Dashboard mensual: activas, impresiones, clics, CTR y posición.</div>
-        </div>
-
-        <div class="acceptance" style="margin-top:28px">
-          <h3>Objetivos al día 90</h3>
-          <div class="acceptance-grid">
-            <div class="acceptance-item"><strong>100%</strong><span>URLs correctas en sitemap y navegables.</span></div>
-            <div class="acceptance-item"><strong>100</strong><span>fichas enriquecidas y conectadas.</span></div>
-            <div class="acceptance-item"><strong>0</strong><span>huérfanas dentro del grafo multimedia.</span></div>
-            <div class="acceptance-item"><strong>≥1,2%</strong><span>CTR agregado como primer umbral de mejora.</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section sources">
-        <strong>Fuentes y método:</strong>
-        <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps">Google Search Central · Video sitemaps</a> ·
-        <a href="https://developers.google.com/search/docs/appearance/structured-data/video">Google Search Central · VideoObject</a> ·
-        <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">Google Search Central · Build a sitemap</a> ·
-        <a href="https://schema.org/PodcastEpisode">Schema.org · PodcastEpisode</a>.
-        Rastreo propio de 146 URLs y grafo interno del 5 de octubre de 2026. GSC: ventana comparable 27 jul–25 ago 2026 y extracción más reciente disponible 17 ago–13 sep 2026. El acceso OAuth requiere renovación para refrescar datos en tiempo real; las cifras mostradas proceden de exportaciones locales previas de la API.
-      </section>
+    <section class="sources">
+      <strong>Fuentes:</strong>
+      <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps">Google · Video sitemaps</a> ·
+      <a href="https://developers.google.com/search/docs/appearance/structured-data/video">Google · VideoObject</a> ·
+      <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">Google · Sitemaps</a> ·
+      <a href="https://schema.org/PodcastEpisode">Schema.org · PodcastEpisode</a>.
+      Datos internos: rastreo de 146 URLs del 5 de octubre de 2026 y exportaciones disponibles de Google Search Console.
     </section>
   </main>
 
-  <footer class="shell">The Food Tech · Plan SEO para /multimedia/ · Octubre 2026</footer>
-
+  <footer class="shell">The Food Tech · Backlog SEO para /multimedia/ · Octubre 2026</footer>
   <script>
-    document.querySelectorAll('.copy-button').forEach((button) => {
-      button.addEventListener('click', async () => {
-        const code = button.closest('.code-block').querySelector('pre').innerText;
-        await navigator.clipboard.writeText(code);
-        const previous = button.textContent;
-        button.textContent = 'Copiado ✓';
-        setTimeout(() => { button.textContent = previous; }, 1600);
-      });
-    });
-
     const root = document.documentElement;
     const savedTheme = localStorage.getItem('tft-multimedia-theme');
     if (savedTheme) root.dataset.theme = savedTheme;

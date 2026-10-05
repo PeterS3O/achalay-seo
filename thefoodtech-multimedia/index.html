@@ -111,6 +111,57 @@
     .mapping { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
     .mapping .card { min-height: 158px; }
     .mapping .tag { display: inline-block; margin-bottom: 18px; padding: 5px 8px; border-radius: 8px; background: var(--acid-soft); color: var(--brand); font-size: 11px; font-weight: 820; }
+    .case-link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand); font-size: 13px; font-weight: 750; text-decoration: none; }
+    .case-link:hover { text-decoration: underline; }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .version { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--paper); box-shadow: var(--shadow); }
+    .version-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 15px 18px; border-bottom: 1px solid var(--line); }
+    .version-head strong { font-size: 14px; }
+    .version-label { padding: 5px 9px; border-radius: 999px; font-size: 10px; font-weight: 850; letter-spacing: .08em; }
+    .version-label.current { background: color-mix(in srgb, var(--red) 13%, var(--paper)); color: var(--red); }
+    .version-label.future { background: var(--acid-soft); color: var(--brand); }
+    .mock-browser { background: #f4f4f2; color: #34393c; font-family: Arial, sans-serif; }
+    .mock-browser-bar { display: flex; align-items: center; gap: 5px; padding: 9px 12px; border-bottom: 1px solid #ddd; background: #eceeeb; }
+    .mock-browser-bar i { width: 7px; height: 7px; border-radius: 50%; background: #c6c9c6; }
+    .mock-browser-bar span { overflow: hidden; margin-left: 8px; color: #7c827e; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+    .mock-sitebar { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 8px 18px; background: #da291c; color: #fff; }
+    .mock-logo { display: grid; place-items: center; width: 36px; height: 36px; border: 2px solid #fff; border-radius: 50%; font-size: 10px; font-weight: 900; }
+    .mock-menu { font-size: 8px; font-weight: 700; letter-spacing: .06em; word-spacing: 7px; }
+    .mock-page { min-height: 770px; padding: 18px; background: #fff; }
+    .mock-grid { display: grid; grid-template-columns: minmax(0, 1fr) 118px; gap: 13px; }
+    .video-frame { position: relative; overflow: hidden; aspect-ratio: 16/9; border-radius: 3px; background: #181818; }
+    .video-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .play { position: absolute; left: 50%; top: 50%; width: 48px; height: 34px; display: grid; place-items: center; transform: translate(-50%,-50%); border-radius: 9px; background: #f00; color: #fff; font-size: 15px; }
+    .ad-slot { min-height: 190px; display: grid; place-items: center; padding: 12px; background: linear-gradient(145deg,#19acd1,#e6f4f7); color: #075469; text-align: center; font-size: 10px; font-weight: 800; }
+    .mock-h1 { margin: 14px 0 8px; color: #3a3f43; font-size: 21px; line-height: 1.12; letter-spacing: -.025em; }
+    .mock-person { margin: 0; color: #2aa572; font-size: 13px; font-weight: 800; }
+    .mock-role, .mock-copy { margin: 2px 0 0; color: #4f5558; font-size: 10px; line-height: 1.45; }
+    .mock-copy { margin-top: 10px; }
+    .mock-share { margin: 18px 0; color: #656b6d; font-size: 9px; font-weight: 750; letter-spacing: .07em; }
+    .mock-related { margin-top: 25px; padding-top: 12px; border-top: 1px solid #d8dcda; }
+    .mock-related strong { font-size: 13px; }
+    .mini-related { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 9px; }
+    .mini-related div { height: 72px; padding: 7px; border-radius: 7px; background: #edf0ed; color: #555; font-size: 8px; }
+    .absence { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+    .absence span { padding: 4px 7px; border-radius: 7px; background: #fee9e7; color: #a5342a; font-size: 8px; font-weight: 800; }
+    .mock-breadcrumb { margin-bottom: 9px; color: #23755b; font-size: 9px; }
+    .mock-topic { display: inline-block; margin-top: 11px; padding: 4px 7px; border-radius: 6px; background: #eaf7f1; color: #227357; font-size: 8px; font-weight: 850; text-transform: uppercase; }
+    .mock-summary { margin: 10px 0 12px; padding: 11px; border-left: 3px solid #2aa572; background: #f1f8f4; color: #3c4742; font-size: 10px; line-height: 1.5; }
+    .mock-section { margin-top: 14px; }
+    .mock-section h4 { margin: 0 0 7px; color: #303638; font-size: 13px; }
+    .mock-section h5 { margin: 8px 0 3px; color: #2f3638; font-size: 10px; }
+    .mock-section ul { margin: 0; padding-left: 16px; color: #4f5654; font-size: 9px; line-height: 1.55; }
+    .mock-section p { margin: 0; color: #515957; font-size: 9px; line-height: 1.55; }
+    .timestamp { color: #23805f; font-weight: 850; }
+    .expert-box { margin-top: 14px; padding: 10px; border: 1px solid #dce3de; border-radius: 8px; background: #fafcfb; }
+    .expert-box strong { display: block; color: #2aa572; font-size: 10px; }
+    .expert-box p { margin: 3px 0 0; color: #59615e; font-size: 8px; }
+    .version-notes { padding: 15px 18px 18px; }
+    .version-notes p { margin: 0 0 9px; color: var(--ink-2); font-size: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+    .chips span { padding: 5px 8px; border-radius: 8px; background: var(--paper-2); color: var(--muted); font-size: 10px; font-weight: 750; }
+    .chips.good span { background: var(--acid-soft); color: var(--brand); }
+    .case-caveat { margin-top: 13px; color: var(--muted); font-size: 11px; }
     .impact-note { margin-bottom: 14px; padding: 16px 18px; border-left: 4px solid var(--amber); background: color-mix(in srgb, var(--amber) 8%, var(--paper)); color: var(--ink-2); font-size: 13px; }
     .delta { color: var(--brand); font-weight: 820; }
     .checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -121,14 +172,16 @@
     footer { padding: 28px 0 50px; color: var(--muted); font-size: 12px; text-align: center; }
     @media (max-width: 880px) {
       .hero, .section-head, .summary { grid-template-columns: 1fr; }
-      .metrics, .template, .mapping { grid-template-columns: 1fr 1fr; }
+      .metrics, .template, .mapping, .comparison { grid-template-columns: 1fr 1fr; }
+      .mock-grid { grid-template-columns: 1fr; }
+      .ad-slot { min-height: 75px; }
     }
     @media (max-width: 590px) {
       .shell { width: min(100% - 22px, 1120px); }
       main { padding-top: 28px; }
       .hero { padding: 24px; }
       h1 { font-size: 41px; }
-      .metrics, .template, .mapping, .checks { grid-template-columns: 1fr; }
+      .metrics, .template, .mapping, .checks, .comparison { grid-template-columns: 1fr; }
       .section { margin-top: 54px; }
       .print { display: none; }
     }
@@ -167,7 +220,7 @@
     <nav class="toc" aria-label="Índice">
       <a href="#diagnostico">Diagnóstico</a>
       <a href="#backlog">Backlog</a>
-      <a href="#template">Template</a>
+      <a href="#caso-real">Caso real</a>
       <a href="#impacto">Impacto</a>
       <a href="#medicion">Medición</a>
     </nav>
@@ -229,20 +282,85 @@
       </div>
     </section>
 
-    <section class="section" id="template">
+    <section class="section" id="caso-real">
       <div class="section-head">
-        <div><span class="eyebrow" style="color:var(--brand)">Template recomendado</span><h2>Qué debe contener cada ficha.</h2></div>
-        <p>La transcripción debe editarse: nombres correctos, headings descriptivos, timestamps y enlaces contextuales. No publicar el volcado automático.</p>
+        <div><span class="eyebrow" style="color:var(--brand)">Caso real</span><h2>La landing actual frente a la recomendación.</h2></div>
+        <div>
+          <p>Ejemplo: entrevista con Javier Mancera, jefe de Sustentabilidad de Yakult México.</p>
+          <a class="case-link" href="https://thefoodtech.com/multimedia/que-hace-yakult-para-reciclar-uno-de-los-envases-mas-reconocidos-del-mundo/" target="_blank" rel="noopener">Abrir la página real ↗</a>
+          <a class="case-link" style="margin-left:16px" href="caso_yakult_optimizado.html" target="_blank">Abrir el prototipo optimizado ↗</a>
+        </div>
       </div>
 
-      <div class="template">
-        <article><h3>Breadcrumb + H1</h3><p>Ruta visible, título orientado al tema y bajada que explique el valor del contenido.</p></article>
-        <article><h3>Reproductor principal</h3><p>Video o audio prominente, con datos consistentes entre embed, contenido y schema.</p></article>
-        <article><h3>Resumen y claves</h3><p>80–120 palabras y entre cuatro y siete conclusiones accionables.</p></article>
-        <article><h3>Transcripción estructurada</h3><p>H2 principal y H3 cada 2–4 minutos, con timestamps y hablantes.</p></article>
-        <article><h3>Especialista</h3><p>Nombre, cargo, empresa y bio breve. No atribuirle la autoría editorial si es invitado.</p></article>
-        <article><h3>Recursos relacionados</h3><p>Dos artículos, tres piezas multimedia y un hub temático relevante.</p></article>
+      <div class="comparison">
+        <article class="version">
+          <header class="version-head"><strong>Landing actual</strong><span class="version-label current">HOY</span></header>
+          <div class="mock-browser">
+            <div class="mock-browser-bar"><i></i><i></i><i></i><span>thefoodtech.com/multimedia/que-hace-yakult...</span></div>
+            <div class="mock-sitebar"><span class="mock-logo">TFT</span><span class="mock-menu">SECCIONES EBOOKS MULTIMEDIA EVENTO</span></div>
+            <div class="mock-page">
+              <div class="absence"><span>Sin breadcrumb</span><span>Sin H2</span><span>Sin transcripción</span></div>
+              <div class="mock-grid">
+                <div>
+                  <div class="video-frame"><img src="https://core.thefoodtech.com/production/multimedia/javier_mancera_horizontalpng-28-09-2026-12-07-22-hs.webp" alt="Entrevista con Javier Mancera sobre el envase de Yakult"><span class="play">▶</span></div>
+                  <h3 class="mock-h1">¿Qué hace Yakult para reciclar uno de los envases más reconocidos del mundo?</h3>
+                  <p class="mock-person">Javier Mancera</p>
+                  <p class="mock-role">Jefe de Sustentabilidad</p>
+                  <p class="mock-copy">Javier Mancera, de Yakult México, sobre uno de los desafíos más complejos: cómo rediseñar un envase icónico de Yakult.</p>
+                  <p class="mock-share">COMPARTIR · WHATSAPP · LINKEDIN · X</p>
+                </div>
+                <aside class="ad-slot">ESPACIO<br>PUBLICITARIO</aside>
+              </div>
+              <div class="mock-related"><strong>Videos relacionados</strong><div class="mini-related"><div>Cartón corrugado</div><div>El futuro del plástico</div><div>El envase como decisión estratégica</div></div></div>
+            </div>
+          </div>
+          <div class="version-notes">
+            <p><strong>Qué comunica:</strong> el video, el invitado y una sola frase. Google y el usuario reciben muy poco contexto adicional.</p>
+            <div class="chips"><span>1 párrafo</span><span>0 H2</span><span>Schema incompleto</span><span>Relacionados por recencia</span></div>
+          </div>
+        </article>
+
+        <article class="version">
+          <header class="version-head"><strong>Landing recomendada</strong><span class="version-label future">OPTIMIZADA</span></header>
+          <div class="mock-browser">
+            <div class="mock-browser-bar"><i></i><i></i><i></i><span>thefoodtech.com/multimedia/que-hace-yakult...</span></div>
+            <div class="mock-sitebar"><span class="mock-logo">TFT</span><span class="mock-menu">SECCIONES EBOOKS MULTIMEDIA EVENTO</span></div>
+            <div class="mock-page">
+              <p class="mock-breadcrumb">Inicio › Multimedia › Packaging y sostenibilidad</p>
+              <div class="mock-grid">
+                <div>
+                  <span class="mock-topic">Packaging sostenible</span>
+                  <h3 class="mock-h1">Cómo Yakult busca reciclar su envase icónico</h3>
+                  <p class="mock-copy">Javier Mancera explica el desafío de rediseñar uno de los envases más reconocibles de la industria sin perder identidad ni viabilidad operativa.</p>
+                  <p class="mock-person">Javier Mancera · Yakult México</p>
+                  <p class="mock-role">Jefe de Sustentabilidad</p>
+                  <div class="video-frame" style="margin-top:12px"><img src="https://core.thefoodtech.com/production/multimedia/javier_mancera_horizontalpng-28-09-2026-12-07-22-hs.webp" alt="Entrevista con Javier Mancera sobre reciclaje del envase de Yakult"><span class="play">▶</span></div>
+                  <div class="mock-summary"><strong>Resumen ejecutivo.</strong> La entrevista aborda cómo una marca puede revisar materiales, circularidad y diseño cuando el formato del envase también es parte de su identidad.</div>
+                  <section class="mock-section">
+                    <h4>Claves de la entrevista</h4>
+                    <ul><li>El envase funciona como activo de reconocimiento de marca.</li><li>El rediseño debe equilibrar sostenibilidad y operación.</li><li>La circularidad requiere considerar el sistema completo.</li></ul>
+                  </section>
+                  <section class="mock-section">
+                    <h4>Transcripción editada</h4>
+                    <h5><span class="timestamp">00:00</span> El desafío de rediseñar un envase icónico</h5>
+                    <p>Fragmento estructurado con nombre del hablante, corrección de términos técnicos y enlaces a contenidos relacionados.</p>
+                    <h5><span class="timestamp">03:40</span> Materiales, recuperación y circularidad</h5>
+                    <p>Los siguientes bloques continúan con H3 y timestamps cada dos a cuatro minutos.</p>
+                  </section>
+                  <div class="expert-box"><strong>Sobre Javier Mancera</strong><p>Jefe de Sustentabilidad de Yakult México. Perfil breve, cargo y contexto profesional.</p></div>
+                </div>
+                <aside><div class="ad-slot">ESPACIO<br>PUBLICITARIO</div><section class="mock-section"><h4>Seguir leyendo</h4><p>→ Innovación en envases<br>→ Economía circular<br>→ Materiales y reciclaje</p></section></aside>
+              </div>
+            </div>
+          </div>
+          <div class="version-notes">
+            <p><strong>Qué cambia:</strong> la misma entrevista se convierte en una landing que responde, enlaza y puede entenderse sin reproducir el video.</p>
+            <div class="chips good"><span>Breadcrumb</span><span>Resumen</span><span>H2 + H3</span><span>Transcripción</span><span>Interlinking</span><span>VideoObject completo</span></div>
+          </div>
+        </article>
       </div>
+
+      <p class="case-caveat">La maqueta optimizada utiliza el contenido visible de la ficha real. Los textos de resumen, claves y transcripción son ilustrativos y deben editarse y validarse contra el video antes de publicarse.</p>
 
       <div class="mapping">
         <article class="card"><span class="tag">VIDEO</span><h3><code>VideoObject</code></h3><p>name, description, thumbnailUrl, uploadDate, duration, embedUrl, inLanguage y publisher.</p></article>

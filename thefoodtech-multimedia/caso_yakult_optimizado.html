@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prototipo SEO de una landing multimedia optimizada para la entrevista con Javier Mancera de Yakult México.">
+  <title>Cómo Yakult busca reciclar su envase icónico | The Food Tech</title>
+  <style>
+    :root { --red:#da291c; --green:#229b6b; --ink:#30363a; --muted:#657078; --line:#dfe4e1; --soft:#f3f7f4; --paper:#fff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#f5f6f4; color:var(--ink); font:16px/1.6 Arial, Helvetica, sans-serif; }
+    a { color:inherit; }
+    .prototype { padding:10px 18px; background:#202b25; color:#fff; text-align:center; font-size:12px; }
+    .prototype strong { color:#c9f24d; }
+    header { background:var(--red); color:#fff; }
+    .header-inner { width:min(1180px,calc(100% - 32px)); min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin:auto; }
+    .logo { width:54px; height:54px; display:grid; place-items:center; border:3px solid #fff; border-radius:50%; font-weight:900; }
+    nav { display:flex; gap:24px; font-size:13px; font-weight:700; }
+    main { width:min(1180px,calc(100% - 32px)); margin:0 auto; padding:34px 0 70px; }
+    .breadcrumb { margin-bottom:22px; color:#487362; font-size:13px; }
+    .breadcrumb a { color:#1f7d5a; text-decoration:none; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:34px; align-items:start; }
+    .topic { display:inline-block; padding:6px 9px; border-radius:7px; background:#e8f6ef; color:#167751; font-size:11px; font-weight:800; text-transform:uppercase; }
+    h1 { max-width:850px; margin:14px 0 12px; font-size:clamp(36px,5vw,58px); line-height:1.04; letter-spacing:-.045em; }
+    .dek { max-width:780px; margin:0 0 15px; color:#4e5a60; font-size:20px; }
+    .person { display:flex; align-items:center; gap:12px; margin:18px 0 25px; }
+    .avatar { width:43px; height:43px; display:grid; place-items:center; border-radius:50%; background:var(--green); color:#fff; font-weight:800; }
+    .person strong { display:block; color:var(--green); }
+    .person span { color:var(--muted); font-size:13px; }
+    .video { overflow:hidden; aspect-ratio:16/9; border-radius:14px; background:#111; box-shadow:0 14px 40px rgba(20,35,27,.16); }
+    .video iframe { width:100%; height:100%; border:0; }
+    .summary { margin:28px 0; padding:22px 24px; border-left:5px solid var(--green); border-radius:0 12px 12px 0; background:#edf7f2; }
+    .summary strong { display:block; margin-bottom:6px; color:#176e4e; }
+    section.content { margin-top:42px; }
+    h2 { margin:0 0 16px; font-size:32px; line-height:1.15; letter-spacing:-.03em; }
+    h3 { margin:27px 0 8px; font-size:21px; line-height:1.25; }
+    .takeaways { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:0; list-style:none; }
+    .takeaways li { padding:18px; border:1px solid var(--line); border-radius:12px; background:var(--paper); font-size:14px; }
+    .takeaways b { display:block; margin-bottom:8px; color:var(--green); font-size:12px; }
+    .transcript { padding-left:24px; border-left:2px solid #d6dfda; }
+    .transcript h3 { position:relative; }
+    .transcript h3::before { content:""; position:absolute; left:-31px; top:7px; width:12px; height:12px; border:3px solid #fff; border-radius:50%; background:var(--green); box-shadow:0 0 0 1px var(--green); }
+    .time { display:inline-block; margin-right:8px; color:var(--green); font-size:13px; }
+    .editorial-note { padding:12px 15px; border-radius:9px; background:#fff3d9; color:#705419; font-size:12px; }
+    .expert { display:grid; grid-template-columns:72px 1fr; gap:18px; align-items:center; padding:22px; border:1px solid var(--line); border-radius:14px; background:var(--paper); }
+    .expert .avatar { width:72px; height:72px; font-size:24px; }
+    .expert h3 { margin:0 0 5px; }
+    .expert p { margin:0; color:var(--muted); font-size:14px; }
+    aside { position:sticky; top:20px; }
+    .ad { min-height:250px; display:grid; place-items:center; border-radius:12px; background:linear-gradient(145deg,#21b7dc,#d8f3f8); color:#075469; text-align:center; font-size:13px; font-weight:800; }
+    .side-card { margin-top:16px; padding:20px; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
+    .side-card h3 { margin:0 0 12px; font-size:18px; }
+    .side-card a { display:block; padding:10px 0; border-top:1px solid var(--line); color:#257558; font-size:13px; text-decoration:none; }
+    .schema-list { margin:0; padding:0; list-style:none; }
+    .schema-list li { position:relative; padding:7px 0 7px 25px; color:var(--muted); font-size:12px; }
+    .schema-list li::before { content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
+    .related { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .related article { overflow:hidden; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
+    .thumb { height:120px; background:linear-gradient(135deg,#273b31,#7ac8a6); }
+    .related div:last-child { padding:15px; }
+    .related strong { display:block; line-height:1.3; }
+    .related span { color:var(--muted); font-size:12px; }
+    footer { padding:42px 20px; background:var(--red); color:#fff; text-align:center; font-size:13px; }
+    @media(max-width:850px){ .layout{grid-template-columns:1fr} aside{position:static}.takeaways,.related{grid-template-columns:1fr 1fr} nav{display:none} }
+    @media(max-width:560px){ h1{font-size:38px}.dek{font-size:18px}.takeaways,.related{grid-template-columns:1fr}.expert{grid-template-columns:1fr}.header-inner{min-height:68px} }
+  </style>
+</head>
+<body>
+  <div class="prototype"><strong>PROTOTIPO SEO</strong> · Ejemplo conceptual basado en una landing real. No es una página productiva.</div>
+  <header>
+    <div class="header-inner"><div class="logo">TFT</div><nav><span>SECCIONES</span><span>EBOOKS</span><span>MULTIMEDIA</span><span>NEWSLETTERS</span><span>EVENTO</span></nav></div>
+  </header>
+
+  <main>
+    <div class="breadcrumb"><a href="#">Inicio</a> › <a href="#">Multimedia</a> › <a href="#">Packaging y sostenibilidad</a> › Cómo Yakult busca reciclar su envase icónico</div>
+    <div class="layout">
+      <article>
+        <span class="topic">Packaging sostenible</span>
+        <h1>Cómo Yakult busca reciclar su envase icónico</h1>
+        <p class="dek">El desafío de rediseñar uno de los envases más reconocibles de la industria sin perder identidad de marca ni viabilidad operativa.</p>
+        <div class="person"><span class="avatar">JM</span><div><strong>Javier Mancera</strong><span>Jefe de Sustentabilidad · Yakult México</span></div></div>
+
+        <div class="video"><iframe src="https://www.youtube.com/embed/p6JdWAUWnt4" title="¿Qué hace Yakult para reciclar uno de los envases más reconocidos del mundo?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+
+        <div class="summary"><strong>Resumen ejecutivo</strong>La entrevista presenta el reto de revisar materiales, circularidad y diseño cuando la forma del envase también es un activo de reconocimiento. La landing final debe resumir las decisiones explicadas por el especialista y conectar cada tema con recursos editoriales relacionados.</div>
+
+        <section class="content">
+          <h2>Claves de la entrevista</h2>
+          <ul class="takeaways">
+            <li><b>IDENTIDAD</b>El envase es parte del reconocimiento de marca, por lo que cualquier cambio debe conservar sus atributos distintivos.</li>
+            <li><b>VIABILIDAD</b>La sostenibilidad debe evaluarse junto con producción, distribución y recuperación del material.</li>
+            <li><b>CIRCULARIDAD</b>El diseño es solo una parte: también intervienen infraestructura, consumidores y cadenas de reciclaje.</li>
+          </ul>
+        </section>
+
+        <section class="content">
+          <h2>Transcripción de la entrevista</h2>
+          <p class="editorial-note">Ejemplo de estructura. El contenido definitivo debe transcribirse, editarse y validarse contra el video.</p>
+          <div class="transcript">
+            <h3><span class="time">00:00</span>El desafío de rediseñar un envase icónico</h3>
+            <p><strong>Javier Mancera:</strong> bloque de transcripción editada con nombres correctos, eliminación de muletillas y conservación del sentido original de la entrevista.</p>
+            <h3><span class="time">03:40</span>Materiales, recuperación y circularidad</h3>
+            <p>Este bloque debe enlazar, cuando corresponda, con contenidos de The Food Tech sobre materiales, reciclaje y diseño de packaging.</p>
+            <h3><span class="time">07:20</span>Cómo equilibrar marca y sostenibilidad</h3>
+            <p>Los timestamps permiten recorrer el contenido y convierten los momentos principales en secciones descriptivas e indexables.</p>
+          </div>
+        </section>
+
+        <section class="content">
+          <h2>Sobre el especialista</h2>
+          <div class="expert"><span class="avatar">JM</span><div><h3>Javier Mancera</h3><p>Jefe de Sustentabilidad de Yakult México. El perfil final debe incluir una bio breve y datos profesionales verificados.</p></div></div>
+        </section>
+
+        <section class="content">
+          <h2>Contenido relacionado</h2>
+          <div class="related">
+            <article><div class="thumb"></div><div><strong>Cartón corrugado e innovación industrial</strong><span>Video relacionado</span></div></article>
+            <article><div class="thumb"></div><div><strong>El futuro del plástico y el empaque</strong><span>Video relacionado</span></div></article>
+            <article><div class="thumb"></div><div><strong>Materiales y economía circular</strong><span>Hub temático</span></div></article>
+          </div>
+        </section>
+      </article>
+
+      <aside>
+        <div class="ad">ESPACIO<br>PUBLICITARIO</div>
+        <div class="side-card"><h3>Seguir leyendo</h3><a href="#">Innovación en envases alimentarios</a><a href="#">Economía circular y reciclaje</a><a href="#">Diseño y materiales</a></div>
+        <div class="side-card"><h3>Implementación SEO</h3><ul class="schema-list"><li>BreadcrumbList visible</li><li>VideoObject completo</li><li>Metadata específica</li><li>H2 y H3 descriptivos</li><li>Enlaces contextuales</li><li>Transcripción editada</li></ul></div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>THE FOOD TECH · Prototipo de landing Multimedia optimizada</footer>
+</body>
+</html>
+

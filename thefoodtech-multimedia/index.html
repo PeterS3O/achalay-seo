@@ -113,6 +113,12 @@
     .mapping .tag { display: inline-block; margin-bottom: 18px; padding: 5px 8px; border-radius: 8px; background: var(--acid-soft); color: var(--brand); font-size: 11px; font-weight: 820; }
     .case-link { display: inline-flex; align-items: center; gap: 8px; color: var(--brand); font-size: 13px; font-weight: 750; text-decoration: none; }
     .case-link:hover { text-decoration: underline; }
+    .keyword-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+    .keyword-card { padding: 16px; border: 1px solid var(--line); border-radius: 15px; background: var(--paper); }
+    .keyword-card strong { display: block; color: var(--brand); font-size: 24px; line-height: 1; }
+    .keyword-card b { display: block; margin-top: 10px; font-size: 13px; }
+    .keyword-card span { color: var(--muted); font-size: 10px; }
+    .keyword-direction { margin-bottom: 18px; padding: 15px 18px; border-left: 4px solid var(--acid); background: var(--paper); color: var(--ink-2); font-size: 13px; }
     .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
     .version { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--paper); box-shadow: var(--shadow); }
     .version-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 15px 18px; border-bottom: 1px solid var(--line); }
@@ -172,7 +178,7 @@
     footer { padding: 28px 0 50px; color: var(--muted); font-size: 12px; text-align: center; }
     @media (max-width: 880px) {
       .hero, .section-head, .summary { grid-template-columns: 1fr; }
-      .metrics, .template, .mapping, .comparison { grid-template-columns: 1fr 1fr; }
+      .metrics, .template, .mapping, .comparison, .keyword-grid { grid-template-columns: 1fr 1fr; }
       .mock-grid { grid-template-columns: 1fr; }
       .ad-slot { min-height: 75px; }
     }
@@ -181,7 +187,7 @@
       main { padding-top: 28px; }
       .hero { padding: 24px; }
       h1 { font-size: 41px; }
-      .metrics, .template, .mapping, .checks, .comparison { grid-template-columns: 1fr; }
+      .metrics, .template, .mapping, .checks, .comparison, .keyword-grid { grid-template-columns: 1fr; }
       .section { margin-top: 54px; }
       .print { display: none; }
     }
@@ -292,6 +298,14 @@
         </div>
       </div>
 
+      <div class="keyword-grid" aria-label="Demanda observada para las keywords objetivo">
+        <article class="keyword-card"><strong>1.935</strong><b>envases sostenibles</b><span>impresiones GSC · 90 días · posición media 52,3</span></article>
+        <article class="keyword-card"><strong>1.017</strong><b>envase sostenible</b><span>impresiones GSC · 90 días · posición media 65,0</span></article>
+        <article class="keyword-card"><strong>999</strong><b>ecodiseño envases</b><span>impresiones GSC · 90 días · posición media 67,3</span></article>
+        <article class="keyword-card"><strong>943</strong><b>packaging sostenible</b><span>impresiones GSC · 90 días · posición media 63,8</span></article>
+      </div>
+      <p class="keyword-direction"><strong>Dirección editorial:</strong> atacar “envases sostenibles” como keyword primaria con un ángulo específico —reciclaje del frasco de poliestireno de Yakult— y trabajar como secundarias “packaging sostenible”, “ecodiseño de envases”, “poliestireno reciclable” y “economía circular en México”. Las cifras son impresiones reales observadas en el sitio, no volumen mensual de una herramienta externa.</p>
+
       <div class="comparison">
         <article class="version">
           <header class="version-head"><strong>Landing actual</strong><span class="version-label current">HOY</span></header>
@@ -330,22 +344,22 @@
               <div class="mock-grid">
                 <div>
                   <span class="mock-topic">Packaging sostenible</span>
-                  <h3 class="mock-h1">Cómo Yakult busca reciclar su envase icónico</h3>
-                  <p class="mock-copy">Javier Mancera explica el desafío de rediseñar uno de los envases más reconocibles de la industria sin perder identidad ni viabilidad operativa.</p>
+                  <h3 class="mock-h1">Envases sostenibles: cómo Yakult recupera sus frascos para reciclaje</h3>
+                  <p class="mock-copy">Yakult México recuperó 23.700 kg de frascos directamente de consumidores. Javier Mancera explica el reciclaje del poliestireno, la circularidad y el equilibrio entre sostenibilidad y precio.</p>
                   <p class="mock-person">Javier Mancera · Yakult México</p>
                   <p class="mock-role">Jefe de Sustentabilidad</p>
                   <div class="video-frame" style="margin-top:12px"><img src="https://core.thefoodtech.com/production/multimedia/javier_mancera_horizontalpng-28-09-2026-12-07-22-hs.webp" alt="Entrevista con Javier Mancera sobre reciclaje del envase de Yakult"><span class="play">▶</span></div>
-                  <div class="mock-summary"><strong>Resumen ejecutivo.</strong> La entrevista aborda cómo una marca puede revisar materiales, circularidad y diseño cuando el formato del envase también es parte de su identidad.</div>
+                  <div class="mock-summary"><strong>Resumen ejecutivo.</strong> El frasco no se rellena ni se reutiliza: se recupera para darle un procesamiento correcto. Yakult trabaja en acopio persona a persona, señalización y alternativas para mantener el poliestireno dentro de un mercado circular.</div>
                   <section class="mock-section">
                     <h4>Claves de la entrevista</h4>
-                    <ul><li>El envase funciona como activo de reconocimiento de marca.</li><li>El rediseño debe equilibrar sostenibilidad y operación.</li><li>La circularidad requiere considerar el sistema completo.</li></ul>
+                    <ul><li>23.700 kg recuperados directamente de consumidores.</li><li>Proceso Reflex para conservar la resina de alto impacto.</li><li>El costo del envase debe preservar la accesibilidad del producto.</li></ul>
                   </section>
                   <section class="mock-section">
                     <h4>Transcripción editada</h4>
-                    <h5><span class="timestamp">00:00</span> El desafío de rediseñar un envase icónico</h5>
-                    <p>Fragmento estructurado con nombre del hablante, corrección de términos técnicos y enlaces a contenidos relacionados.</p>
-                    <h5><span class="timestamp">03:40</span> Materiales, recuperación y circularidad</h5>
-                    <p>Los siguientes bloques continúan con H3 y timestamps cada dos a cuatro minutos.</p>
+                    <h5><span class="timestamp">02:03</span> Ecodiseño y reciclaje del poliestireno</h5>
+                    <p>Yakult explica el proceso Reflex, la señalización del frasco y el objetivo de mantener la resina dentro de un mercado circular.</p>
+                    <h5><span class="timestamp">09:56</span> 23.700 kg recuperados de consumidores</h5>
+                    <p>La compañía detalla su esquema de acopio directo y el bajo nivel de valorización del poliestireno de alto impacto en México.</p>
                   </section>
                   <div class="expert-box"><strong>Sobre Javier Mancera</strong><p>Jefe de Sustentabilidad de Yakult México. Perfil breve, cargo y contexto profesional.</p></div>
                 </div>
@@ -360,7 +374,7 @@
         </article>
       </div>
 
-      <p class="case-caveat">La maqueta optimizada utiliza el contenido visible de la ficha real. Los textos de resumen, claves y transcripción son ilustrativos y deben editarse y validarse contra el video antes de publicarse.</p>
+      <p class="case-caveat">La recomendación utiliza la transcripción real del video. La maqueta resume algunos fragmentos; el prototipo navegable incluye la estructura editorial completa, cifras atribuidas y capítulos con H3.</p>
 
       <div class="mapping">
         <article class="card"><span class="tag">VIDEO</span><h3><code>VideoObject</code></h3><p>name, description, thumbnailUrl, uploadDate, duration, embedUrl, inLanguage y publisher.</p></article>

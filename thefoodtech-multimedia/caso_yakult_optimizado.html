@@ -3,133 +3,188 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Prototipo SEO de una landing multimedia optimizada para la entrevista con Javier Mancera de Yakult México.">
-  <title>Cómo Yakult busca reciclar su envase icónico | The Food Tech</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Yakult México recuperó 23.700 kg de frascos. Javier Mancera explica reciclaje de poliestireno, ecodiseño, circularidad y costos.">
+  <title>Envases sostenibles: reciclaje del frasco Yakult | TFT</title>
   <style>
-    :root { --red:#da291c; --green:#229b6b; --ink:#30363a; --muted:#657078; --line:#dfe4e1; --soft:#f3f7f4; --paper:#fff; }
+    :root { --red:#da291c; --green:#249a6b; --green-dark:#14734d; --ink:#30363a; --muted:#69737a; --line:#e0e4e2; --soft:#f3f7f4; --paper:#fff; --dark:#19241f; }
     * { box-sizing:border-box; }
-    body { margin:0; background:#f5f6f4; color:var(--ink); font:16px/1.6 Arial, Helvetica, sans-serif; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:#fff; color:var(--ink); font:16px/1.7 "Helvetica Neue",Arial,sans-serif; -webkit-font-smoothing:antialiased; }
     a { color:inherit; }
-    .prototype { padding:10px 18px; background:#202b25; color:#fff; text-align:center; font-size:12px; }
-    .prototype strong { color:#c9f24d; }
-    header { background:var(--red); color:#fff; }
-    .header-inner { width:min(1180px,calc(100% - 32px)); min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin:auto; }
-    .logo { width:54px; height:54px; display:grid; place-items:center; border:3px solid #fff; border-radius:50%; font-weight:900; }
-    nav { display:flex; gap:24px; font-size:13px; font-weight:700; }
-    main { width:min(1180px,calc(100% - 32px)); margin:0 auto; padding:34px 0 70px; }
-    .breadcrumb { margin-bottom:22px; color:#487362; font-size:13px; }
-    .breadcrumb a { color:#1f7d5a; text-decoration:none; }
-    .layout { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:34px; align-items:start; }
-    .topic { display:inline-block; padding:6px 9px; border-radius:7px; background:#e8f6ef; color:#167751; font-size:11px; font-weight:800; text-transform:uppercase; }
-    h1 { max-width:850px; margin:14px 0 12px; font-size:clamp(36px,5vw,58px); line-height:1.04; letter-spacing:-.045em; }
-    .dek { max-width:780px; margin:0 0 15px; color:#4e5a60; font-size:20px; }
-    .person { display:flex; align-items:center; gap:12px; margin:18px 0 25px; }
-    .avatar { width:43px; height:43px; display:grid; place-items:center; border-radius:50%; background:var(--green); color:#fff; font-weight:800; }
-    .person strong { display:block; color:var(--green); }
-    .person span { color:var(--muted); font-size:13px; }
-    .video { overflow:hidden; aspect-ratio:16/9; border-radius:14px; background:#111; box-shadow:0 14px 40px rgba(20,35,27,.16); }
+    .concept { position:fixed; right:14px; bottom:14px; z-index:30; padding:7px 10px; border-radius:999px; background:rgba(25,36,31,.92); color:#fff; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    header { position:relative; z-index:3; background:var(--red); color:#fff; }
+    .header-inner { width:min(1220px,calc(100% - 34px)); min-height:90px; display:flex; align-items:center; justify-content:space-between; gap:28px; margin:auto; }
+    .logo-img { width:76px; height:76px; object-fit:contain; }
+    nav { display:flex; align-self:flex-end; gap:27px; padding-bottom:24px; font-size:13px; font-weight:750; }
+    .job { margin-bottom:-1px; padding:11px 15px 18px; border-radius:14px 14px 0 0; background:#ff6900; }
+    .utility { width:min(1220px,calc(100% - 34px)); display:flex; justify-content:flex-end; gap:18px; margin:auto; padding:9px 0; color:#778087; font-size:12px; }
+    main { width:min(1180px,calc(100% - 34px)); margin:auto; padding:28px 0 80px; }
+    .breadcrumb { margin-bottom:26px; color:#6d777b; font-size:12px; }
+    .breadcrumb a { color:var(--green-dark); text-decoration:none; }
+    .layout { display:grid; grid-template-columns:minmax(0,820px) 285px; gap:42px; align-items:start; }
+    .topic { display:inline-flex; align-items:center; gap:7px; padding:6px 10px; border-radius:999px; background:#e9f6ef; color:var(--green-dark); font-size:11px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .topic::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--green); }
+    h1,h2,h3 { letter-spacing:-.035em; line-height:1.12; }
+    h1 { max-width:900px; margin:16px 0 15px; font-size:clamp(40px,5.5vw,66px); }
+    h2 { margin:0 0 18px; font-size:34px; }
+    h3 { margin:0 0 8px; font-size:21px; }
+    .dek { max-width:810px; margin:0; color:#4f5a60; font-size:21px; line-height:1.48; }
+    .byline { display:flex; align-items:center; justify-content:space-between; gap:20px; margin:24px 0; padding:17px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .person { display:flex; align-items:center; gap:12px; }
+    .avatar { width:45px; height:45px; display:grid; place-items:center; border-radius:50%; background:var(--green); color:#fff; font-weight:850; }
+    .person strong { display:block; color:var(--green-dark); }
+    .person span,.meta { color:var(--muted); font-size:12px; }
+    .share { display:flex; gap:7px; }
+    .share span { width:30px; height:30px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; color:#58635e; font-size:10px; font-weight:800; }
+    .video { overflow:hidden; aspect-ratio:16/9; border-radius:15px; background:#111; box-shadow:0 16px 46px rgba(20,35,27,.16); }
     .video iframe { width:100%; height:100%; border:0; }
-    .summary { margin:28px 0; padding:22px 24px; border-left:5px solid var(--green); border-radius:0 12px 12px 0; background:#edf7f2; }
-    .summary strong { display:block; margin-bottom:6px; color:#176e4e; }
-    section.content { margin-top:42px; }
-    h2 { margin:0 0 16px; font-size:32px; line-height:1.15; letter-spacing:-.03em; }
-    h3 { margin:27px 0 8px; font-size:21px; line-height:1.25; }
-    .takeaways { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:0; list-style:none; }
-    .takeaways li { padding:18px; border:1px solid var(--line); border-radius:12px; background:var(--paper); font-size:14px; }
-    .takeaways b { display:block; margin-bottom:8px; color:var(--green); font-size:12px; }
-    .transcript { padding-left:24px; border-left:2px solid #d6dfda; }
-    .transcript h3 { position:relative; }
-    .transcript h3::before { content:""; position:absolute; left:-31px; top:7px; width:12px; height:12px; border:3px solid #fff; border-radius:50%; background:var(--green); box-shadow:0 0 0 1px var(--green); }
-    .time { display:inline-block; margin-right:8px; color:var(--green); font-size:13px; }
-    .editorial-note { padding:12px 15px; border-radius:9px; background:#fff3d9; color:#705419; font-size:12px; }
-    .expert { display:grid; grid-template-columns:72px 1fr; gap:18px; align-items:center; padding:22px; border:1px solid var(--line); border-radius:14px; background:var(--paper); }
-    .expert .avatar { width:72px; height:72px; font-size:24px; }
-    .expert h3 { margin:0 0 5px; }
+    .caption { margin-top:8px; color:#81898d; font-size:11px; }
+    .standfirst { margin:30px 0 0; padding:23px 25px; border-left:5px solid var(--green); border-radius:0 12px 12px 0; background:#edf7f2; font-size:18px; }
+    .standfirst p { margin:0; }
+    .standfirst p + p { margin-top:10px; }
+    .numbers { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin:38px 0; overflow:hidden; border:1px solid var(--line); border-radius:14px; background:var(--line); }
+    .number { padding:20px 15px; background:#fff; }
+    .number strong { display:block; color:var(--green-dark); font-size:28px; line-height:1; letter-spacing:-.04em; }
+    .number span { display:block; margin-top:8px; color:var(--muted); font-size:11px; line-height:1.4; }
+    section.content { margin-top:50px; scroll-margin-top:20px; }
+    .key-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0; counter-reset:key; list-style:none; }
+    .key-list li { position:relative; min-height:140px; padding:20px 20px 20px 58px; border:1px solid var(--line); border-radius:13px; background:#fff; font-size:14px; }
+    .key-list li::before { counter-increment:key; content:"0" counter(key); position:absolute; left:19px; top:20px; color:var(--green); font-size:12px; font-weight:900; }
+    .key-list strong { display:block; margin-bottom:6px; font-size:16px; }
+    .quote { margin:42px 0; padding:28px 30px; border-radius:15px; background:var(--dark); color:#fff; font-size:24px; font-weight:650; line-height:1.42; letter-spacing:-.025em; }
+    .quote span { display:block; margin-top:12px; color:#b9ccc2; font-size:12px; font-weight:500; letter-spacing:0; }
+    .chapters { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; }
+    .chapters a { padding:6px 9px; border:1px solid var(--line); border-radius:999px; color:var(--green-dark); font-size:11px; text-decoration:none; }
+    .transcript-block { padding:23px 0; border-top:1px solid var(--line); scroll-margin-top:20px; }
+    .transcript-block:last-child { border-bottom:1px solid var(--line); }
+    .transcript-block h3 { margin-bottom:12px; font-size:20px; }
+    .time { display:inline-block; min-width:50px; margin-right:9px; color:var(--green); font-size:12px; }
+    .transcript { padding-left:59px; color:#4b565b; font-size:15px; }
+    .transcript p { margin:0 0 13px; }
+    .speaker { color:var(--ink); font-weight:780; }
+    .expert { display:grid; grid-template-columns:78px 1fr; gap:20px; align-items:center; padding:23px; border:1px solid var(--line); border-radius:14px; background:var(--soft); }
+    .expert .avatar { width:78px; height:78px; font-size:24px; }
     .expert p { margin:0; color:var(--muted); font-size:14px; }
-    aside { position:sticky; top:20px; }
-    .ad { min-height:250px; display:grid; place-items:center; border-radius:12px; background:linear-gradient(145deg,#21b7dc,#d8f3f8); color:#075469; text-align:center; font-size:13px; font-weight:800; }
-    .side-card { margin-top:16px; padding:20px; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
-    .side-card h3 { margin:0 0 12px; font-size:18px; }
-    .side-card a { display:block; padding:10px 0; border-top:1px solid var(--line); color:#257558; font-size:13px; text-decoration:none; }
-    .schema-list { margin:0; padding:0; list-style:none; }
-    .schema-list li { position:relative; padding:7px 0 7px 25px; color:var(--muted); font-size:12px; }
-    .schema-list li::before { content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
+    aside { position:sticky; top:18px; }
+    .ad { min-height:250px; display:grid; place-items:center; border:1px dashed #c7ceca; border-radius:12px; background:#f7f8f7; color:#8a918e; text-align:center; font-size:11px; font-weight:800; letter-spacing:.08em; }
+    .side-card { margin-top:16px; padding:19px; border:1px solid var(--line); border-radius:12px; background:#fff; }
+    .side-card h3 { font-size:17px; }
+    .side-card a { display:block; padding:10px 0; border-top:1px solid var(--line); color:var(--green-dark); font-size:13px; text-decoration:none; }
     .related { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    .related article { overflow:hidden; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
-    .thumb { height:120px; background:linear-gradient(135deg,#273b31,#7ac8a6); }
-    .related div:last-child { padding:15px; }
-    .related strong { display:block; line-height:1.3; }
-    .related span { color:var(--muted); font-size:12px; }
-    footer { padding:42px 20px; background:var(--red); color:#fff; text-align:center; font-size:13px; }
-    @media(max-width:850px){ .layout{grid-template-columns:1fr} aside{position:static}.takeaways,.related{grid-template-columns:1fr 1fr} nav{display:none} }
-    @media(max-width:560px){ h1{font-size:38px}.dek{font-size:18px}.takeaways,.related{grid-template-columns:1fr}.expert{grid-template-columns:1fr}.header-inner{min-height:68px} }
+    .related a { overflow:hidden; border:1px solid var(--line); border-radius:13px; background:#fff; text-decoration:none; }
+    .related img { width:100%; height:128px; display:block; object-fit:cover; }
+    .related div { padding:14px; }
+    .related strong { display:block; line-height:1.35; }
+    .related span { color:var(--muted); font-size:11px; }
+    .method { margin-top:18px; color:#7d8588; font-size:11px; }
+    footer { padding:46px 20px; background:var(--red); color:#fff; }
+    .footer-inner { width:min(1180px,100%); display:flex; justify-content:space-between; gap:24px; margin:auto; }
+    footer strong { letter-spacing:.08em; }
+    footer span { font-size:12px; }
+    @media(max-width:900px){ nav{display:none}.layout{grid-template-columns:1fr}aside{position:static}.numbers{grid-template-columns:1fr 1fr}.related{grid-template-columns:1fr 1fr} }
+    @media(max-width:590px){ .header-inner{min-height:72px}.logo-img{width:58px;height:58px}.utility{display:none}h1{font-size:40px}.dek{font-size:18px}.byline{align-items:flex-start;flex-direction:column}.numbers,.key-list,.related{grid-template-columns:1fr}.transcript{padding-left:0}.quote{font-size:20px}.footer-inner{flex-direction:column} }
   </style>
 </head>
 <body>
-  <div class="prototype"><strong>PROTOTIPO SEO</strong> · Ejemplo conceptual basado en una landing real. No es una página productiva.</div>
+  <span class="concept">Concepto de plantilla</span>
   <header>
-    <div class="header-inner"><div class="logo">TFT</div><nav><span>SECCIONES</span><span>EBOOKS</span><span>MULTIMEDIA</span><span>NEWSLETTERS</span><span>EVENTO</span></nav></div>
+    <div class="header-inner">
+      <img class="logo-img" src="https://thefoodtech.com/img/logo.webp" alt="The Food Tech">
+      <nav><span>SECCIONES</span><span>EBOOKS</span><span>MULTIMEDIA</span><span>NEWSLETTERS</span><span>EVENTO</span><span class="job">BOLSA DE TRABAJO</span></nav>
+    </div>
   </header>
+  <div class="utility"><span>Buscar</span><span>Suscribirse</span></div>
 
   <main>
-    <div class="breadcrumb"><a href="#">Inicio</a> › <a href="#">Multimedia</a> › <a href="#">Packaging y sostenibilidad</a> › Cómo Yakult busca reciclar su envase icónico</div>
+    <div class="breadcrumb"><a href="#">Inicio</a> › <a href="#">Multimedia</a> › <a href="#">Packaging y sostenibilidad</a> › Reciclaje del frasco de Yakult</div>
     <div class="layout">
       <article>
-        <span class="topic">Packaging sostenible</span>
-        <h1>Cómo Yakult busca reciclar su envase icónico</h1>
-        <p class="dek">El desafío de rediseñar uno de los envases más reconocibles de la industria sin perder identidad de marca ni viabilidad operativa.</p>
-        <div class="person"><span class="avatar">JM</span><div><strong>Javier Mancera</strong><span>Jefe de Sustentabilidad · Yakult México</span></div></div>
+        <span class="topic">Envases sostenibles</span>
+        <h1>Cómo Yakult recupera sus envases de poliestireno para reciclaje</h1>
+        <p class="dek">Javier Mancera explica el proceso de acopio, el reto de valorizar el poliestireno y por qué la sostenibilidad del envase debe equilibrarse con seguridad alimentaria y precio.</p>
 
-        <div class="video"><iframe src="https://www.youtube.com/embed/p6JdWAUWnt4" title="¿Qué hace Yakult para reciclar uno de los envases más reconocidos del mundo?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="byline">
+          <div class="person"><span class="avatar">JM</span><div><strong>Javier Mancera</strong><span>Jefe de Sustentabilidad · Yakult México</span></div></div>
+          <div><div class="meta">Video · 13:59 min</div><div class="share"><span>WA</span><span>IN</span><span>X</span><span>↗</span></div></div>
+        </div>
 
-        <div class="summary"><strong>Resumen ejecutivo</strong>La entrevista presenta el reto de revisar materiales, circularidad y diseño cuando la forma del envase también es un activo de reconocimiento. La landing final debe resumir las decisiones explicadas por el especialista y conectar cada tema con recursos editoriales relacionados.</div>
+        <div class="video"><iframe src="https://www.youtube.com/embed/p6JdWAUWnt4" title="Reciclaje del envase de Yakult: entrevista con Javier Mancera" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <p class="caption">Javier Mancera, jefe de Sustentabilidad de Yakult México, durante The Food Tech Podcast.</p>
 
-        <section class="content">
-          <h2>Claves de la entrevista</h2>
-          <ul class="takeaways">
-            <li><b>IDENTIDAD</b>El envase es parte del reconocimiento de marca, por lo que cualquier cambio debe conservar sus atributos distintivos.</li>
-            <li><b>VIABILIDAD</b>La sostenibilidad debe evaluarse junto con producción, distribución y recuperación del material.</li>
-            <li><b>CIRCULARIDAD</b>El diseño es solo una parte: también intervienen infraestructura, consumidores y cadenas de reciclaje.</li>
-          </ul>
+        <div class="standfirst">
+          <p>El frasco de Yakult no se rellena ni se reutiliza. La compañía lo recupera directamente de consumidores para enviarlo a reciclaje y darle un procesamiento adecuado.</p>
+          <p>En esta conversación, Mancera detalla el uso de poliestireno de alto impacto, el proceso Reflex, la señalización del envase y las alianzas necesarias para avanzar hacia una economía circular.</p>
+        </div>
+
+        <div class="numbers" aria-label="Cifras destacadas de la entrevista">
+          <div class="number"><strong>23.700 kg</strong><span>de frascos recuperados directamente de consumidores durante el año.</span></div>
+          <div class="number"><strong>&lt;0,1%</strong><span>de reciclaje en México para poliestireno de alto impacto o cristal, según el entrevistado.</span></div>
+          <div class="number"><strong>40+</strong><span>países y regiones donde la marca mantiene un envase ampliamente reconocido.</span></div>
+          <div class="number"><strong>90+</strong><span>años de historia industrial detrás del diseño emblemático.</span></div>
+        </div>
+
+        <section class="content" id="claves">
+          <h2>Las claves para avanzar hacia envases sostenibles</h2>
+          <ol class="key-list">
+            <li><strong>Reciclar antes que rellenar</strong>La estrategia se basa en recuperar el frasco usado y procesar su material; no en rellenarlo ni reutilizarlo para alimento.</li>
+            <li><strong>Mantener el material en circulación</strong>El proceso Reflex combina etapas físicas y químicas para conservar la resina como poliestireno de alto impacto.</li>
+            <li><strong>Involucrar al consumidor</strong>El acopio persona a persona y la señalización del código de reciclaje ayudan a cerrar el circuito.</li>
+            <li><strong>Proteger el producto</strong>El envase debe asegurar que la bacteria viva llegue en condiciones adecuadas hasta el consumo.</li>
+            <li><strong>Equilibrar sostenibilidad y precio</strong>Una alternativa que encarece demasiado el producto puede dejar de ser viable y limitar su accesibilidad.</li>
+            <li><strong>Crear infraestructura y regulación</strong>Industria, autoridades, procesadores y sociedad deben construir un mercado para residuos poco valorizados.</li>
+          </ol>
         </section>
 
-        <section class="content">
-          <h2>Transcripción de la entrevista</h2>
-          <p class="editorial-note">Ejemplo de estructura. El contenido definitivo debe transcribirse, editarse y validarse contra el video.</p>
-          <div class="transcript">
-            <h3><span class="time">00:00</span>El desafío de rediseñar un envase icónico</h3>
-            <p><strong>Javier Mancera:</strong> bloque de transcripción editada con nombres correctos, eliminación de muletillas y conservación del sentido original de la entrevista.</p>
-            <h3><span class="time">03:40</span>Materiales, recuperación y circularidad</h3>
-            <p>Este bloque debe enlazar, cuando corresponda, con contenidos de The Food Tech sobre materiales, reciclaje y diseño de packaging.</p>
-            <h3><span class="time">07:20</span>Cómo equilibrar marca y sostenibilidad</h3>
-            <p>Los timestamps permiten recorrer el contenido y convierten los momentos principales en secciones descriptivas e indexables.</p>
-          </div>
+        <blockquote class="quote">“No es que se vayan a rellenar los frasquitos; es para que se pueda tener un correcto procesamiento”.<span>Javier Mancera · Yakult México · 05:12</span></blockquote>
+
+        <section class="content" id="transcripcion">
+          <h2>Transcripción editada de la entrevista</h2>
+          <nav class="chapters" aria-label="Capítulos del video"><a href="#c1">00:25</a><a href="#c2">02:03</a><a href="#c3">03:37</a><a href="#c4">04:45</a><a href="#c5">06:42</a><a href="#c6">08:10</a><a href="#c7">09:56</a><a href="#c8">11:03</a><a href="#c9">12:13</a></nav>
+
+          <section class="transcript-block" id="c1"><h3><span class="time">00:25</span>Un envase reconocido en más de 40 países</h3><div class="transcript"><p><span class="speaker">Ingrid Cubas:</span> ¿Qué significa repensar un diseño tan emblemático como el de Yakult?</p><p><span class="speaker">Javier Mancera:</span> Es un legado difícil de cambiar. Tenemos presencia en más de 40 países y regiones y más de 90 años como industria. Eso no quiere decir que no pueda evolucionar: hay que buscar materiales alternativos o una salida sustentable y viable para el material actual. El reto es permitir que la industria continúe mientras reduce su impacto ambiental.</p></div></section>
+
+          <section class="transcript-block" id="c2"><h3><span class="time">02:03</span>Ecodiseño, proceso Reflex y señalización</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> El empaque ya está diseñado para resistir y mantener viable el producto. Ahora trabajamos en darle una salida correcta después del consumo. El frasco es de poliestireno y hoy se recicla mecánicamente, pero necesitamos alternativas.</p><p>Estamos impulsando un proceso llamado Reflex, mitad físico y mitad químico, que permite conservar la resina como poliestireno de alto impacto sin mezclarla con otras. También incorporamos el triángulo y el código de reciclaje para que el consumidor lo reconozca, lo regrese y podamos enviarlo a reciclaje.</p></div></section>
+
+          <section class="transcript-block" id="c3"><h3><span class="time">03:37</span>Circularidad, emisiones y seguridad alimentaria</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> El impacto puede medirse por el CO₂ generado en extracción, producción y procesamiento posterior. Sin embargo, el mayor aporte del frasco puede ser abrir un camino hacia la circularidad: no eliminar una resina que ya existe, sino evitar que se degrade y mantenerla funcional.</p><p>Además de contener un alimento, el envase protege una bacteria viva. Debemos asegurar que llegue viva hasta el consumidor y conserve sus beneficios, por lo que cualquier cambio de material exige cuidados adicionales.</p></div></section>
+
+          <section class="transcript-block" id="c4"><h3><span class="time">04:45</span>Consumidores, devolución y costo del envase</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> La recepción ha sido positiva porque tenemos contacto directo con los consumidores. Podemos aclarar que los frascos no se rellenan ni se reutilizan: se devuelven para recibir un procesamiento correcto.</p><p>Los estudios citados muestran disposición a pagar más por envases sostenibles, pero Yakult busca mantener un precio bajo. Existen tecnologías y materiales alternativos; si encarecen demasiado el producto, dejan de ser viables. El objetivo es equilibrar sostenibilidad, reciclaje y acceso al producto.</p></div></section>
+
+          <section class="transcript-block" id="c5"><h3><span class="time">06:42</span>El futuro de los envases probióticos</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> No parece sencillo eliminar los envases o sustituirlos por formatos industriales más grandes, porque deben conservarse las características del producto. El avance puede venir de una mejor identificación y valorización del material.</p><p>La circularidad será un diferenciador competitivo: los consumidores reconocen que los productos generan residuos y pueden favorecer con su compra a las marcas que reduzcan ese impacto.</p></div></section>
+
+          <section class="transcript-block" id="c6"><h3><span class="time">08:10</span>Educación, alianzas y Pacto de los Plásticos</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> Trabajamos con Grupo Promesa en capacitación y campañas escolares de reciclaje. También nos sumamos al Pacto de los Plásticos de México, auspiciado por WWF, para contribuir al camino regulatorio y comunicar avances.</p><p>La colaboración con empresas que trasladan y procesan residuos mostró que existe mercado para el poliestireno expandido, pero el poliestireno de alto impacto y el cristal todavía se valorizan muy poco.</p></div></section>
+
+          <section class="transcript-block" id="c7"><h3><span class="time">09:56</span>23.700 kg recuperados directamente de consumidores</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> Como no existe un sistema de acopio bien establecido para este poliestireno, generamos una recuperación persona a persona. Durante el año logramos recuperar 23.700 kg directamente de consumidores y enviarlos a reciclaje.</p><p>Según Mancera, el porcentaje de reciclaje en México está por debajo del 0,1% para el poliestireno de alto impacto o cristal. El objetivo es aumentar el acopio y construir un mercado que permita valorizarlo.</p></div></section>
+
+          <section class="transcript-block" id="c8"><h3><span class="time">11:03</span>Nuevas alianzas y otros componentes</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> Buscamos colaboradores en educación, procesamiento y respaldo de autoridades. También evaluamos mejoras en otros productos y componentes.</p><p>Las tapas de aluminio son pequeñas y pueden perderse en el ambiente. Una alternativa que permita recuperarlas o reciclarlas junto con el resto del envase sería un avance adicional.</p></div></section>
+
+          <section class="transcript-block" id="c9"><h3><span class="time">12:13</span>Regulación y responsabilidad compartida</h3><div class="transcript"><p><span class="speaker">Javier Mancera:</span> Una limitante es la ausencia de un marco suficientemente claro. La industria necesita objetivos, capacidad de acopio y respaldo regulatorio para que las acciones sean reconocidas y tengan impacto.</p><p>El cierre es una invitación a construir un camino para los residuos que ya existen: que dejen de ser desechos, comiencen a valorizarse y reduzcan su impacto ambiental. Es un trabajo conjunto entre gobierno, sociedad e industria.</p></div></section>
         </section>
 
-        <section class="content">
+        <section class="content" id="especialista">
           <h2>Sobre el especialista</h2>
-          <div class="expert"><span class="avatar">JM</span><div><h3>Javier Mancera</h3><p>Jefe de Sustentabilidad de Yakult México. El perfil final debe incluir una bio breve y datos profesionales verificados.</p></div></div>
+          <div class="expert"><span class="avatar">JM</span><div><h3>Javier Mancera</h3><p>Jefe de Sustentabilidad de Yakult México. Participó en The Food Tech Podcast después de su conferencia en Food Pack &amp; Process Congress.</p></div></div>
         </section>
 
-        <section class="content">
-          <h2>Contenido relacionado</h2>
+        <section class="content" id="relacionados">
+          <h2>Más sobre packaging sostenible y circularidad</h2>
           <div class="related">
-            <article><div class="thumb"></div><div><strong>Cartón corrugado e innovación industrial</strong><span>Video relacionado</span></div></article>
-            <article><div class="thumb"></div><div><strong>El futuro del plástico y el empaque</strong><span>Video relacionado</span></div></article>
-            <article><div class="thumb"></div><div><strong>Materiales y economía circular</strong><span>Hub temático</span></div></article>
+            <a href="https://thefoodtech.com/multimedia/-carton-corrugado-un-motor-de-innovacion-industrial-en-mexico/"><img src="https://core.thefoodtech.com/production/multimedia/cover-youtube-14jpg-10-06-2026-13-52-29-hs.webp" alt="Cartón corrugado e innovación"><div><strong>Cartón corrugado, un motor de innovación industrial</strong><span>Video relacionado</span></div></a>
+            <a href="https://thefoodtech.com/multimedia/-el-plastico-no-es-el-villano-el-futuro-del-plastico-y-el-empaque-en-mexico/"><img src="https://core.thefoodtech.com/production/multimedia/susana-cover-trailerpng-16-07-2026-14-44-21-hs.webp" alt="El futuro del plástico"><div><strong>El futuro del plástico y el empaque en México</strong><span>Video relacionado</span></div></a>
+            <a href="https://thefoodtech.com/packaging-y-procesamiento/"><img src="https://core.thefoodtech.com/production/multimedia/portada_jn_horizontalpng-28-09-2026-12-02-14-hs.webp" alt="Packaging y procesamiento"><div><strong>Packaging, materiales y economía circular</strong><span>Hub temático</span></div></a>
           </div>
+          <p class="method">Keyword primaria: <strong>envases sostenibles</strong>. Secundarias: packaging sostenible, ecodiseño de envases, poliestireno reciclable y economía circular en México.</p>
         </section>
       </article>
 
       <aside>
-        <div class="ad">ESPACIO<br>PUBLICITARIO</div>
-        <div class="side-card"><h3>Seguir leyendo</h3><a href="#">Innovación en envases alimentarios</a><a href="#">Economía circular y reciclaje</a><a href="#">Diseño y materiales</a></div>
-        <div class="side-card"><h3>Implementación SEO</h3><ul class="schema-list"><li>BreadcrumbList visible</li><li>VideoObject completo</li><li>Metadata específica</li><li>H2 y H3 descriptivos</li><li>Enlaces contextuales</li><li>Transcripción editada</li></ul></div>
+        <div class="ad">ESPACIO PUBLICITARIO<br>336 × 280</div>
+        <div class="side-card"><h3>En esta entrevista</h3><a href="#claves">Claves principales</a><a href="#transcripcion">Transcripción editada</a><a href="#especialista">Sobre el especialista</a><a href="#relacionados">Contenido relacionado</a></div>
+        <div class="side-card"><h3>Temas</h3><a href="#">Envases sostenibles</a><a href="#">Reciclaje de poliestireno</a><a href="#">Economía circular</a><a href="#">Ecodiseño</a></div>
       </aside>
     </div>
   </main>
 
-  <footer>THE FOOD TECH · Prototipo de landing Multimedia optimizada</footer>
+  <footer><div class="footer-inner"><strong>THE FOOD TECH</strong><span>Industria de alimentos y bebidas · Multimedia</span></div></footer>
 </body>
 </html>
-

@@ -168,6 +168,11 @@
     .chips span { padding: 5px 8px; border-radius: 8px; background: var(--paper-2); color: var(--muted); font-size: 10px; font-weight: 750; }
     .chips.good span { background: var(--acid-soft); color: var(--brand); }
     .case-caveat { margin-top: 13px; color: var(--muted); font-size: 11px; }
+    .prototype-frame { display: block; width: 100%; height: 770px; border: 0; background: #fff; }
+    .seo-spec { display: grid; gap: 7px; margin: 13px 0 0; }
+    .seo-spec div { padding: 9px 10px; border-radius: 9px; background: var(--paper-2); }
+    .seo-spec dt { color: var(--muted); font-size: 9px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .seo-spec dd { margin: 3px 0 0; color: var(--ink-2); font-size: 11px; line-height: 1.4; }
     .impact-note { margin-bottom: 14px; padding: 16px 18px; border-left: 4px solid var(--amber); background: color-mix(in srgb, var(--amber) 8%, var(--paper)); color: var(--ink-2); font-size: 13px; }
     .delta { color: var(--brand); font-weight: 820; }
     .checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -336,45 +341,20 @@
 
         <article class="version">
           <header class="version-head"><strong>Landing recomendada</strong><span class="version-label future">OPTIMIZADA</span></header>
-          <div class="mock-browser">
-            <div class="mock-browser-bar"><i></i><i></i><i></i><span>thefoodtech.com/multimedia/que-hace-yakult...</span></div>
-            <div class="mock-sitebar"><span class="mock-logo">TFT</span><span class="mock-menu">SECCIONES EBOOKS MULTIMEDIA EVENTO</span></div>
-            <div class="mock-page">
-              <p class="mock-breadcrumb">Inicio › Multimedia › Packaging y sostenibilidad</p>
-              <div class="mock-grid">
-                <div>
-                  <span class="mock-topic">Packaging sostenible</span>
-                  <h3 class="mock-h1">Envases sostenibles: cómo Yakult recupera sus frascos para reciclaje</h3>
-                  <p class="mock-copy">Yakult México recuperó 23.700 kg de frascos directamente de consumidores. Javier Mancera explica el reciclaje del poliestireno, la circularidad y el equilibrio entre sostenibilidad y precio.</p>
-                  <p class="mock-person">Javier Mancera · Yakult México</p>
-                  <p class="mock-role">Jefe de Sustentabilidad</p>
-                  <div class="video-frame" style="margin-top:12px"><img src="https://core.thefoodtech.com/production/multimedia/javier_mancera_horizontalpng-28-09-2026-12-07-22-hs.webp" alt="Entrevista con Javier Mancera sobre reciclaje del envase de Yakult"><span class="play">▶</span></div>
-                  <div class="mock-summary"><strong>Resumen ejecutivo.</strong> El frasco no se rellena ni se reutiliza: se recupera para darle un procesamiento correcto. Yakult trabaja en acopio persona a persona, señalización y alternativas para mantener el poliestireno dentro de un mercado circular.</div>
-                  <section class="mock-section">
-                    <h4>Claves de la entrevista</h4>
-                    <ul><li>23.700 kg recuperados directamente de consumidores.</li><li>Proceso Reflex para conservar la resina de alto impacto.</li><li>El costo del envase debe preservar la accesibilidad del producto.</li></ul>
-                  </section>
-                  <section class="mock-section">
-                    <h4>Transcripción editada</h4>
-                    <h5><span class="timestamp">02:03</span> Ecodiseño y reciclaje del poliestireno</h5>
-                    <p>Yakult explica el proceso Reflex, la señalización del frasco y el objetivo de mantener la resina dentro de un mercado circular.</p>
-                    <h5><span class="timestamp">09:56</span> 23.700 kg recuperados de consumidores</h5>
-                    <p>La compañía detalla su esquema de acopio directo y el bajo nivel de valorización del poliestireno de alto impacto en México.</p>
-                  </section>
-                  <div class="expert-box"><strong>Sobre Javier Mancera</strong><p>Jefe de Sustentabilidad de Yakult México. Perfil breve, cargo y contexto profesional.</p></div>
-                </div>
-                <aside><div class="ad-slot">ESPACIO<br>PUBLICITARIO</div><section class="mock-section"><h4>Seguir leyendo</h4><p>→ Innovación en envases<br>→ Economía circular<br>→ Materiales y reciclaje</p></section></aside>
-              </div>
-            </div>
-          </div>
+          <iframe class="prototype-frame" src="caso_yakult_optimizado.html" title="Vista navegable de la landing Multimedia optimizada" loading="lazy"></iframe>
           <div class="version-notes">
-            <p><strong>Qué cambia:</strong> la misma entrevista se convierte en una landing que responde, enlaza y puede entenderse sin reproducir el video.</p>
+            <p><strong>Qué cambia:</strong> esta vista carga el prototipo actualizado, por lo que el informe y la landing recomendada permanecen sincronizados.</p>
             <div class="chips good"><span>Breadcrumb</span><span>Resumen</span><span>H2 + H3</span><span>Transcripción</span><span>Interlinking</span><span>VideoObject completo</span></div>
+            <dl class="seo-spec">
+              <div><dt>Title SEO</dt><dd>Envases sostenibles: reciclaje del frasco Yakult | TFT</dd></div>
+              <div><dt>H1</dt><dd>Cómo Yakult recupera sus envases de poliestireno para reciclaje</dd></div>
+              <div><dt>Meta description</dt><dd>Yakult México recuperó 23.700 kg de frascos. Javier Mancera explica reciclaje de poliestireno, ecodiseño, circularidad y costos.</dd></div>
+            </dl>
           </div>
         </article>
       </div>
 
-      <p class="case-caveat">La recomendación utiliza la transcripción real del video. La maqueta resume algunos fragmentos; el prototipo navegable incluye la estructura editorial completa, cifras atribuidas y capítulos con H3.</p>
+      <p class="case-caveat">La vista optimizada es el mismo archivo del prototipo navegable: utiliza la transcripción real, cifras atribuidas, seis claves editoriales y nueve capítulos con H3. Cualquier cambio futuro en el prototipo se reflejará aquí automáticamente.</p>
 
       <div class="mapping">
         <article class="card"><span class="tag">VIDEO</span><h3><code>VideoObject</code></h3><p>name, description, thumbnailUrl, uploadDate, duration, embedUrl, inLanguage y publisher.</p></article>

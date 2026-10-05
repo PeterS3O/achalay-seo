@@ -10,4 +10,5 @@ Dashboard tecnico SEO publicado como sitio estatico en GitHub Pages.
 - Dashboard mensual The Food Tech: `thefoodtech-dashboard-mensual/index.html`
 - Dashboard mensual The Logistics World: `thelogisticsworld-dashboard-mensual/index.html`
 - Dashboard mensual Expo The Food Tech: `expo-thefoodtech-dashboard-mensual/index.html`
+- Plan de optimización de schemas The Food Tech: `thefoodtech-plan-schemas/index.html`
 - Reporte SEO Ruta Logistica MX / The Logistics World: `thelogisticsworld-ruta-logistica-mx-seo/index.html`
